@@ -1,0 +1,4 @@
+baseURL = "http://ronangaillard.github.io"
+languageCode = "en-us"
+title = "Ronan Gaillard"
+theme = "cactus"
