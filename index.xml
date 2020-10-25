@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ronan Gaillard</title>
+    <link>http://ronangaillard.github.io/</link>
+    <description>Recent content on Ronan Gaillard</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 25 Oct 2020 23:02:46 +0100</lastBuildDate><atom:link href="http://ronangaillard.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Mac SE/30 Is Back Alive</title>
+      <link>http://ronangaillard.github.io/posts/my-mac-se30-is-back-alive/</link>
+      <pubDate>Sun, 25 Oct 2020 23:02:46 +0100</pubDate>
+      
+      <guid>http://ronangaillard.github.io/posts/my-mac-se30-is-back-alive/</guid>
+      <description>Or how I fixed my Mac SE/30 that was not booting unexpectedly
+One day around a year ago I was playing with my SE/30 (the best looking computer ever) and I was trying to install Debian on it for fun. But after inserting some floppies and trying to boot from them the computer wouldn&amp;rsquo;t turn back on. I mean it would turn on but with weird static graphics and no sound at startup.</description>
+    </item>
+    
+  </channel>
+</rss>
