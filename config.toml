@@ -14,7 +14,7 @@ disableKinds = ["about"]
 
 [[menu.main]]
   name = "About"
-  url = "/about"
+  url = "/about/"
   weight = 4
 
 [markup]
