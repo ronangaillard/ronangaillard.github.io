@@ -6,7 +6,17 @@
     <description>Recent content on Ronan Gaillard</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Oct 2020 23:02:46 +0100</lastBuildDate><atom:link href="https://ronangaillard.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Nov 2020 10:30:29 +0100</lastBuildDate><atom:link href="https://ronangaillard.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>68net : A Modern SCSI2Ethernet Board - Part 1</title>
+      <link>https://ronangaillard.github.io/posts/68net-a-modern-scsi2ethernet-board-part1/</link>
+      <pubDate>Tue, 10 Nov 2020 10:30:29 +0100</pubDate>
+      
+      <guid>https://ronangaillard.github.io/posts/68net-a-modern-scsi2ethernet-board-part1/</guid>
+      <description>Want to discuss about this project ? Go here !
+Introduction I had been looking to connect my SE/30 to the internet but I struggled to find PDS boards that would fit in it. It is particularly difficult as such boards are rare, but there is also very little space available in the SE/30, so most cards won&amp;rsquo;t fit in. Apart from the internal PDS port the SE/30 has another expansion port : SCSI, which is an improved parallel port.</description>
+    </item>
+    
     <item>
       <title>My Mac SE/30 Is Back Alive</title>
       <link>https://ronangaillard.github.io/posts/my-mac-se30-is-back-alive/</link>
