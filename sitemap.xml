@@ -1,38 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
-    <loc>https://ronangaillard.github.io/posts/68net-a-modern-scsi2ethernet-board-part1/</loc>
+    <loc>/posts/68net-a-modern-scsi2ethernet-board-part1/</loc>
     <lastmod>2020-11-10T10:30:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ronangaillard.github.io/posts/</loc>
+  </url><url>
+    <loc>/posts/</loc>
     <lastmod>2020-11-10T10:30:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ronangaillard.github.io/</loc>
+  </url><url>
+    <loc>/</loc>
     <lastmod>2020-11-10T10:30:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ronangaillard.github.io/posts/my-mac-se30-is-back-alive/</loc>
+  </url><url>
+    <loc>/posts/my-mac-se30-is-back-alive/</loc>
     <lastmod>2020-10-25T23:02:46+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ronangaillard.github.io/about/</loc>
+  </url><url>
+    <loc>/about/</loc>
     <lastmod>2020-10-24T17:51:42+00:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+  </url><url>
+    <loc>/tags/</loc>
   </url>
-  
-  <url>
-    <loc>https://ronangaillard.github.io/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>https://ronangaillard.github.io/tags/</loc>
-  </url>
-  
 </urlset>
