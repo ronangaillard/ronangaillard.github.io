@@ -4,39 +4,37 @@
     <title>Ronan Gaillard</title>
     <link>/</link>
     <description>Recent content on Ronan Gaillard</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Nov 2020 10:30:29 +0100</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 Dec 2025 22:00:00 +0100</lastBuildDate>
+    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reverse Engineering the Epson FilmScan 200 for Classic Mac</title>
+      <link>/posts/reverse-engineering-epson-filmscan-200/</link>
+      <pubDate>Tue, 30 Dec 2025 22:00:00 +0100</pubDate>
+      <guid>/posts/reverse-engineering-epson-filmscan-200/</guid>
+      <description>&lt;p&gt;&lt;em&gt;How I wrote a SCSI driver from scratch to scan 35mm film on a Mac SE/30 running System 7&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;&#xA;&lt;p&gt;I shoot and develop 35mm film at home. It&amp;rsquo;s a nice hobby, and I do my own prints in a small darkroom. But sometimes I want digital copies to share online or just to archive.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;/img/filmscan/cameras.jpg&#34; alt=&#34;My analog cameras&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;A while ago I found an Epson FilmScan 200 on leboncoin (the French Craigslist) for 10 euros. It&amp;rsquo;s a dedicated 35mm film scanner from 1997 that scans at 1200 DPI optical. At that price, worth a try.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>68net : A Modern SCSI2Ethernet Board - Part 1</title>
       <link>/posts/68net-a-modern-scsi2ethernet-board-part1/</link>
       <pubDate>Tue, 10 Nov 2020 10:30:29 +0100</pubDate>
-      
       <guid>/posts/68net-a-modern-scsi2ethernet-board-part1/</guid>
-      <description>Want to discuss about this project ? Go here !
-Introduction I had been looking to connect my SE/30 to the internet but I struggled to find PDS boards that would fit in it. It is particularly difficult as such boards are rare, but there is also very little space available in the SE/30, so most cards won&amp;rsquo;t fit in. Apart from the internal PDS port the SE/30 has another expansion port : SCSI, which is an improved parallel port.</description>
+      <description>&lt;p&gt;&lt;em&gt;Want to discuss about this project ? &lt;a href=&#34;https://68kmla.org/forums/topic/61287-68net-a-modern-scsi-to-ethernet-board/&#34; target=&#34;_blank&#34;&gt;Go here !&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;I had been looking to connect my SE/30 to the internet but I struggled to find PDS boards that would fit in it. It is particularly difficult as such boards are rare, but there is also very little space available in the SE/30, so most cards won&amp;rsquo;t fit in. Apart from the internal PDS port the SE/30 has another expansion port : SCSI, which is an improved parallel port. It is available at the back of the computer as a DB25 port. But all SCSI to Ethernet devices from back in the days that I found were missing floppies with drivers. Moreover most of this stuff was in the US so shipping would be really expensive. Then I found about &lt;a href=&#34;https://68kmla.org/forums/topic/58413-scsi-to-ethernet-adapter-on-new-hardware/&#34; target=&#34;_blank&#34;&gt;scuznet&lt;/a&gt;, a modern design by @saybur. It was really interesting because it was made to work with an unpatched Nuvotech driver. But there was a few things I did want to change/improve to the design, including the fact that it would be really cool to be able to upgrade the firmware by USB so that the community could easily develop and upgrade the firmware.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>My Mac SE/30 Is Back Alive</title>
       <link>/posts/my-mac-se30-is-back-alive/</link>
       <pubDate>Sun, 25 Oct 2020 23:02:46 +0100</pubDate>
-      
       <guid>/posts/my-mac-se30-is-back-alive/</guid>
-      <description>Or how I fixed my Mac SE/30 that was not booting unexpectedly
- Updates
- [02 November 2020] This article was also featured on Hackaday : BODGE WIRE SAVES A VINTAGE MAC SE/30 FROM THE HEAP   One day around a year ago I was playing with my SE/30 (the best looking computer ever) and I was trying to install Debian on it for fun. But after inserting some floppies and trying to boot from them the computer wouldn&amp;rsquo;t turn back on.</description>
+      <description>&lt;p&gt;&lt;em&gt;Or how I fixed my Mac SE/30 that was not booting unexpectedly&lt;/em&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;Updates&lt;/em&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;[02 November 2020] This article was also featured on Hackaday : &lt;a href=&#34;https://hackaday.com/2020/11/01/bodge-wire-saves-a-vintage-mac-se-30-from-the-heap/&#34; target=&#34;_blank&#34;&gt;BODGE WIRE SAVES A VINTAGE MAC SE/30 FROM THE HEAP&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;One day around a year ago I was playing with my SE/30 (the best looking computer ever) and I was trying to install Debian on it for fun. But after inserting some floppies and trying to boot from them the computer wouldn&amp;rsquo;t turn back on. I mean it would turn on but with weird static graphics and no sound at startup. I already had a hard time figuring out how I would boot Linux on that machine (which I succeeded at doing) that I did not want to spend more time fixing it.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>About me</title>
       <link>/about/</link>
       <pubDate>Sat, 24 Oct 2020 17:51:42 +0000</pubDate>
-      
       <guid>/about/</guid>
-      <description>I&amp;rsquo;m Ronan Gaillard an Embedded System Engineer as well as a sailor with boat based in Saint-Malo France.
-My main points of interest are embedded systems, retro computing, sailing and hiking.</description>
+      <description>&lt;p&gt;I&amp;rsquo;m Ronan Gaillard an Embedded System Engineer as well as a sailor with boat based in Saint-Malo France.&lt;/p&gt;&#xA;&lt;p&gt;My main points of interest are embedded systems, retro computing, sailing and hiking.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

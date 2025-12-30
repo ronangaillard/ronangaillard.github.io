@@ -8,19 +8,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
-  <meta property="og:title" content="68net : A Modern SCSI2Ethernet Board - Part 1" />
-<meta property="og:description" content="Want to discuss about this project ? Go here !
-Introduction I had been looking to connect my SE/30 to the internet but I struggled to find PDS boards that would fit in it. It is particularly difficult as such boards are rare, but there is also very little space available in the SE/30, so most cards won&rsquo;t fit in. Apart from the internal PDS port the SE/30 has another expansion port : SCSI, which is an improved parallel port." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="/posts/68net-a-modern-scsi2ethernet-board-part1/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-11-10T10:30:29+01:00" />
-<meta property="article:modified_time" content="2020-11-10T10:30:29+01:00" />
+  <meta property="og:url" content="/posts/68net-a-modern-scsi2ethernet-board-part1/">
+  <meta property="og:site_name" content="Ronan Gaillard">
+  <meta property="og:title" content="68net : A Modern SCSI2Ethernet Board - Part 1">
+  <meta property="og:description" content="Want to discuss about this project ? Go here !
+Introduction I had been looking to connect my SE/30 to the internet but I struggled to find PDS boards that would fit in it. It is particularly difficult as such boards are rare, but there is also very little space available in the SE/30, so most cards won’t fit in. Apart from the internal PDS port the SE/30 has another expansion port : SCSI, which is an improved parallel port. It is available at the back of the computer as a DB25 port. But all SCSI to Ethernet devices from back in the days that I found were missing floppies with drivers. Moreover most of this stuff was in the US so shipping would be really expensive. Then I found about scuznet, a modern design by @saybur. It was really interesting because it was made to work with an unpatched Nuvotech driver. But there was a few things I did want to change/improve to the design, including the fact that it would be really cool to be able to upgrade the firmware by USB so that the community could easily develop and upgrade the firmware.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-11-10T10:30:29+01:00">
+    <meta property="article:modified_time" content="2020-11-10T10:30:29+01:00">
 
-
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="68net : A Modern SCSI2Ethernet Board - Part 1"/>
-<meta name="twitter:description" content="Want to discuss about this project ? Go here !
-Introduction I had been looking to connect my SE/30 to the internet but I struggled to find PDS boards that would fit in it. It is particularly difficult as such boards are rare, but there is also very little space available in the SE/30, so most cards won&rsquo;t fit in. Apart from the internal PDS port the SE/30 has another expansion port : SCSI, which is an improved parallel port."/>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="68net : A Modern SCSI2Ethernet Board - Part 1">
+  <meta name="twitter:description" content="Want to discuss about this project ? Go here !
+Introduction I had been looking to connect my SE/30 to the internet but I struggled to find PDS boards that would fit in it. It is particularly difficult as such boards are rare, but there is also very little space available in the SE/30, so most cards won’t fit in. Apart from the internal PDS port the SE/30 has another expansion port : SCSI, which is an improved parallel port. It is available at the back of the computer as a DB25 port. But all SCSI to Ethernet devices from back in the days that I found were missing floppies with drivers. Moreover most of this stuff was in the US so shipping would be really expensive. Then I found about scuznet, a modern design by @saybur. It was really interesting because it was made to work with an unpatched Nuvotech driver. But there was a few things I did want to change/improve to the design, including the fact that it would be really cool to be able to upgrade the firmware by USB so that the community could easily develop and upgrade the firmware.">
 
   
   
@@ -39,24 +42,8 @@ Introduction I had been looking to connect my SE/30 to the internet but I strugg
 <link rel="icon" type="image/png" href="/images/favicon.ico" />
 
   
-  
-  
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-181304069-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-  
-
 </head>
+
 <body class="max-width mx-auto px3 ltr">
   <div class="content index py4">
 
@@ -84,6 +71,12 @@ if (!doNotTrack) {
           </a>
         </li>
         
+        
+        <li>
+          <a class="icon" href="/posts/reverse-engineering-epson-filmscan-200/">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
         
         <li>
           <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');">
@@ -156,7 +149,7 @@ if (!doNotTrack) {
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.tumblr.com/share/link?url=%2fposts%2f68net-a-modern-scsi2ethernet-board-part1%2f&name=68net%20%3a%20A%20Modern%20SCSI2Ethernet%20Board%20-%20Part%201&description=Want%20to%20discuss%20about%20this%20project%20%3f%20Go%20here%20%21%0aIntroduction%20I%20had%20been%20looking%20to%20connect%20my%20SE%2f30%20to%20the%20internet%20but%20I%20struggled%20to%20find%20PDS%20boards%20that%20would%20fit%20in%20it.%20It%20is%20particularly%20difficult%20as%20such%20boards%20are%20rare%2c%20but%20there%20is%20also%20very%20little%20space%20available%20in%20the%20SE%2f30%2c%20so%20most%20cards%20won%26rsquo%3bt%20fit%20in.%20Apart%20from%20the%20internal%20PDS%20port%20the%20SE%2f30%20has%20another%20expansion%20port%20%3a%20SCSI%2c%20which%20is%20an%20improved%20parallel%20port.">
+    <a class="icon" href="http://www.tumblr.com/share/link?url=%2fposts%2f68net-a-modern-scsi2ethernet-board-part1%2f&name=68net%20%3a%20A%20Modern%20SCSI2Ethernet%20Board%20-%20Part%201&description=%3cp%3e%3cem%3eWant%20to%20discuss%20about%20this%20project%20%3f%20%3ca%20href%3d%22https%3a%2f%2f68kmla.org%2fforums%2ftopic%2f61287-68net-a-modern-scsi-to-ethernet-board%2f%22%20target%3d%22_blank%22%3eGo%20here%20%21%3c%2fa%3e%3c%2fem%3e%3c%2fp%3e%0a%3ch2%20id%3d%22introduction%22%3eIntroduction%3c%2fh2%3e%0a%3cp%3eI%20had%20been%20looking%20to%20connect%20my%20SE%2f30%20to%20the%20internet%20but%20I%20struggled%20to%20find%20PDS%20boards%20that%20would%20fit%20in%20it.%20It%20is%20particularly%20difficult%20as%20such%20boards%20are%20rare%2c%20but%20there%20is%20also%20very%20little%20space%20available%20in%20the%20SE%2f30%2c%20so%20most%20cards%20won%26rsquo%3bt%20fit%20in.%20Apart%20from%20the%20internal%20PDS%20port%20the%20SE%2f30%20has%20another%20expansion%20port%20%3a%20SCSI%2c%20which%20is%20an%20improved%20parallel%20port.%20It%20is%20available%20at%20the%20back%20of%20the%20computer%20as%20a%20DB25%20port.%20But%20all%20SCSI%20to%20Ethernet%20devices%20from%20back%20in%20the%20days%20that%20I%20found%20were%20missing%20floppies%20with%20drivers.%20Moreover%20most%20of%20this%20stuff%20was%20in%20the%20US%20so%20shipping%20would%20be%20really%20expensive.%20Then%20I%20found%20about%20%3ca%20href%3d%22https%3a%2f%2f68kmla.org%2fforums%2ftopic%2f58413-scsi-to-ethernet-adapter-on-new-hardware%2f%22%20target%3d%22_blank%22%3escuznet%3c%2fa%3e%2c%20a%20modern%20design%20by%20%40saybur.%20It%20was%20really%20interesting%20because%20it%20was%20made%20to%20work%20with%20an%20unpatched%20Nuvotech%20driver.%20But%20there%20was%20a%20few%20things%20I%20did%20want%20to%20change%2fimprove%20to%20the%20design%2c%20including%20the%20fact%20that%20it%20would%20be%20really%20cool%20to%20be%20able%20to%20upgrade%20the%20firmware%20by%20USB%20so%20that%20the%20community%20could%20easily%20develop%20and%20upgrade%20the%20firmware.%3c%2fp%3e">
       <i class="fab fa-tumblr " aria-hidden="true"></i>
     </a>
   </li>
@@ -346,7 +339,7 @@ if (!doNotTrack) {
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.tumblr.com/share/link?url=%2fposts%2f68net-a-modern-scsi2ethernet-board-part1%2f&name=68net%20%3a%20A%20Modern%20SCSI2Ethernet%20Board%20-%20Part%201&description=Want%20to%20discuss%20about%20this%20project%20%3f%20Go%20here%20%21%0aIntroduction%20I%20had%20been%20looking%20to%20connect%20my%20SE%2f30%20to%20the%20internet%20but%20I%20struggled%20to%20find%20PDS%20boards%20that%20would%20fit%20in%20it.%20It%20is%20particularly%20difficult%20as%20such%20boards%20are%20rare%2c%20but%20there%20is%20also%20very%20little%20space%20available%20in%20the%20SE%2f30%2c%20so%20most%20cards%20won%26rsquo%3bt%20fit%20in.%20Apart%20from%20the%20internal%20PDS%20port%20the%20SE%2f30%20has%20another%20expansion%20port%20%3a%20SCSI%2c%20which%20is%20an%20improved%20parallel%20port.">
+    <a class="icon" href="http://www.tumblr.com/share/link?url=%2fposts%2f68net-a-modern-scsi2ethernet-board-part1%2f&name=68net%20%3a%20A%20Modern%20SCSI2Ethernet%20Board%20-%20Part%201&description=%3cp%3e%3cem%3eWant%20to%20discuss%20about%20this%20project%20%3f%20%3ca%20href%3d%22https%3a%2f%2f68kmla.org%2fforums%2ftopic%2f61287-68net-a-modern-scsi-to-ethernet-board%2f%22%20target%3d%22_blank%22%3eGo%20here%20%21%3c%2fa%3e%3c%2fem%3e%3c%2fp%3e%0a%3ch2%20id%3d%22introduction%22%3eIntroduction%3c%2fh2%3e%0a%3cp%3eI%20had%20been%20looking%20to%20connect%20my%20SE%2f30%20to%20the%20internet%20but%20I%20struggled%20to%20find%20PDS%20boards%20that%20would%20fit%20in%20it.%20It%20is%20particularly%20difficult%20as%20such%20boards%20are%20rare%2c%20but%20there%20is%20also%20very%20little%20space%20available%20in%20the%20SE%2f30%2c%20so%20most%20cards%20won%26rsquo%3bt%20fit%20in.%20Apart%20from%20the%20internal%20PDS%20port%20the%20SE%2f30%20has%20another%20expansion%20port%20%3a%20SCSI%2c%20which%20is%20an%20improved%20parallel%20port.%20It%20is%20available%20at%20the%20back%20of%20the%20computer%20as%20a%20DB25%20port.%20But%20all%20SCSI%20to%20Ethernet%20devices%20from%20back%20in%20the%20days%20that%20I%20found%20were%20missing%20floppies%20with%20drivers.%20Moreover%20most%20of%20this%20stuff%20was%20in%20the%20US%20so%20shipping%20would%20be%20really%20expensive.%20Then%20I%20found%20about%20%3ca%20href%3d%22https%3a%2f%2f68kmla.org%2fforums%2ftopic%2f58413-scsi-to-ethernet-adapter-on-new-hardware%2f%22%20target%3d%22_blank%22%3escuznet%3c%2fa%3e%2c%20a%20modern%20design%20by%20%40saybur.%20It%20was%20really%20interesting%20because%20it%20was%20made%20to%20work%20with%20an%20unpatched%20Nuvotech%20driver.%20But%20there%20was%20a%20few%20things%20I%20did%20want%20to%20change%2fimprove%20to%20the%20design%2c%20including%20the%20fact%20that%20it%20would%20be%20really%20cool%20to%20be%20able%20to%20upgrade%20the%20firmware%20by%20USB%20so%20that%20the%20community%20could%20easily%20develop%20and%20upgrade%20the%20firmware.%3c%2fp%3e">
       <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
     </a>
   </li>
@@ -377,7 +370,7 @@ if (!doNotTrack) {
 
   <footer id="footer">
   <div class="footer-left">
-    Copyright  &copy; 2021  Ronan Gaillard 
+    Copyright  &copy; 2025  Ronan Gaillard 
   </div>
   <div class="footer-right">
     <nav>
