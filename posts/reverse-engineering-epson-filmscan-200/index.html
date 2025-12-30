@@ -234,7 +234,8 @@ A while ago I found an Epson FilmScan 200 on leboncoin (the French Craigslist) f
   </tbody>
 </table>
 <p>The &ldquo;Processor&rdquo; device type was interesting. Unlike standard SCSI scanners that use vendor-specific commands, this one uses generic SEND (0x0A) and RECEIVE (0x08) commands to exchange ESC/I protocol data. The ESC/I protocol is Epson&rsquo;s standard scanner command language, same family as what their flatbed scanners use.</p>
-<p>I was surprised by how technical the service manual is. It details SCSI timings, command sequences, data exchange formats&hellip; Did technicians really use this to repair people&rsquo;s scanners back in the day? I guess they did. Either way, it gave me a solid foundation, even if it stayed a bit high-level and didn&rsquo;t detail every command parameter.</p>
+<p><img src="/img/filmscan/manual-extract.png" alt="Extract from the service manual"></p>
+<p><em>I was surprised by how technical the service manual is. It details SCSI timings, command sequences, data exchange formats&hellip; Did technicians really use this to repair people&rsquo;s scanners back in the day? I guess they did. Either way, it gave me a solid foundation, even if it stayed a bit high-level and didn&rsquo;t detail every command parameter.</em></p>
 <p>I also extracted the original 68k driver from the Epson TWAIN plugin (a 748KB resource fork) and started disassembling it to understand the command flow. Why not just use SANE on Linux? Because SANE doesn&rsquo;t actually support the FilmScan 200 out of the box. The mainline epson backend doesn&rsquo;t include it. So I was on my own.</p>
 <h2 id="setting-up-the-development-environment">Setting Up the Development Environment</h2>
 <p>For development, I used THINK C 5.0 on the SE/30. Yes, I&rsquo;m writing 68k code in 2025. There&rsquo;s something satisfying about it.</p>
