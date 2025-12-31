@@ -16,6 +16,13 @@
       <description>&lt;p&gt;&lt;em&gt;How I wrote a SCSI driver from scratch to scan 35mm film on a Mac SE/30 running System 7&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;&#xA;&lt;p&gt;I shoot and develop 35mm film at home. It&amp;rsquo;s a nice hobby, and I do my own prints in a small darkroom. But sometimes I want digital copies to share online or just to archive.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;/img/filmscan/cameras.jpg&#34; alt=&#34;My analog cameras&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;A while ago I found an Epson FilmScan 200 on leboncoin (the French Craigslist) for 10 euros. It&amp;rsquo;s a dedicated 35mm film scanner from 1997 that scans at 1200 DPI optical. At that price, worth a try.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>From Frustration to App Store: The Story of Workspace Profiles</title>
+      <link>/posts/workspace-profiles-blog-post-en/</link>
+      <pubDate>Wed, 03 Sep 2025 15:30:00 +0200</pubDate>
+      <guid>/posts/workspace-profiles-blog-post-en/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Or, how I turned an annoying daily routine into a Mac app.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-problem-the-tyranny-of-manual-settings&#34;&gt;The Problem: The Tyranny of Manual Settings&lt;/h2&gt;&#xA;&lt;p&gt;Like many developers, my day is punctuated by context switches. I plug my MacBook into a docking station at the office, connect it to an external monitor at home, put on a headset for a call&amp;hellip; and each time, it&amp;rsquo;s the same ritual: open System Settings, find the right Display panel, rearrange my screens, then go to the Sound panel to select the correct microphone and speakers. It&amp;rsquo;s a waste of a few seconds, but repeated multiple times a day, it became a constant source of frustration.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>68net : A Modern SCSI2Ethernet Board - Part 1</title>
       <link>/posts/68net-a-modern-scsi2ethernet-board-part1/</link>
       <pubDate>Tue, 10 Nov 2020 10:30:29 +0100</pubDate>
