@@ -326,16 +326,16 @@ Why the Nintendo DS? I think the Nintendo DS is one of the best consoles ever ma
 
 
 
-<figure class="fdsn" id="fdsn-876394152" data-mode="power" style="margin:1.5em 0">
+<figure class="fdsn" id="fdsn-954826371" data-mode="power" style="margin:1.5em 0">
   <div class="fdsn-nav" style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:6px"></div>
-  <div class="fdsn-step" style="min-height:5.2em;font-size:.9em;line-height:1.5;margin-bottom:8px"></div>
+  <div class="fdsn-step" style="font-size:.9em;line-height:1.5;margin-bottom:8px"></div>
   <canvas width="384" height="160" style="width:100%;max-width:768px;display:block;margin:0 auto;image-rendering:pixelated;image-rendering:crisp-edges;border-radius:8px;background:#1d1b24;border:6px solid #1d1b24;box-sizing:border-box;cursor:pointer"></canvas>
-  <div class="fdsn-panel" style="font-size:.85em;margin-top:8px;line-height:1.6;min-height:3.3em"></div>
+  <div class="fdsn-panel" style="font-size:.85em;margin-top:8px;line-height:1.6"></div>
   <figcaption style="text-align:center;font-style:italic;margin-top:8px;font-size:0.9em;color:#666">The same rules and numbers as in the game, replayed in your browser. Click the picture or a number to go step by step. The colored bar under a machine is its speed.</figcaption>
 </figure>
 <script>
 (function () {
-  var root = document.getElementById("fdsn-876394152");
+  var root = document.getElementById("fdsn-954826371");
   var MODE = root.getAttribute("data-mode");
   var cv = root.querySelector("canvas"), g = cv.getContext("2d");
   var stepEl = root.querySelector(".fdsn-step"), panel = root.querySelector(".fdsn-panel");
@@ -583,6 +583,24 @@ Why the Nintendo DS? I think the Nintendo DS is one of the best consoles ever ma
     scene.render(si, t, now);
     requestAnimationFrame(loop);
   }
+  
+  function lockHeights() {
+    var keep = stepEl.innerHTML, h = 0;
+    stepEl.style.minHeight = "0";
+    for (var k = 0; k < N; k++) {
+      stepEl.innerHTML = '<b>Step ' + (k + 1) + '/' + N + ': ' + STEPS[k].title + '</b><br>' + STEPS[k].text;
+      h = Math.max(h, stepEl.offsetHeight);
+    }
+    stepEl.innerHTML = keep; stepEl.style.minHeight = h + "px";
+    var row = MODE === "power"                                         
+      ? "<div>" + dot("#000") + "<b>Network 1</b>: produces 20, needs 29" + bar("#000", 50) + "<b>100%</b> speed</div>"
+      : "<div>" + dot("#000") + "<b>Network 1</b>: 18 pieces, 3300 / 3420 water" + bar("#000", 50) + "</div>";
+    var two = row + row, keepP = panel.innerHTML;
+    panel.style.minHeight = "0"; panel.innerHTML = two; var hp = panel.offsetHeight; panel.innerHTML = keepP;
+    panel.style.minHeight = hp + "px";
+  }
+  lockHeights();
+  window.addEventListener("resize", lockHeights);
   var started = false;
   function start() { if (!started) { started = true; requestAnimationFrame(loop); } }
   sheet.onload = start;
@@ -594,16 +612,16 @@ Why the Nintendo DS? I think the Nintendo DS is one of the best consoles ever ma
 
 
 
-<figure class="fdsn" id="fdsn-987562431" data-mode="fluid" style="margin:1.5em 0">
+<figure class="fdsn" id="fdsn-486751932" data-mode="fluid" style="margin:1.5em 0">
   <div class="fdsn-nav" style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:6px"></div>
-  <div class="fdsn-step" style="min-height:5.2em;font-size:.9em;line-height:1.5;margin-bottom:8px"></div>
+  <div class="fdsn-step" style="font-size:.9em;line-height:1.5;margin-bottom:8px"></div>
   <canvas width="384" height="160" style="width:100%;max-width:768px;display:block;margin:0 auto;image-rendering:pixelated;image-rendering:crisp-edges;border-radius:8px;background:#1d1b24;border:6px solid #1d1b24;box-sizing:border-box;cursor:pointer"></canvas>
-  <div class="fdsn-panel" style="font-size:.85em;margin-top:8px;line-height:1.6;min-height:3.3em"></div>
+  <div class="fdsn-panel" style="font-size:.85em;margin-top:8px;line-height:1.6"></div>
   <figcaption style="text-align:center;font-style:italic;margin-top:8px;font-size:0.9em;color:#666">One number per network instead of one per pipe. Click to go step by step.</figcaption>
 </figure>
 <script>
 (function () {
-  var root = document.getElementById("fdsn-987562431");
+  var root = document.getElementById("fdsn-486751932");
   var MODE = root.getAttribute("data-mode");
   var cv = root.querySelector("canvas"), g = cv.getContext("2d");
   var stepEl = root.querySelector(".fdsn-step"), panel = root.querySelector(".fdsn-panel");
@@ -851,6 +869,24 @@ Why the Nintendo DS? I think the Nintendo DS is one of the best consoles ever ma
     scene.render(si, t, now);
     requestAnimationFrame(loop);
   }
+  
+  function lockHeights() {
+    var keep = stepEl.innerHTML, h = 0;
+    stepEl.style.minHeight = "0";
+    for (var k = 0; k < N; k++) {
+      stepEl.innerHTML = '<b>Step ' + (k + 1) + '/' + N + ': ' + STEPS[k].title + '</b><br>' + STEPS[k].text;
+      h = Math.max(h, stepEl.offsetHeight);
+    }
+    stepEl.innerHTML = keep; stepEl.style.minHeight = h + "px";
+    var row = MODE === "power"                                         
+      ? "<div>" + dot("#000") + "<b>Network 1</b>: produces 20, needs 29" + bar("#000", 50) + "<b>100%</b> speed</div>"
+      : "<div>" + dot("#000") + "<b>Network 1</b>: 18 pieces, 3300 / 3420 water" + bar("#000", 50) + "</div>";
+    var two = row + row, keepP = panel.innerHTML;
+    panel.style.minHeight = "0"; panel.innerHTML = two; var hp = panel.offsetHeight; panel.innerHTML = keepP;
+    panel.style.minHeight = hp + "px";
+  }
+  lockHeights();
+  window.addEventListener("resize", lockHeights);
   var started = false;
   function start() { if (!started) { started = true; requestAnimationFrame(loop); } }
   sheet.onload = start;
