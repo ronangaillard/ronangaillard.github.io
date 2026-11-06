@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="-apple-system,Helvetica,Arial,sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="#22272a"/></marker>
+  </defs>
+  <rect width="800" height="400" fill="#fafafa"/>
+  <!-- loop arcs -->
+  <g fill="none" stroke="#22272a" stroke-width="2.5" marker-end="url(#a)">
+    <path d="M330 72 C 400 56, 440 56, 500 72"/>
+    <path d="M590 130 C 620 170, 620 210, 590 252"/>
+    <path d="M500 312 C 440 330, 400 330, 330 312"/>
+    <path d="M220 252 C 190 210, 190 170, 220 130"/>
+  </g>
+  <g font-size="13" fill="#22272a">
+    <rect x="110" y="40" width="220" height="86" rx="12" fill="#fff4e0" stroke="#c27a00" stroke-width="2"/>
+    <text x="126" y="64" font-weight="700">1. Build a card on the Mac</text>
+    <text x="126" y="84" font-size="12" fill="#6b7280">compile linkxt, patch the</text>
+    <text x="126" y="100" font-size="12" fill="#6b7280">RAM image, test it in an</text>
+    <text x="126" y="116" font-size="12" fill="#6b7280">emulator with a fake Link 3</text>
+
+    <rect x="500" y="40" width="220" height="86" rx="12" fill="#e8efff" stroke="#2563eb" stroke-width="2"/>
+    <text x="516" y="64" font-weight="700">2. Copy it to the SD card</text>
+    <text x="516" y="84" font-size="12" fill="#6b7280">check the checksums,</text>
+    <text x="516" y="100" font-size="12" fill="#6b7280">eject, put it in the camera</text>
+
+    <rect x="500" y="256" width="220" height="86" rx="12" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/>
+    <text x="516" y="280" font-weight="700">3. Boot and try to print</text>
+    <text x="516" y="300" font-size="12" fill="#6b7280">linkxt writes a text log</text>
+    <text x="516" y="316" font-size="12" fill="#6b7280">(and dumps buffers) to the</text>
+    <text x="516" y="332" font-size="12" fill="#6b7280">SD card as it goes</text>
+
+    <rect x="110" y="256" width="220" height="86" rx="12" fill="#f7d7e6" stroke="#c2185b" stroke-width="2"/>
+    <text x="126" y="280" font-weight="700">4. Pull the battery</text>
+    <text x="126" y="300" font-size="12" fill="#6b7280">card back in the Mac,</text>
+    <text x="126" y="316" font-size="12" fill="#6b7280">read <tspan font-family="Menlo,monospace">LINKXT.TXT</tspan>, decide</text>
+    <text x="126" y="332" font-size="12" fill="#6b7280">what the next card tests</text>
+  </g>
+  <circle cx="415" cy="190" r="62" fill="#22272a"/>
+  <text x="415" y="182" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">46</text>
+  <text x="415" y="202" text-anchor="middle" font-size="12" fill="#d1d5db">trials</text>
+  <text x="415" y="218" text-anchor="middle" font-size="11" fill="#9ca3af">~10 min each</text>
+  <text x="400" y="382" text-anchor="middle" font-size="13" fill="#6b7280" font-style="italic">Most cards were "no-print" builds: they do everything except the last command, so no film is wasted.</text>
+</svg>

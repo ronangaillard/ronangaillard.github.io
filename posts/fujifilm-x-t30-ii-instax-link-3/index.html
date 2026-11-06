@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Teaching my Fujifilm X-T30 II to Print on an instax Link 3 | Ronan Gaillard</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:url" content="/posts/fujifilm-x-t30-ii-instax-link-3/">
+	<meta property="og:site_name" content="Ronan Gaillard">
+	<meta property="og:title" content="Teaching my Fujifilm X-T30 II to Print on an instax Link 3">
+	<meta property="og:description" content="How I added Bluetooth instax printing to a camera that never had it, without flashing anything, with a lot of help from Claude Code
+The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 printer. I like giving prints to people I meet. But the camera can’t talk to the printer. I have to copy the photo to my phone, open the instax app and print from there. That works, but it is slow and it kills the fun.">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-11-06T22:00:00+01:00">
+		<meta property="article:modified_time" content="2026-11-06T22:00:00+01:00">
+
+  
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Teaching my Fujifilm X-T30 II to Print on an instax Link 3">
+	<meta name="twitter:description" content="How I added Bluetooth instax printing to a camera that never had it, without flashing anything, with a lot of help from Claude Code
+The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 printer. I like giving prints to people I meet. But the camera can’t talk to the printer. I have to copy the photo to my phone, open the instax app and print from there. That works, but it is slow and it kills the fun.">
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="/css/style-classic.css">
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="/images/favicon.ico" />
+
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" /posts/factory-ds-a-factory-game-for-the-nintendo-ds/">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&text=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&title=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&is_video=false&description=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203&body=Check out this article: %2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&title=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&title=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.stumbleupon.com/submit?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&title=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-stumbleupon " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://digg.com/submit?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&title=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-digg " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&name=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203&description=%3cp%3e%3cem%3eHow%20I%20added%20Bluetooth%20instax%20printing%20to%20a%20camera%20that%20never%20had%20it%2c%20without%20flashing%20anything%2c%20with%20a%20lot%20of%20help%20from%20Claude%20Code%3c%2fem%3e%3c%2fp%3e%0a%3cp%3e%3cimg%20src%3d%22%2fimg%2ffujifilm-instax%2fsetup.jpg%22%20alt%3d%22The%20X-T30%20II%20and%20the%20instax%20mini%20Link%203%22%3e%3c%2fp%3e%0a%3ch2%20id%3d%22the-problem%22%3eThe%20Problem%3c%2fh2%3e%0a%3cp%3eI%20travel%20with%20a%20Fujifilm%20X-T30%20II%20and%20a%20small%20instax%20mini%20Link%203%20printer.%20I%20like%20giving%20prints%20to%20people%20I%20meet.%20But%20the%20camera%20can%26rsquo%3bt%20talk%20to%20the%20printer.%20I%20have%20to%20copy%20the%20photo%20to%20my%20phone%2c%20open%20the%20instax%20app%20and%20print%20from%20there.%20That%20works%2c%20but%20it%20is%20slow%20and%20it%20kills%20the%20fun.%3c%2fp%3e">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&t=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-problem">The Problem</a></li>
+    <li><a href="#rule-zero-dont-brick-the-camera">Rule zero: don&rsquo;t brick the camera</a></li>
+    <li><a href="#step-1-opening-the-firmware">Step 1: Opening the firmware</a></li>
+    <li><a href="#step-2-the-code-was-already-there">Step 2: The code was already there</a></li>
+    <li><a href="#step-3-writing-the-missing-piece">Step 3: Writing the missing piece</a></li>
+    <li><a href="#step-4-running-it-without-flashing">Step 4: Running it without flashing</a></li>
+    <li><a href="#step-5-debugging-blind">Step 5: Debugging blind</a></li>
+    <li><a href="#the-pink-ghost">The pink ghost</a></li>
+    <li><a href="#it-works">It works!</a></li>
+    <li><a href="#tools-and-sources">Tools and sources</a></li>
+    <li><a href="#lessons-learned">Lessons Learned</a></li>
+    <li><a href="#whats-next">What&rsquo;s next</a></li>
+  </ul>
+</nav>
+    </div>
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        Teaching my Fujifilm X-T30 II to Print on an instax Link 3
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2026-11-06 22:00:00 &#43;0100 &#43;0100" itemprop="datePublished">2026-11-06</time>
+          
+        </div>
+        
+        
+      </div>
+    </header>
+
+  
+    <div class="content" itemprop="articleBody">
+      <p><em>How I added Bluetooth instax printing to a camera that never had it, without flashing anything, with a lot of help from Claude Code</em></p>
+<p><img src="/img/fujifilm-instax/setup.jpg" alt="The X-T30 II and the instax mini Link 3"></p>
+<h2 id="the-problem">The Problem</h2>
+<p>I travel with a Fujifilm X-T30 II and a small instax mini Link 3 printer. I like giving prints to people I meet. But the camera can&rsquo;t talk to the printer. I have to copy the photo to my phone, open the instax app and print from there. That works, but it is slow and it kills the fun.</p>
+<p>The X-T30 II can print to instax printers, but only the old Wi-Fi ones (SP-1, SP-2, SP-3). The Link 3 only does Bluetooth LE. Fujifilm added Link support to newer cameras like the X-S10, never to mine. It is on its latest firmware, so no update is coming.</p>
+<p><img src="/img/fujifilm-instax/01-goal.svg" alt="What the camera supports vs what I want"></p>
+<p>So the only way was to change the firmware. I had never looked at camera firmware before.</p>
+<h2 id="rule-zero-dont-brick-the-camera">Rule zero: don&rsquo;t brick the camera</h2>
+<p>Before anything, I set a few rules. A bricked camera is an expensive paperweight, and people in the community have bricked bodies by poking at random memory addresses.</p>
+<ul>
+<li><strong>Never write to the flash.</strong> Everything runs in RAM, and pulling the battery brings back the stock camera.</li>
+<li><strong>Every write to the camera needs my explicit OK</strong>, and the original bytes are checked first.</li>
+<li><strong>Prefer reading files on the Mac</strong> over probing the camera.</li>
+<li><strong>Don&rsquo;t waste film.</strong> An instax sheet costs about a euro. Debug cards never print.</li>
+</ul>
+<p>These rules shaped the whole project. They made it slower, but I never had a moment of panic.</p>
+<h2 id="step-1-opening-the-firmware">Step 1: Opening the firmware</h2>
+<p>Fujifilm publishes firmware updates on its website. It&rsquo;s one <code>.DAT</code> file per camera. The format isn&rsquo;t documented, but <a href="https://fujihack.org/" target="_blank">FujiHack</a> had already done part of the work on older bodies.</p>
+<p>Opening it took three steps. First, cut a header (model ID, version, checksums). Second, flip every bit (yes, the &ldquo;encryption&rdquo; is a NOT). Third, decompress four blocks packed with a custom LZ variant. I wrote a small Python unpacker, <code>fujifw.py</code>, and checked it against zlib tables hidden in the data: if they decode, the decompressor is right.</p>
+<p><img src="/img/fujifilm-instax/02-unpack.svg" alt="From the update file to Ghidra"></p>
+<p>Three blocks are ARM code: a Cortex-A7 running ThreadX, a small real-time OS. To load them in <a href="https://ghidra-sre.org/" target="_blank">Ghidra</a>, I needed their addresses in memory. I matched pointers in the code with the positions of the strings they should point to, and the addresses came out. Ghidra then found about 59,000 functions. I ran it headless from scripts, so Claude could ask it for decompiled functions without me clicking around.</p>
+<h2 id="step-2-the-code-was-already-there">Step 2: The code was already there</h2>
+<p>59,000 functions with no names is a lot. But I had a trick: the X-S10 uses the same processor and <strong>does</strong> print to Link printers. So I unpacked its firmware too and compared the two.</p>
+<p>I wrote a fuzzy matcher. It compares whole functions and ignores the addresses that change between builds. Then I ran it on the 176 functions of the X-S10 print code. 109 of them had a twin in my camera that was at least 90% identical.</p>
+<p>That was the big surprise: <strong>the X-T30 II already contains Fujifilm&rsquo;s Bluetooth print app.</strong> Cropping, rotation, JPEG encoding, progress screens, everything. Only the bottom layer, the part that talks to the printer over Bluetooth, had been compiled out and replaced by empty functions that return 0.</p>
+<p><img src="/img/fujifilm-instax/03-compare.svg" alt="X-S10 vs X-T30 II"></p>
+<p>Even better, the camera already has a Bluetooth LE stack in central mode. It uses it for the Fujifilm Bluetooth grip. So I didn&rsquo;t need a Bluetooth stack, just the missing glue.</p>
+<p>One more detail found here: the print app identifies printers by the first digit of their serial number. My camera knows <code>1</code> and <code>2</code>. The Link 3&rsquo;s serial starts with <code>7</code>. Without a patch, the camera would say &ldquo;unknown printer&rdquo; even with perfect Bluetooth.</p>
+<h2 id="step-3-writing-the-missing-piece">Step 3: Writing the missing piece</h2>
+<p>The instax Link protocol is well known thanks to people who sniffed it from the phone app: <a href="https://github.com/javl/InstaxBLE" target="_blank">javl/InstaxBLE</a>, <a href="https://github.com/linssenste/instax-link-web" target="_blank">linssenste/instax-link-web</a> and others. It&rsquo;s simple. Each packet starts with <code>Ab</code>, then a length, an opcode, a payload and a checksum. The camera asks a few questions, sends the JPEG in 900-byte chunks and says &ldquo;print&rdquo;.</p>
+<p>I didn&rsquo;t copy the X-S10 code. Moving it to another firmware would mean fixing hundreds of addresses. Instead, Claude and I wrote a small C module from scratch, <strong>linkxt</strong>. It sits exactly where the stubs were: the Fuji app calls it, and it calls the Fuji Bluetooth stack.</p>
+<p><img src="/img/fujifilm-instax/05-linkxt.svg" alt="Where linkxt sits"></p>
+<p>The hard constraint was space. The only safe place I found was a 4 KB hole full of zeros in the code, so linkxt had to fit in 4048 bytes. That includes a debug build with logging. Most debugging sessions started with &ldquo;what can I remove to make room for this new trace?&rdquo;.</p>
+<p>Before touching the camera, every build ran in an emulator. I used <a href="https://www.unicorn-engine.org/" target="_blank">Unicorn</a> to run the real ARM binary with a fake Link 3 printer written in Python. It caught a lot of bugs at zero cost.</p>
+<h2 id="step-4-running-it-without-flashing">Step 4: Running it without flashing</h2>
+<p>Now, how do you run modified firmware without flashing it?</p>
+<p>The answer came from <strong>jitl</strong> and the <a href="https://fujimod.com/" target="_blank">FujiMod</a> project, found on the FujiHack Discord. Fujifilm cameras can boot from the SD card if you hold a secret button combo at power-on (on mine: Delete + press the rear dial). The card holds a tiny loader, <code>ffinit.bin</code>, and <code>ffboot.bin</code>, an image of the whole RAM (72 MB) built from the official firmware. The camera loads it into RAM and runs it. The flash is never touched.</p>
+<p><img src="/img/fujifilm-instax/04-sdboot.svg" alt="SD boot"></p>
+<p>This was proven on the X-S10, not on the X-T30 II. Getting it to boot on mine took about 30 trials and a lot of black screens. With no screen and no debugger, my only output was the camera&rsquo;s LED. I wrote loaders that blink green for each stage reached and red for errors, then counted blinks. Later I wrote raw sectors to the SD card from the loader to keep a small log.</p>
+<p>The cause, found by reading the code: just before starting the app, the kernel wipes a 128 KB log buffer. That buffer is exactly where my hooks lived. Switching to jitl&rsquo;s other boot recipe (&ldquo;cold&rdquo; instead of &ldquo;startup&rdquo;) fixed it. On trial 30, the camera booted from the card to a normal live view. On trial 32, my first mod ran: it turned the LED red for 10 seconds and then let the camera boot.</p>
+<p>(I also spent a few evenings on a USB &ldquo;service mode&rdquo; route that can read and write RAM live. It was great for checking my RAM image against the real thing, but useless for running code.)</p>
+<h2 id="step-5-debugging-blind">Step 5: Debugging blind</h2>
+<p>Once linkxt was on the card, the camera showed a new screen: &ldquo;connecting&rdquo;… then &ldquo;CAN NOT BE CONNECTED&rdquo;. No details.</p>
+<p>I needed logs. In the firmware, I found the function Fuji uses to write <code>A:\UILOG\COUNTER.TXT</code> to the SD card, and I reused it. From then on, linkxt wrote everything it did to <code>A:\LINKXT.TXT</code>. Each trial became the same loop:</p>
+<p><img src="/img/fujifilm-instax/07-loop.svg" alt="The debug loop"></p>
+<p>The logs moved things forward fast:</p>
+<ul>
+<li><strong>Trials 34-36:</strong> scan, connect, find the instax service, enable notifications. Bluetooth works.</li>
+<li><strong>Trial 37:</strong> the first question gets an answer, but the Fuji app rejects it. The Link 3 answers in a newer layout than the old printers. A small shim in linkxt rewrites the answer.</li>
+<li><strong>Trial 38:</strong> all the questions pass and the photo upload starts.</li>
+<li><strong>Trial 39:</strong> the Link 3 accepts a print. The film counter goes from 7 to 6!</li>
+</ul>
+<p><img src="/img/fujifilm-instax/06-sequence.svg" alt="The full exchange"></p>
+<h2 id="the-pink-ghost">The pink ghost</h2>
+<p>Trial 39 printed. The sheet came out white and slowly developed into… an almost white picture with a faint pink boat. Not quite what I was hoping for.</p>
+<p>Since prints cost money, I switched to &ldquo;no-print&rdquo; cards. They do everything, but instead of sending the JPEG they save it to the SD card and stop. The JPEG was garbage: pink, zoomed 2×, with stripes on every other column.</p>
+
+
+
+
+
+
+
+<figure>
+<div class="img-compare" id="ic-128947365" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
+  <img src="/img/fujifilm-instax/jpeg-after-fix.jpg" alt="Trial 45" style="display:block;width:100%" draggable="false">
+  <img src="/img/fujifilm-instax/jpeg-before-fix.jpg" alt="Trial 44" class="img-compare-before" style="position:absolute;top:0;left:0;width:100%;height:100%;clip-path:inset(0 50% 0 0)" draggable="false">
+  <div class="img-compare-slider" style="position:absolute;top:0;left:50%;width:3px;height:100%;background:#fff;transform:translateX(-50%);pointer-events:none">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:50%;background:#fff;box-shadow:0 0 6px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;pointer-events:none">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L5 7M2 10L5 13" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 10L18 10M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+  <div style="position:absolute;top:10px;left:10px;background:rgba(0,0,0,.6);color:#fff;padding:3px 8px;border-radius:3px;font-size:12px;pointer-events:none">Trial 44</div>
+  <div style="position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;padding:3px 8px;border-radius:3px;font-size:12px;pointer-events:none">Trial 45</div>
+</div>
+<figcaption style="text-align:center;font-style:italic;margin-top:8px;font-size:0.9em;color:#666">The JPEG the camera builds for the printer, before and after the fix. Drag the slider.</figcaption>
+</figure>
+
+<script>
+(function(){
+  var container = document.getElementById("ic-128947365");
+  var before = container.querySelector(".img-compare-before");
+  var slider = container.querySelector(".img-compare-slider");
+  var active = false;
+
+  function move(x) {
+    var rect = container.getBoundingClientRect();
+    var pos = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+    before.style.clipPath = "inset(0 " + ((1 - pos) * 100) + "% 0 0)";
+    slider.style.left = (pos * 100) + "%";
+  }
+
+  container.addEventListener("mousedown", function(e) { active = true; move(e.clientX); e.preventDefault(); });
+  window.addEventListener("mousemove", function(e) { if (active) move(e.clientX); });
+  window.addEventListener("mouseup", function() { active = false; });
+
+  container.addEventListener("touchstart", function(e) { active = true; move(e.touches[0].clientX); e.preventDefault(); }, {passive:false});
+  container.addEventListener("touchmove", function(e) { if (active) move(e.touches[0].clientX); }, {passive:false});
+  container.addEventListener("touchend", function() { active = false; });
+})();
+</script>
+
+<p>I first suspected my code, then the file size, then the source image (an S-size JPEG gave the same result). None of that was it. So I made linkxt dump the image buffers between each step of Fuji&rsquo;s pipeline, then decoded them on the Mac.</p>
+<ul>
+<li>After resize: a perfect image, in a YUV layout (&ldquo;Y Y U V&rdquo;).</li>
+<li>After rotation: <strong>not YUV at all</strong>, but 32-bit ARGB pixels.</li>
+</ul>
+<p>Reading the code around it explained everything. Some printers advertise a &ldquo;capability bit 3&rdquo;. When it&rsquo;s set, the app runs an extra colour pass: YUV to ARGB, colour tweak, back to YUV. Then a copy meant for the case <strong>without</strong> the colour pass runs anyway and overwrites the clean result with half of the ARGB buffer. The encoder reads ARGB as if it were YUV, and you get a pink ghost.</p>
+<p><img src="/img/fujifilm-instax/08-pink-bug.svg" alt="The pink bug"></p>
+<p>It looks like a real Fujifilm bug. Maybe no printer ever set that bit for this code path, and the Link 3 is the first. The fix is one line in linkxt: hide bit 3 from the app. Trial 45, still without film, gave a clean JPEG.</p>
+<h2 id="it-works">It works!</h2>
+<p>Trial 46: real card, real film. Photo picked in the playback menu, &ldquo;Print&rdquo;, a progress bar, and the Link 3 starts whirring. A few minutes later, the boat appears.</p>
+<p><img src="/img/fujifilm-instax/print.jpg" alt="The first good print, straight from the X-T30 II"></p>
+<p>No phone, no bridge, no flash. Pull the card and the camera is stock again.</p>
+<h2 id="tools-and-sources">Tools and sources</h2>
+<table>
+	<thead>
+			<tr>
+					<th>What</th>
+					<th>Used for</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Python</td>
+					<td>firmware unpacker, function matcher, card builder, buffer decoders</td>
+			</tr>
+			<tr>
+					<td><a href="https://ghidra-sre.org/" target="_blank">Ghidra</a> (headless)</td>
+					<td>disassembly and decompilation of the X-T30 II and X-S10 firmwares</td>
+			</tr>
+			<tr>
+					<td><a href="https://www.unicorn-engine.org/" target="_blank">Unicorn</a></td>
+					<td>running linkxt against a fake Link 3 before every trial</td>
+			</tr>
+			<tr>
+					<td>arm-none-eabi GCC</td>
+					<td>building linkxt (Thumb-2, under 4 KB)</td>
+			</tr>
+			<tr>
+					<td><a href="https://claude.com/claude-code" target="_blank">Claude Code</a></td>
+					<td>reading thousands of decompiled functions, writing the tools and the module, keeping notes</td>
+			</tr>
+			<tr>
+					<td><a href="https://fujihack.org/" target="_blank">FujiHack</a> Discord, <a href="https://fujimod.com/" target="_blank">FujiMod</a></td>
+					<td>SD boot, button combos, and a lot of advice from jitl</td>
+			</tr>
+			<tr>
+					<td><a href="https://github.com/javl/InstaxBLE" target="_blank">javl/InstaxBLE</a>, <a href="https://github.com/linssenste/instax-link-web" target="_blank">linssenste/instax-link-web</a></td>
+					<td>the instax Link protocol</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="lessons-learned">Lessons Learned</h2>
+<p><strong>Look for code that is already there.</strong> I expected to port a whole Bluetooth print feature. In the end I wrote 3 KB of glue, because Fuji had left most of it in my camera.</p>
+<p><strong>Compare with a sibling.</strong> The X-S10 firmware was my Rosetta Stone. Same chip, same libraries, with names and code paths my camera had lost.</p>
+<p><strong>Find a way to log, whatever it costs.</strong> An LED, raw SD sectors, then a real text file. Every step up in visibility made debugging 10× faster.</p>
+<p><strong>Dump the data, don&rsquo;t guess.</strong> I had five wrong theories about the pink image. One buffer dump settled it.</p>
+<p><strong>Don&rsquo;t debug with film.</strong> No-print builds saved me a lot of sheets.</p>
+<h2 id="whats-next">What&rsquo;s next</h2>
+<p>It&rsquo;s still a debug build, and landscape photos haven&rsquo;t been tested since the fix (before it, they froze on &ldquo;Sending&rdquo;). Next, I want to clean it up and turn linkxt into a proper FujiMod mod, so other X-T30 II owners can try it.</p>
+<p>Now if you&rsquo;ll excuse me, I have a Link 3 to fill up.</p>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-problem">The Problem</a></li>
+    <li><a href="#rule-zero-dont-brick-the-camera">Rule zero: don&rsquo;t brick the camera</a></li>
+    <li><a href="#step-1-opening-the-firmware">Step 1: Opening the firmware</a></li>
+    <li><a href="#step-2-the-code-was-already-there">Step 2: The code was already there</a></li>
+    <li><a href="#step-3-writing-the-missing-piece">Step 3: Writing the missing piece</a></li>
+    <li><a href="#step-4-running-it-without-flashing">Step 4: Running it without flashing</a></li>
+    <li><a href="#step-5-debugging-blind">Step 5: Debugging blind</a></li>
+    <li><a href="#the-pink-ghost">The pink ghost</a></li>
+    <li><a href="#it-works">It works!</a></li>
+    <li><a href="#tools-and-sources">Tools and sources</a></li>
+    <li><a href="#lessons-learned">Lessons Learned</a></li>
+    <li><a href="#whats-next">What&rsquo;s next</a></li>
+  </ul>
+</nav>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&text=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&title=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&is_video=false&description=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203&body=Check out this article: %2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&title=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&title=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.stumbleupon.com/submit?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&title=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://digg.com/submit?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&title=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-digg fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&name=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203&description=%3cp%3e%3cem%3eHow%20I%20added%20Bluetooth%20instax%20printing%20to%20a%20camera%20that%20never%20had%20it%2c%20without%20flashing%20anything%2c%20with%20a%20lot%20of%20help%20from%20Claude%20Code%3c%2fem%3e%3c%2fp%3e%0a%3cp%3e%3cimg%20src%3d%22%2fimg%2ffujifilm-instax%2fsetup.jpg%22%20alt%3d%22The%20X-T30%20II%20and%20the%20instax%20mini%20Link%203%22%3e%3c%2fp%3e%0a%3ch2%20id%3d%22the-problem%22%3eThe%20Problem%3c%2fh2%3e%0a%3cp%3eI%20travel%20with%20a%20Fujifilm%20X-T30%20II%20and%20a%20small%20instax%20mini%20Link%203%20printer.%20I%20like%20giving%20prints%20to%20people%20I%20meet.%20But%20the%20camera%20can%26rsquo%3bt%20talk%20to%20the%20printer.%20I%20have%20to%20copy%20the%20photo%20to%20my%20phone%2c%20open%20the%20instax%20app%20and%20print%20from%20there.%20That%20works%2c%20but%20it%20is%20slow%20and%20it%20kills%20the%20fun.%3c%2fp%3e">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=%2fposts%2ffujifilm-x-t30-ii-instax-link-3%2f&t=Teaching%20my%20Fujifilm%20X-T30%20II%20to%20Print%20on%20an%20instax%20Link%203">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2026  Ronan Gaillard 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+
+
+</html>

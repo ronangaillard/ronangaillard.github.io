@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" font-family="-apple-system,Helvetica,Arial,sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="#c27a00"/></marker>
+  </defs>
+  <rect width="800" height="380" fill="#fafafa"/>
+  <text x="160" y="36" text-anchor="middle" font-size="17" font-weight="700" fill="#22272a">X-S10 (fw 3.11)</text>
+  <text x="160" y="55" text-anchor="middle" font-size="12" fill="#6b7280">same processor, prints to Link</text>
+  <text x="640" y="36" text-anchor="middle" font-size="17" font-weight="700" fill="#22272a">X-T30 II (fw 2.04)</text>
+  <text x="640" y="55" text-anchor="middle" font-size="12" fill="#6b7280">my camera</text>
+
+  <g font-size="14" fill="#22272a">
+    <!-- X-S10 column -->
+    <rect x="40" y="72" width="240" height="56" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/>
+    <text x="56" y="97" font-weight="700">Menu: "connect via BT"</text><text x="262" y="106" text-anchor="end" fill="#1f8a4c" font-size="22">✓</text>
+    <rect x="40" y="138" width="240" height="56" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/>
+    <text x="56" y="162" font-weight="700">Print app</text><text x="56" y="180" font-size="12" fill="#6b7280">crop · rotate · JPEG · send</text><text x="262" y="172" text-anchor="end" fill="#1f8a4c" font-size="22">✓</text>
+    <rect x="40" y="204" width="240" height="56" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/>
+    <text x="56" y="228" font-weight="700">instax BLE transport</text><text x="56" y="246" font-size="12" fill="#6b7280">task "instaxbt", ~13.5 KB</text><text x="262" y="238" text-anchor="end" fill="#1f8a4c" font-size="22">✓</text>
+    <rect x="40" y="270" width="240" height="56" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/>
+    <text x="56" y="303" font-weight="700">Bluetooth LE stack</text><text x="262" y="304" text-anchor="end" fill="#1f8a4c" font-size="22">✓</text>
+
+    <!-- X-T30 II column -->
+    <rect x="520" y="72" width="240" height="56" rx="8" fill="#f2f2f2" stroke="#9ca3af" stroke-width="2" stroke-dasharray="7 5"/>
+    <text x="536" y="97" font-weight="700" fill="#6b7280">Menu: missing</text><text x="536" y="115" font-size="12" fill="#6b7280">Wi-Fi only</text><text x="742" y="106" text-anchor="end" fill="#d9372b" font-size="22">✗</text>
+    <rect x="520" y="138" width="240" height="56" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/>
+    <text x="536" y="162" font-weight="700">Print app</text><text x="536" y="180" font-size="12" fill="#6b7280">same code, still there!</text><text x="742" y="172" text-anchor="end" fill="#1f8a4c" font-size="22">✓</text>
+    <rect x="520" y="204" width="240" height="56" rx="8" fill="#fdecea" stroke="#d9372b" stroke-width="2" stroke-dasharray="7 5"/>
+    <text x="536" y="228" font-weight="700">instax BLE transport</text><text x="536" y="246" font-size="12" fill="#d9372b" font-family="Menlo,monospace">return 0;  // stubs</text><text x="742" y="238" text-anchor="end" fill="#d9372b" font-size="22">✗</text>
+    <rect x="520" y="270" width="240" height="56" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/>
+    <text x="536" y="294" font-weight="700">Bluetooth LE stack</text><text x="536" y="312" font-size="12" fill="#6b7280">used by the Bluetooth grip</text><text x="742" y="304" text-anchor="end" fill="#1f8a4c" font-size="22">✓</text>
+  </g>
+
+  <!-- links -->
+  <path d="M288 166 H512" stroke="#1f8a4c" stroke-width="2" stroke-dasharray="3 5"/>
+  <text x="400" y="158" text-anchor="middle" font-size="12" fill="#1f8a4c">109 functions ≥ 90 % identical</text>
+  <path d="M288 232 H512" stroke="#c27a00" stroke-width="3" marker-end="url(#a)"/>
+  <text x="400" y="224" text-anchor="middle" font-size="13" font-weight="700" fill="#c27a00">the missing piece</text>
+  <text x="400" y="250" text-anchor="middle" font-size="12" fill="#c27a00">rewrite it → "linkxt"</text>
+
+  <text x="400" y="362" text-anchor="middle" font-size="13" fill="#6b7280" font-style="italic">The X-T30 III also prints to Link, but it is 64-bit: useful only as a second reference.</text>
+</svg>

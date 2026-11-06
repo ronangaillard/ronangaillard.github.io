@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Tue, 13 Oct 2026 10:00:00 +0200</lastBuildDate>
+			<lastBuildDate>Fri, 06 Nov 2026 22:00:00 +0100</lastBuildDate>
 		
 			<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Teaching my Fujifilm X-T30 II to Print on an instax Link 3</title>
+				<link>/posts/fujifilm-x-t30-ii-instax-link-3/</link>
+				<pubDate>Fri, 06 Nov 2026 22:00:00 +0100</pubDate>
+				<guid>/posts/fujifilm-x-t30-ii-instax-link-3/</guid>
+				<description>&lt;p&gt;&lt;em&gt;How I added Bluetooth instax printing to a camera that never had it, without flashing anything, with a lot of help from Claude Code&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;/img/fujifilm-instax/setup.jpg&#34; alt=&#34;The X-T30 II and the instax mini Link 3&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;&#xA;&lt;p&gt;I travel with a Fujifilm X-T30 II and a small instax mini Link 3 printer. I like giving prints to people I meet. But the camera can&amp;rsquo;t talk to the printer. I have to copy the photo to my phone, open the instax app and print from there. That works, but it is slow and it kills the fun.&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>Factory DS: a Factorio-like on a 67 MHz Nintendo DS</title>
 				<link>/posts/factory-ds-a-factory-game-for-the-nintendo-ds/</link>
