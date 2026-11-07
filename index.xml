@@ -56,9 +56,16 @@
 				<description>&lt;p&gt;&lt;em&gt;Or how I fixed my Mac SE/30 that was not booting unexpectedly&lt;/em&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;Updates&lt;/em&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;[02 November 2020] This article was also featured on Hackaday : &lt;a href=&#34;https://hackaday.com/2020/11/01/bodge-wire-saves-a-vintage-mac-se-30-from-the-heap/&#34; target=&#34;_blank&#34;&gt;BODGE WIRE SAVES A VINTAGE MAC SE/30 FROM THE HEAP&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;One day around a year ago I was playing with my SE/30 (the best looking computer ever) and I was trying to install Debian on it for fun. But after inserting some floppies and trying to boot from them the computer wouldn&amp;rsquo;t turn back on. I mean it would turn on but with weird static graphics and no sound at startup. I already had a hard time figuring out how I would boot Linux on that machine (which I succeeded at doing) that I did not want to spend more time fixing it.&lt;/p&gt;</description>
 			</item>
 			<item>
+				<title>Turning an Arduino into a Logitech Wireless Mouse</title>
+				<link>/posts/arduino-logitech-wireless-mouse/</link>
+				<pubDate>Thu, 02 Feb 2017 21:00:00 +0100</pubDate>
+				<guid>/posts/arduino-logitech-wireless-mouse/</guid>
+				<description>&lt;p&gt;&lt;em&gt;A 2 euros radio module, a Logitech Unifying dongle and a mouse you wear on your wrist : our last year project at Supélec&lt;/em&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;Updates&lt;/em&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;[10 March 2018] This project was featured on Hackaday : &lt;a href=&#34;https://hackaday.com/2018/03/10/wireless-protocol-reverse-engineered-to-create-wrist-wearable-mouse/&#34; target=&#34;_blank&#34;&gt;WIRELESS PROTOCOL REVERSE ENGINEERED TO CREATE WRIST WEARABLE MOUSE&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;This winter, for our last year project at Supélec, Guilhem and I had to build a wireless 3D mouse : you move your arm, the cursor moves on the screen. I took care of the wireless part and Guilhem of the motion sensing.&lt;/p&gt;</description>
+			</item>
+			<item>
 				<title>About me</title>
 				<link>/about/</link>
-				<pubDate>Sat, 24 Oct 2020 17:51:42 +0000</pubDate>
+				<pubDate>Thu, 01 Dec 2016 17:51:42 +0000</pubDate>
 				<guid>/about/</guid>
 				<description>&lt;p&gt;I&amp;rsquo;m Ronan Gaillard an Embedded System Engineer as well as a sailor with boat based in Saint-Malo France.&lt;/p&gt;&#xA;&lt;p&gt;My main points of interest are embedded systems, retro computing, sailing and hiking.&lt;/p&gt;</description>
 			</item>
