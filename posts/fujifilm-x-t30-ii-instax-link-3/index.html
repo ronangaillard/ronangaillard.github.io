@@ -230,7 +230,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 <p>First, linkxt needs a place to live. I can&rsquo;t push existing code aside to make room, since that would move addresses. So I looked for space that already exists but that nobody uses. In the middle of the code there is a run of 4048 bytes of zeros, at <code>0x01e12030</code>. No function points to it, and it&rsquo;s still all zeros in a dump of the running camera&rsquo;s RAM, so the firmware doesn&rsquo;t use it at runtime either. That&rsquo;s where linkxt goes. It also set the hard limit of the project: linkxt has to fit in 4048 bytes, debug logging included. Most debugging sessions started with &ldquo;what can I remove to make room for this new trace?&rdquo;.</p>
 <p>Then the two pieces have to call each other. In one direction, Fuji calls linkxt. The print app still calls its 12 empty functions (&ldquo;send the serial request&rdquo;, &ldquo;send a chunk&rdquo;, &ldquo;print&rdquo;, &ldquo;connect&rdquo;…) at their usual addresses. I overwrite the first 8 bytes of each one with a tiny instruction, &ldquo;jump to this address&rdquo;, pointing to the matching function in linkxt. The app has no idea. It calls the stub as always and lands in my code.</p>
 <p>In the other direction, linkxt calls Fuji. It needs firmware functions too, to open a Bluetooth connection, send a packet or write a file. I give the compiler a list of their addresses, found in Ghidra, and it calls them directly.</p>
-<p>On top of that, a few single bytes change. One switches the print menu from &ldquo;Wi-Fi printer&rdquo; to &ldquo;Bluetooth printer&rdquo;, and another teaches the serial check about <code>7</code>.</p>
+<p>On top of that, a few single bytes change. I didn&rsquo;t add a menu entry: the existing &ldquo;instax printer print&rdquo; entry passes a connection type to the print app, 0 for Wi-Fi. Two bytes turn that 0 into a 1, Bluetooth, so the same entry now takes the Link path (with this card, the old Wi-Fi printers are no longer reachable). And the serial check learns about <code>7</code>.</p>
 <p><img src="/img/fujifilm-instax/11-wiring.svg" alt="How linkxt is plugged in"></p>
 <p>All these patches go into the copy of the firmware loaded from the SD card (more on that below), never into the camera itself.</p>
 <p>Before touching the camera, every build ran in an emulator. I used <a href="https://www.unicorn-engine.org/" target="_blank">Unicorn</a> to run the real ARM binary against a fake Link 3 printer written in Python. It caught a lot of bugs at zero cost.</p>
@@ -275,7 +275,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 
 <figure>
-<div class="img-compare" id="ic-785123964" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
+<div class="img-compare" id="ic-693482715" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
   <img src="/img/fujifilm-instax/jpeg-after-fix.jpg" alt="Trial 45" style="display:block;width:100%" draggable="false">
   <img src="/img/fujifilm-instax/jpeg-before-fix.jpg" alt="Trial 44" class="img-compare-before" style="position:absolute;top:0;left:0;width:100%;height:100%;clip-path:inset(0 50% 0 0)" draggable="false">
   <div class="img-compare-slider" style="position:absolute;top:0;left:50%;width:3px;height:100%;background:#fff;transform:translateX(-50%);pointer-events:none">
@@ -291,7 +291,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 <script>
 (function(){
-  var container = document.getElementById("ic-785123964");
+  var container = document.getElementById("ic-693482715");
   var before = container.querySelector(".img-compare-before");
   var slider = container.querySelector(".img-compare-slider");
   var active = false;
