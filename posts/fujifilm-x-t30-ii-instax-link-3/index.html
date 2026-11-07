@@ -215,6 +215,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 <p>Ghidra first needs to know where each block sits in the camera&rsquo;s memory. The firmware doesn&rsquo;t say, so I had to work it out. The code is full of pointers to text messages. If I guess the wrong starting address for a block, those pointers land in the middle of nowhere. There is only one starting address where they all land on the start of a real message. With that, Ghidra found about 59,000 functions. I ran it from scripts instead of its interface, so Claude could ask it for any function directly.</p>
 <h2 id="step-2-the-code-was-already-there">Step 2: The code was already there</h2>
 <p>59,000 functions with no names is a lot. But I had a trick: the X-S10 uses the same processor and <strong>does</strong> print to Link printers. So I unpacked its firmware too and compared the two.</p>
+<p>First I had to find the print code in the X-S10, among its own tens of thousands of nameless functions. Strings gave it away. The instax Link service has a known Bluetooth ID (a 128-bit UUID), published by the people who reverse engineered the protocol, and it appears in the X-S10 firmware. The code that uses it sits next to a task called <code>instaxbt</code> and debug markers like <code>INSXSe</code> or <code>INSXPt</code>, and it builds packets starting with the instax header. That&rsquo;s the Bluetooth part. Then I listed every function that calls into it, and the functions around those: that&rsquo;s the print app, 176 functions in one block.</p>
 <p>I wrote a fuzzy matcher. It compares whole functions and ignores the addresses inside them, which change from one build to another (more on that later). I ran it on the 176 functions of the X-S10 print code. 109 of them had a twin in my camera that was at least 90% identical.</p>
 <p>That was the big surprise: <strong>the X-T30 II already contains Fujifilm&rsquo;s Bluetooth print app.</strong> Cropping, rotation, JPEG encoding, progress screens, it&rsquo;s all there. Only the bottom layer, the part that talks to the printer over Bluetooth, was left out when Fuji built this firmware. In its place are empty functions, stubs that just return 0.</p>
 <p><img src="/img/fujifilm-instax/03-compare.svg" alt="X-S10 vs X-T30 II"></p>
@@ -273,7 +274,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 
 <figure>
-<div class="img-compare" id="ic-428396175" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
+<div class="img-compare" id="ic-639821457" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
   <img src="/img/fujifilm-instax/jpeg-after-fix.jpg" alt="Trial 45" style="display:block;width:100%" draggable="false">
   <img src="/img/fujifilm-instax/jpeg-before-fix.jpg" alt="Trial 44" class="img-compare-before" style="position:absolute;top:0;left:0;width:100%;height:100%;clip-path:inset(0 50% 0 0)" draggable="false">
   <div class="img-compare-slider" style="position:absolute;top:0;left:50%;width:3px;height:100%;background:#fff;transform:translateX(-50%);pointer-events:none">
@@ -289,7 +290,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 <script>
 (function(){
-  var container = document.getElementById("ic-428396175");
+  var container = document.getElementById("ic-639821457");
   var before = container.querySelector(".img-compare-before");
   var slider = container.querySelector(".img-compare-slider");
   var active = false;
