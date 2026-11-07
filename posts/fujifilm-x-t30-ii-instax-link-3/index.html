@@ -234,6 +234,13 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 <h2 id="step-3-writing-the-missing-piece">Step 3: Writing the missing piece</h2>
 <p>The instax Link protocol is well known thanks to people who sniffed it from the phone app: <a href="https://github.com/javl/InstaxBLE" target="_blank">javl/InstaxBLE</a>, <a href="https://github.com/linssenste/instax-link-web" target="_blank">linssenste/instax-link-web</a> and others. It&rsquo;s simple. Each packet starts with <code>Ab</code>, then a length, an opcode, a payload and a checksum. The camera asks a few questions, sends the JPEG in 900-byte chunks and says &ldquo;print&rdquo;.</p>
 <p>I didn&rsquo;t copy the X-S10 code. In a firmware like this, every function and every variable lives at a fixed address, chosen by the compiler when Fuji builds it. When a function calls another one, the call contains that address written in plain bytes. Change one line of code, recompile, and everything after it shifts. Two different cameras are two different builds, so the same function sits at a different address in each. Moving the X-S10 code into my camera would have meant finding and fixing hundreds of those addresses by hand. Instead, Claude and I wrote a small C module from scratch, <strong>linkxt</strong>. It sits exactly where the stubs were: the Fuji app calls it, and it calls the Fuji Bluetooth stack.</p>
+<p>How do you plug new code into a firmware you can&rsquo;t recompile? With the same fixed addresses:</p>
+<ul>
+<li><strong>Fuji → linkxt.</strong> The print app still calls its 12 empty functions (&ldquo;send the serial request&rdquo;, &ldquo;send a chunk&rdquo;, &ldquo;print&rdquo;, &ldquo;connect&rdquo;…) at their usual addresses. I overwrite the first 8 bytes of each one with a tiny instruction: &ldquo;jump to this address&rdquo;, which is the matching function in linkxt. The app has no idea; it calls the stub as always and lands in my code.</li>
+<li><strong>linkxt → Fuji.</strong> linkxt needs firmware functions too: open a Bluetooth connection, send a packet, write a file. I give the compiler a list of their addresses, found in Ghidra, and it calls them directly.</li>
+<li><strong>A few single-byte tweaks.</strong> One switches the print menu from &ldquo;Wi-Fi printer&rdquo; to &ldquo;Bluetooth printer&rdquo;, and the serial check above learns about <code>7</code>.</li>
+</ul>
+<p>All these patches are applied to the copy of the firmware loaded from the SD card (more on that below), never to the camera itself.</p>
 <p><img src="/img/fujifilm-instax/05-linkxt.svg" alt="Where linkxt sits"></p>
 <p>The hard constraint was space. The only safe place I found was a 4 KB hole full of zeros in the code, so linkxt had to fit in 4048 bytes. That includes a debug build with logging. Most debugging sessions started with &ldquo;what can I remove to make room for this new trace?&rdquo;.</p>
 <p>Before touching the camera, every build ran in an emulator. I used <a href="https://www.unicorn-engine.org/" target="_blank">Unicorn</a> to run the real ARM binary with a fake Link 3 printer written in Python. It caught a lot of bugs at zero cost.</p>
@@ -267,7 +274,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 
 <figure>
-<div class="img-compare" id="ic-486597321" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
+<div class="img-compare" id="ic-581397264" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
   <img src="/img/fujifilm-instax/jpeg-after-fix.jpg" alt="Trial 45" style="display:block;width:100%" draggable="false">
   <img src="/img/fujifilm-instax/jpeg-before-fix.jpg" alt="Trial 44" class="img-compare-before" style="position:absolute;top:0;left:0;width:100%;height:100%;clip-path:inset(0 50% 0 0)" draggable="false">
   <div class="img-compare-slider" style="position:absolute;top:0;left:50%;width:3px;height:100%;background:#fff;transform:translateX(-50%);pointer-events:none">
@@ -283,7 +290,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 <script>
 (function(){
-  var container = document.getElementById("ic-486597321");
+  var container = document.getElementById("ic-581397264");
   var before = container.querySelector(".img-compare-before");
   var slider = container.querySelector(".img-compare-slider");
   var active = false;
