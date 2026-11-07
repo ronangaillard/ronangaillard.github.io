@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" font-family="-apple-system,Helvetica,Arial,sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="#22272a"/></marker>
+  </defs>
+  <rect width="800" height="380" fill="#fafafa"/>
+  <text x="400" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#22272a">The same 128 KB of RAM, a split second apart</text>
+
+  <!-- column 1 -->
+  <text x="140" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#22272a">1. Card loaded in RAM</text>
+  <rect x="60" y="76" width="160" height="150" rx="8" fill="#fff" stroke="#22272a" stroke-width="2"/>
+  <rect x="72" y="88" width="136" height="58" rx="6" fill="#e8efff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="140" y="112" text-anchor="middle" font-size="12" fill="#22272a">jitl's "fake flash"</text>
+  <text x="140" y="128" text-anchor="middle" font-size="11" fill="#6b7280">keeps the real flash safe</text>
+  <rect x="72" y="156" width="136" height="58" rx="6" fill="#fff4e0" stroke="#c27a00" stroke-width="1.5"/>
+  <text x="140" y="180" text-anchor="middle" font-size="12" fill="#22272a">my debug hooks</text>
+  <text x="140" y="196" text-anchor="middle" font-size="11" fill="#6b7280">write LOG.BIN</text>
+  <text x="140" y="244" text-anchor="middle" font-size="11" fill="#6b7280" font-family="Menlo,monospace">0x1a0000</text>
+
+  <path d="M232 151 H290" stroke="#22272a" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- column 2 -->
+  <text x="400" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#22272a">2. Kernel starts its logs</text>
+  <rect x="320" y="76" width="160" height="150" rx="8" fill="#fff" stroke="#22272a" stroke-width="2"/>
+  <rect x="332" y="88" width="136" height="22" rx="4" fill="#e5e7eb"/>
+  <text x="400" y="103" text-anchor="middle" font-size="11" fill="#22272a" font-family="Menlo,monospace">"syslog Ver 2.3"</text>
+  <text x="400" y="150" text-anchor="middle" font-size="22" fill="#9ca3af" font-family="Menlo,monospace">00 00 00</text>
+  <text x="400" y="178" text-anchor="middle" font-size="22" fill="#9ca3af" font-family="Menlo,monospace">00 00 00</text>
+  <text x="400" y="208" text-anchor="middle" font-size="11" fill="#6b7280">"clean log buffer"</text>
+  <text x="400" y="244" text-anchor="middle" font-size="11" fill="#6b7280">everything wiped</text>
+
+  <path d="M492 151 H550" stroke="#22272a" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- column 3 -->
+  <text x="660" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#22272a">3. Kernel starts the app</text>
+  <rect x="580" y="76" width="160" height="150" rx="8" fill="#22272a" stroke="#22272a" stroke-width="2"/>
+  <text x="660" y="130" text-anchor="middle" font-size="12" fill="#fff">app calls the fake flash</text>
+  <text x="660" y="148" text-anchor="middle" font-size="12" fill="#fff">→ runs zeros</text>
+  <text x="660" y="184" text-anchor="middle" font-size="16" font-weight="700" fill="#d9372b">frozen</text>
+  <text x="660" y="244" text-anchor="middle" font-size="11" fill="#6b7280">black screen, no error</text>
+
+  <rect x="60" y="272" width="680" height="88" rx="12" fill="#fff4e0" stroke="#c27a00" stroke-width="2"/>
+  <text x="80" y="298" font-size="13" fill="#22272a"><tspan font-weight="700">Why it was so hard to see:</tspan> the card was fine on disk, the loader was fine,</text>
+  <text x="80" y="318" font-size="13" fill="#22272a">the kernel was fine. And my own debug hooks lived in the same spot, so they were</text>
+  <text x="80" y="338" font-size="13" fill="#22272a">wiped too: the tool meant to find the bug was erased by the bug.</text>
+</svg>

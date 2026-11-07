@@ -259,7 +259,11 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 <li><strong>Emulators lie a little.</strong> One of my loaders froze silently. The C compiler had turned a byte read into a 4-byte read at an odd address. That&rsquo;s fine on a normal running system, but this early in boot the processor refuses it and stops. Unicorn didn&rsquo;t model that, so all my tests were green. One compiler flag fixed it.</li>
 <li><strong>Blinks don&rsquo;t scale.</strong> So I taught the loader to write raw sectors on the SD card, inside a file I had created on the Mac beforehand. The ROM&rsquo;s reader found the file, my write routine filled it. After a trial, I opened <code>LOG.BIN</code> on the Mac and read where the boot had stopped.</li>
 </ul>
-<p>The log said the kernel started, but the app never did. The answer came from reading the kernel code: just before starting the app, it wipes a 128 KB log buffer. That buffer was exactly where jitl&rsquo;s boot recipe (&ldquo;startup&rdquo;) and my own hooks lived, so they were replaced by zeros right before being used. jitl had another recipe, &ldquo;cold&rdquo;, that doesn&rsquo;t put anything there.</p>
+<p>The log said the kernel started, but the app never did. And most of my log points, the ones placed later in the boot, never wrote anything at all.</p>
+<p>So why did it take 30 trials? Because the bug was in none of the places I was looking. The card was fine, the loader was fine, the kernel started fine. The answer came from reading the kernel code on the Mac, not from another trial: just before starting the app, the kernel prepares its log buffers, and &ldquo;prepare&rdquo; means writing a header and filling 128 KB with zeros.</p>
+<p>jitl&rsquo;s first boot recipe (&ldquo;startup&rdquo;) had put a small piece of code right in that spot. As far as I can tell, it&rsquo;s a fake flash: it catches the firmware&rsquo;s writes to the flash memory, most likely so that a camera booted from the card can&rsquo;t damage its real flash. And I had put my debug hooks in the same spot, because it looked empty in the image. So:</p>
+<p><img src="/img/fujifilm-instax/10-wipe.svg" alt="The log buffer wipe"></p>
+<p>Nothing on the camera itself was wrong, and nothing on the card looked wrong either. It only broke in RAM, a split second after the kernel started, with no screen to show it. jitl&rsquo;s recipe had failed the same way on an X100V. His other recipe, &ldquo;cold&rdquo;, leaves that spot alone.</p>
 <p><strong>Trial 30:</strong> no LED at all, then after a minute or two, a normal live view. But was it really running from the card, or had the camera given up and started from its flash? <strong>Trial 31:</strong> same card with the big image renamed. Nothing, ever. So trial 30 had really booted from the SD card.</p>
 <p><strong>Trial 32:</strong> my first mod. It turned the LED red for 10 seconds, then let the camera boot. Useless, and the best red LED I&rsquo;ve ever seen.</p>
 <p>(I also spent a few evenings on a USB &ldquo;service mode&rdquo; route that can read and write RAM live. It was great for checking my RAM image against the real thing, but useless for running code.)</p>
@@ -286,7 +290,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 
 <figure>
-<div class="img-compare" id="ic-648215937" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
+<div class="img-compare" id="ic-324678159" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
   <img src="/img/fujifilm-instax/jpeg-after-fix.jpg" alt="Trial 45" style="display:block;width:100%" draggable="false">
   <img src="/img/fujifilm-instax/jpeg-before-fix.jpg" alt="Trial 44" class="img-compare-before" style="position:absolute;top:0;left:0;width:100%;height:100%;clip-path:inset(0 50% 0 0)" draggable="false">
   <div class="img-compare-slider" style="position:absolute;top:0;left:50%;width:3px;height:100%;background:#fff;transform:translateX(-50%);pointer-events:none">
@@ -302,7 +306,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 <script>
 (function(){
-  var container = document.getElementById("ic-648215937");
+  var container = document.getElementById("ic-324678159");
   var before = container.querySelector(".img-compare-before");
   var slider = container.querySelector(".img-compare-slider");
   var active = false;
