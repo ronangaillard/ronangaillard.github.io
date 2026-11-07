@@ -38,16 +38,27 @@
     <rect x="30" y="282" width="110" height="40" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/><text x="85" y="307" fill="#1f8a4c">A: YUV</text>
     <rect x="245" y="282" width="110" height="40" rx="8" fill="#fff4e0" stroke="#c27a00" stroke-width="2"/><text x="300" y="307" fill="#c27a00">A: ARGB</text>
     <rect x="460" y="282" width="110" height="40" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/><text x="515" y="307" fill="#1f8a4c">B: YUV</text>
-    <rect x="460" y="370" width="110" height="48" rx="8" fill="#fdecea" stroke="#d9372b" stroke-width="2.5"/><text x="515" y="390" fill="#d9372b">B: half of</text><text x="515" y="406" fill="#d9372b">the ARGB</text>
-    <rect x="640" y="374" width="130" height="40" rx="8" fill="#f3c6ef" stroke="#22272a" stroke-width="2"/><text x="705" y="399" fill="#22272a">pink, zoomed x2</text>
+    <rect x="460" y="372" width="110" height="48" rx="8" fill="#fdecea" stroke="#d9372b" stroke-width="2.5"/><text x="515" y="392" fill="#d9372b">B: half of</text><text x="515" y="408" fill="#d9372b">the ARGB</text>
+    <rect x="640" y="376" width="130" height="40" rx="8" fill="#f3c6ef" stroke="#22272a" stroke-width="2"/><text x="705" y="401" fill="#22272a">pink, zoomed x2</text>
   </g>
   <path d="M142 302 H239" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
+  <circle cx="190" cy="302" r="10" fill="#d9372b"/><text x="190" y="306" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">1</text>
   <path d="M357 302 H454" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
-  <path d="M515 324 V364" stroke="#d9372b" stroke-width="2.5" marker-end="url(#ar)"/>
-  <path d="M300 324 C 300 394, 380 394, 454 394" fill="none" stroke="#d9372b" stroke-width="2.5" marker-end="url(#ar)"/>
-  <text x="40" y="360" font-size="12" fill="#d9372b" font-weight="700">then "copy A to B" runs anyway</text>
-  <text x="40" y="376" font-size="11" fill="#d9372b">and overwrites the good B</text>
-  <path d="M572 394 H634" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
+  <circle cx="406" cy="302" r="10" fill="#d9372b"/><text x="406" y="306" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">2</text>
+  <text x="595" y="300" font-size="11" fill="#1f8a4c" font-weight="700">good so far</text>
+  <path d="M300 324 V396 H454" fill="none" stroke="#d9372b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <circle cx="300" cy="360" r="10" fill="#d9372b"/><text x="300" y="364" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">3</text>
+  <text x="40" y="352" font-size="12" fill="#d9372b" font-weight="700">then "copy A to B"</text>
+  <text x="40" y="368" font-size="12" fill="#d9372b" font-weight="700">runs anyway…</text>
+  <text x="40" y="386" font-size="11" fill="#d9372b">but A is ARGB now, so it</text>
+  <text x="40" y="400" font-size="11" fill="#d9372b">overwrites the good B</text>
+  <path d="M515 324 V368" stroke="#9ca3af" stroke-width="2" stroke-dasharray="4 4"/>
+  <text x="524" y="352" font-size="10" fill="#6b7280">same B, a moment later</text>
+  <path d="M572 396 H634" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
+  <circle cx="603" cy="396" r="10" fill="#d9372b"/><text x="603" y="400" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">4</text>
+  <text x="190" y="336" text-anchor="middle" font-size="10" fill="#6b7280">to ARGB</text>
+  <text x="406" y="336" text-anchor="middle" font-size="10" fill="#6b7280">tweak, back to YUV</text>
+  <text x="603" y="428" text-anchor="middle" font-size="10" fill="#6b7280">encode B</text>
 
   <!-- fix -->
   <rect x="30" y="450" width="740" height="92" rx="12" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/>
