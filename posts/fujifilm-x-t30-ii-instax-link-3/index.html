@@ -230,7 +230,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 <p><img src="/img/fujifilm-instax/03-compare.svg" alt="X-S10 vs X-T30 II"></p>
 <p>Even better, the camera already knows how to drive a Bluetooth device. Bluetooth LE (Low Energy) is the low-power flavour of Bluetooth used by watches, sensors and printers like the Link 3. In every connection one side is the <em>central</em>, which scans, connects and gives orders, and the other is the <em>peripheral</em>, which waits and answers. Usually the camera is a peripheral: the phone app connects to it. To print, it has to be the central and go get the printer.</p>
 <p>The X-T30 II already plays that role in one case: Fujifilm&rsquo;s Bluetooth shooting grip (most likely the TG-BT1), a small tripod handle with a shutter button that sends commands to the camera. The firmware has a module that looks for the grip and connects to it as a central. So I didn&rsquo;t need to write a Bluetooth stack, just the missing glue.</p>
-<p>One more detail found here: the print app identifies printers by the first digit of their serial number. My camera knows <code>1</code> and <code>2</code>. The Link 3&rsquo;s serial starts with <code>7</code>. Without a patch, the camera would say &ldquo;unknown printer&rdquo; even with perfect Bluetooth.</p>
+<p>One more detail found here. Before printing, the app needs to know which film is loaded, because a mini and a wide print don&rsquo;t have the same size or shape. It doesn&rsquo;t ask the printer directly: it reads its serial number and looks at the first digit. <code>1</code> means mini, <code>2</code> means wide, anything else means &ldquo;unknown printer, stop&rdquo;. That list was written for the printers that existed when the code was written. The X-S10, a bit newer, also accepts <code>4</code>. My Link 3&rsquo;s serial starts with <code>7</code>, which no firmware I looked at knows about, not even the X-T30 III. So even with perfect Bluetooth, the camera would have rejected it. The fix in linkxt is simple: treat <code>7</code> as a mini.</p>
 <h2 id="step-3-writing-the-missing-piece">Step 3: Writing the missing piece</h2>
 <p>The instax Link protocol is well known thanks to people who sniffed it from the phone app: <a href="https://github.com/javl/InstaxBLE" target="_blank">javl/InstaxBLE</a>, <a href="https://github.com/linssenste/instax-link-web" target="_blank">linssenste/instax-link-web</a> and others. It&rsquo;s simple. Each packet starts with <code>Ab</code>, then a length, an opcode, a payload and a checksum. The camera asks a few questions, sends the JPEG in 900-byte chunks and says &ldquo;print&rdquo;.</p>
 <p>I didn&rsquo;t copy the X-S10 code. Moving it to another firmware would mean fixing hundreds of addresses. Instead, Claude and I wrote a small C module from scratch, <strong>linkxt</strong>. It sits exactly where the stubs were: the Fuji app calls it, and it calls the Fuji Bluetooth stack.</p>
@@ -267,7 +267,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 
 <figure>
-<div class="img-compare" id="ic-341762598" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
+<div class="img-compare" id="ic-751982634" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
   <img src="/img/fujifilm-instax/jpeg-after-fix.jpg" alt="Trial 45" style="display:block;width:100%" draggable="false">
   <img src="/img/fujifilm-instax/jpeg-before-fix.jpg" alt="Trial 44" class="img-compare-before" style="position:absolute;top:0;left:0;width:100%;height:100%;clip-path:inset(0 50% 0 0)" draggable="false">
   <div class="img-compare-slider" style="position:absolute;top:0;left:50%;width:3px;height:100%;background:#fff;transform:translateX(-50%);pointer-events:none">
@@ -283,7 +283,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 <script>
 (function(){
-  var container = document.getElementById("ic-341762598");
+  var container = document.getElementById("ic-751982634");
   var before = container.querySelector(".img-compare-before");
   var slider = container.querySelector(".img-compare-slider");
   var active = false;
