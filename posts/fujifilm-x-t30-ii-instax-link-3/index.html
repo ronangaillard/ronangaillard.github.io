@@ -204,12 +204,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 <p>So the only way was to change the firmware. I had never looked at camera firmware before.</p>
 <h2 id="rule-zero-dont-brick-the-camera">Rule zero: don&rsquo;t brick the camera</h2>
 <p>Before anything, I set a few rules. A bricked camera is an expensive paperweight, and people in the community have bricked bodies by poking at random memory addresses.</p>
-<ul>
-<li><strong>Never write to the flash.</strong> Everything runs in RAM, and pulling the battery brings back the stock camera.</li>
-<li><strong>Every write to the camera needs my explicit OK</strong>, and the original bytes are checked first.</li>
-<li><strong>Prefer reading files on the Mac</strong> over probing the camera.</li>
-<li><strong>Don&rsquo;t waste film.</strong> An instax sheet costs about a euro.</li>
-</ul>
+<p>I never write to the flash: everything runs in RAM, and pulling the battery brings back the stock camera. Every write to the camera needs my explicit OK, and the original bytes are checked first. I prefer reading files on the Mac over probing the camera. And I don&rsquo;t waste film, because an instax sheet costs about a euro.</p>
 <p>These rules shaped the whole project. They made it slower, but I never had a moment of panic.</p>
 <h2 id="step-1-opening-the-firmware">Step 1: Opening the firmware</h2>
 <p>Fujifilm publishes firmware updates on its website. It&rsquo;s one <code>.DAT</code> file per camera. The format isn&rsquo;t documented, but <a href="https://fujihack.org/" target="_blank">FujiHack</a> had already done part of the work on older bodies.</p>
@@ -234,12 +229,10 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 <h2 id="step-3-writing-the-missing-piece">Step 3: Writing the missing piece</h2>
 <p>The instax Link protocol is well known thanks to people who sniffed it from the phone app: <a href="https://github.com/javl/InstaxBLE" target="_blank">javl/InstaxBLE</a>, <a href="https://github.com/linssenste/instax-link-web" target="_blank">linssenste/instax-link-web</a> and others. It&rsquo;s simple. Each packet starts with <code>Ab</code>, then a length, an opcode, a payload and a checksum. The camera asks a few questions, sends the JPEG in 900-byte chunks and says &ldquo;print&rdquo;.</p>
 <p>I didn&rsquo;t copy the X-S10 code. In a firmware like this, every function and every variable lives at a fixed address, chosen by the compiler when Fuji builds it. When a function calls another one, the call contains that address written in plain bytes. Change one line of code, recompile, and everything after it shifts. Two different cameras are two different builds, so the same function sits at a different address in each. Moving the X-S10 code into my camera would have meant finding and fixing hundreds of those addresses by hand. Instead, Claude and I wrote a small C module from scratch, <strong>linkxt</strong>. It sits exactly where the stubs were: the Fuji app calls it, and it calls the Fuji Bluetooth stack.</p>
-<p>How do you plug new code into a firmware you can&rsquo;t recompile? With the same fixed addresses:</p>
-<ul>
-<li><strong>Fuji → linkxt.</strong> The print app still calls its 12 empty functions (&ldquo;send the serial request&rdquo;, &ldquo;send a chunk&rdquo;, &ldquo;print&rdquo;, &ldquo;connect&rdquo;…) at their usual addresses. I overwrite the first 8 bytes of each one with a tiny instruction: &ldquo;jump to this address&rdquo;, which is the matching function in linkxt. The app has no idea; it calls the stub as always and lands in my code.</li>
-<li><strong>linkxt → Fuji.</strong> linkxt needs firmware functions too: open a Bluetooth connection, send a packet, write a file. I give the compiler a list of their addresses, found in Ghidra, and it calls them directly.</li>
-<li><strong>A few single-byte tweaks.</strong> One switches the print menu from &ldquo;Wi-Fi printer&rdquo; to &ldquo;Bluetooth printer&rdquo;, and the serial check above learns about <code>7</code>.</li>
-</ul>
+<p>How do you plug new code into a firmware you can&rsquo;t recompile? With the same fixed addresses.</p>
+<p>In one direction, Fuji calls linkxt. The print app still calls its 12 empty functions (&ldquo;send the serial request&rdquo;, &ldquo;send a chunk&rdquo;, &ldquo;print&rdquo;, &ldquo;connect&rdquo;…) at their usual addresses. I overwrite the first 8 bytes of each one with a tiny instruction, &ldquo;jump to this address&rdquo;, pointing to the matching function in linkxt. The app has no idea: it calls the stub as always and lands in my code.</p>
+<p>In the other direction, linkxt calls Fuji. It needs firmware functions too, to open a Bluetooth connection, send a packet or write a file. I give the compiler a list of their addresses, found in Ghidra, and it calls them directly.</p>
+<p>On top of that, a few single bytes change. One switches the print menu from &ldquo;Wi-Fi printer&rdquo; to &ldquo;Bluetooth printer&rdquo;, and the serial check above learns about <code>7</code>.</p>
 <p>All these patches are applied to the copy of the firmware loaded from the SD card (more on that below), never to the camera itself.</p>
 <p><img src="/img/fujifilm-instax/05-linkxt.svg" alt="Where linkxt sits"></p>
 <p>The hard constraint was space. The only safe place I found was a 4 KB hole full of zeros in the code, so linkxt had to fit in 4048 bytes. That includes a debug build with logging. Most debugging sessions started with &ldquo;what can I remove to make room for this new trace?&rdquo;.</p>
@@ -268,13 +261,10 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 <p>Once linkxt was on the card, the camera showed a new screen: &ldquo;connecting&rdquo;… then &ldquo;CAN NOT BE CONNECTED&rdquo;. No details.</p>
 <p>I needed logs. In the firmware, I found the function Fuji uses to write <code>A:\UILOG\COUNTER.TXT</code> to the SD card, and I reused it. From then on, linkxt wrote everything it did to <code>A:\LINKXT.TXT</code>. Each trial became the same loop:</p>
 <p><img src="/img/fujifilm-instax/07-loop.svg" alt="The debug loop"></p>
-<p>The logs moved things forward fast:</p>
-<ul>
-<li><strong>Trials 34-36:</strong> scan, connect, find the instax service, enable notifications. Bluetooth works.</li>
-<li><strong>Trial 37:</strong> the first real instax exchange. The camera&rsquo;s first question is opcode <code>0x0000</code>, a &ldquo;who are you, what do you support?&rdquo; request. The Link 3 answers, but the Fuji app rejects the answer: it expects a set of flags laid out like on the older printers, and the Link 3 sends <code>00 02 00 00 00 00</code> instead. I still don&rsquo;t know what those bytes mean. Since the app doesn&rsquo;t use them for anything else, linkxt simply replaces them with the values the app wants.</li>
-<li><strong>Trial 38:</strong> all the questions pass and the photo upload starts.</li>
-<li><strong>Trial 39:</strong> the Link 3 accepts a print. The film counter goes from 7 to 6!</li>
-</ul>
+<p>The logs moved things forward fast.</p>
+<p>On trials 34 to 36, linkxt scans, connects, finds the instax service and enables notifications. Bluetooth works.</p>
+<p>Trial 37 is the first real instax exchange. The camera&rsquo;s first question is opcode <code>0x0000</code>, a &ldquo;who are you, what do you support?&rdquo; request. The Link 3 answers, but the Fuji app rejects the answer: it expects a set of flags laid out like on the older printers, and the Link 3 sends <code>00 02 00 00 00 00</code> instead. I still don&rsquo;t know what those bytes mean. Since the app doesn&rsquo;t use them for anything else, linkxt simply replaces them with the values the app wants.</p>
+<p>On trial 38, all the questions pass and the photo upload starts. On trial 39, the Link 3 accepts a print, and the film counter goes from 7 to 6!</p>
 <p><img src="/img/fujifilm-instax/06-sequence.svg" alt="The full exchange"></p>
 <h2 id="the-pink-ghost">The pink ghost</h2>
 <p>Trial 39 printed. The sheet came out white and slowly developed into… an almost white picture with a faint pink boat. Not quite what I was hoping for.</p>
@@ -287,7 +277,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 
 <figure>
-<div class="img-compare" id="ic-194625783" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
+<div class="img-compare" id="ic-592478316" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
   <img src="/img/fujifilm-instax/jpeg-after-fix.jpg" alt="Trial 45" style="display:block;width:100%" draggable="false">
   <img src="/img/fujifilm-instax/jpeg-before-fix.jpg" alt="Trial 44" class="img-compare-before" style="position:absolute;top:0;left:0;width:100%;height:100%;clip-path:inset(0 50% 0 0)" draggable="false">
   <div class="img-compare-slider" style="position:absolute;top:0;left:50%;width:3px;height:100%;background:#fff;transform:translateX(-50%);pointer-events:none">
@@ -303,7 +293,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 <script>
 (function(){
-  var container = document.getElementById("ic-194625783");
+  var container = document.getElementById("ic-592478316");
   var before = container.querySelector(".img-compare-before");
   var slider = container.querySelector(".img-compare-slider");
   var active = false;
@@ -326,10 +316,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 </script>
 
 <p>I first suspected my code, then the file size, then the source image (an S-size JPEG gave the same result). None of that was it. So I made linkxt dump the image buffers between each step of Fuji&rsquo;s pipeline, then decoded them on the Mac.</p>
-<ul>
-<li>After resize: a perfect image, in a YUV layout (&ldquo;Y Y U V&rdquo;).</li>
-<li>After rotation: <strong>not YUV at all</strong>, but 32-bit ARGB pixels.</li>
-</ul>
+<p>After the resize, the image was perfect, in a YUV layout (&ldquo;Y Y U V&rdquo;). After the rotation, it was <strong>not YUV at all</strong>, but 32-bit ARGB pixels.</p>
 <p>Reading the code around it explained everything. Some printers advertise a &ldquo;capability bit 3&rdquo;. When it&rsquo;s set, the app runs an extra colour pass: YUV to ARGB, colour tweak, back to YUV. Then a copy meant for the case <strong>without</strong> the colour pass runs anyway and overwrites the clean result with half of the ARGB buffer. The encoder reads ARGB as if it were YUV, and you get a pink ghost.</p>
 <p><img src="/img/fujifilm-instax/08-pink-bug.svg" alt="The pink bug"></p>
 <p>It looks like a real Fujifilm bug. Maybe no printer ever set that bit for this code path, and the Link 3 is the first. The fix is one line in linkxt: hide bit 3 from the app. Trial 45, still without film, gave a clean JPEG.</p>
