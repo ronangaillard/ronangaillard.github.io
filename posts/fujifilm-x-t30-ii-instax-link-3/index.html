@@ -213,7 +213,13 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 <p>These rules shaped the whole project. They made it slower, but I never had a moment of panic.</p>
 <h2 id="step-1-opening-the-firmware">Step 1: Opening the firmware</h2>
 <p>Fujifilm publishes firmware updates on its website. It&rsquo;s one <code>.DAT</code> file per camera. The format isn&rsquo;t documented, but <a href="https://fujihack.org/" target="_blank">FujiHack</a> had already done part of the work on older bodies.</p>
-<p>Opening it took three steps. First, cut a header (model ID, version, checksums). Second, flip every bit (yes, the &ldquo;encryption&rdquo; is a NOT). Third, decompress four blocks. Fuji uses its own flavour of LZ, the classic compression trick behind ZIP: instead of storing a sequence twice, it writes &ldquo;copy 20 bytes from 300 bytes back&rdquo;. I wrote a small Python unpacker, <code>fujifw.py</code>, and checked it against zlib tables hidden in the data: if they decode, the decompressor is right.</p>
+<p>Unpacking it took three steps:</p>
+<ol>
+<li><strong>Cut the header.</strong> The first bytes are an ID card: camera model, version, checksums. The code comes after.</li>
+<li><strong>Flip every bit.</strong> Every 0 becomes a 1 and every 1 a 0. That&rsquo;s all the &ldquo;encryption&rdquo; there is.</li>
+<li><strong>Decompress.</strong> What&rsquo;s left is four compressed blocks. Fuji uses its own flavour of LZ, the classic trick behind ZIP: when a sequence of bytes repeats, it isn&rsquo;t stored again but replaced by &ldquo;copy 20 bytes from 300 bytes back&rdquo;.</li>
+</ol>
+<p>I wrote a small Python script, <code>fujifw.py</code>, that does the three steps. To check it, I had a free test: the firmware contains some well-known data tables from zlib, a public compression library. If they come out byte for byte identical to the published ones, the decompression is right.</p>
 <p><img src="/img/fujifilm-instax/02-unpack.svg" alt="From the update file to Ghidra"></p>
 <p>Three blocks are ARM code: a Cortex-A7 running ThreadX, a small real-time OS. To load them in <a href="https://ghidra-sre.org/" target="_blank">Ghidra</a>, I needed their addresses in memory. I matched pointers in the code with the positions of the strings they should point to, and the addresses came out. Ghidra then found about 59,000 functions. I ran it headless from scripts, so Claude could ask it for decompiled functions without me clicking around.</p>
 <h2 id="step-2-the-code-was-already-there">Step 2: The code was already there</h2>
@@ -259,7 +265,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 
 <figure>
-<div class="img-compare" id="ic-572169384" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
+<div class="img-compare" id="ic-683124579" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
   <img src="/img/fujifilm-instax/jpeg-after-fix.jpg" alt="Trial 45" style="display:block;width:100%" draggable="false">
   <img src="/img/fujifilm-instax/jpeg-before-fix.jpg" alt="Trial 44" class="img-compare-before" style="position:absolute;top:0;left:0;width:100%;height:100%;clip-path:inset(0 50% 0 0)" draggable="false">
   <div class="img-compare-slider" style="position:absolute;top:0;left:50%;width:3px;height:100%;background:#fff;transform:translateX(-50%);pointer-events:none">
@@ -275,7 +281,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 <script>
 (function(){
-  var container = document.getElementById("ic-572169384");
+  var container = document.getElementById("ic-683124579");
   var before = container.querySelector(".img-compare-before");
   var slider = container.querySelector(".img-compare-slider");
   var active = false;
