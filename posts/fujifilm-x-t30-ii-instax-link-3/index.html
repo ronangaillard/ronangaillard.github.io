@@ -168,7 +168,6 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
     <li><a href="#the-pink-ghost">The pink ghost</a></li>
     <li><a href="#it-works">It works!</a></li>
     <li><a href="#tools-and-sources">Tools and sources</a></li>
-    <li><a href="#lessons-learned">Lessons Learned</a></li>
     <li><a href="#whats-next">What&rsquo;s next</a></li>
   </ul>
 </nav>
@@ -260,7 +259,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 
 <figure>
-<div class="img-compare" id="ic-695213478" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
+<div class="img-compare" id="ic-791645823" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
   <img src="/img/fujifilm-instax/jpeg-after-fix.jpg" alt="Trial 45" style="display:block;width:100%" draggable="false">
   <img src="/img/fujifilm-instax/jpeg-before-fix.jpg" alt="Trial 44" class="img-compare-before" style="position:absolute;top:0;left:0;width:100%;height:100%;clip-path:inset(0 50% 0 0)" draggable="false">
   <div class="img-compare-slider" style="position:absolute;top:0;left:50%;width:3px;height:100%;background:#fff;transform:translateX(-50%);pointer-events:none">
@@ -276,7 +275,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 <script>
 (function(){
-  var container = document.getElementById("ic-695213478");
+  var container = document.getElementById("ic-791645823");
   var before = container.querySelector(".img-compare-before");
   var slider = container.querySelector(".img-compare-slider");
   var active = false;
@@ -349,12 +348,6 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 			</tr>
 	</tbody>
 </table>
-<h2 id="lessons-learned">Lessons Learned</h2>
-<p><strong>Look for code that is already there.</strong> I expected to port a whole Bluetooth print feature. In the end I wrote 3 KB of glue, because Fuji had left most of it in my camera.</p>
-<p><strong>Compare with a sibling.</strong> The X-S10 firmware was my Rosetta Stone. Same chip, same libraries, with names and code paths my camera had lost.</p>
-<p><strong>Find a way to log, whatever it costs.</strong> An LED, raw SD sectors, then a real text file. Every step up in visibility made debugging 10× faster.</p>
-<p><strong>Dump the data, don&rsquo;t guess.</strong> I had five wrong theories about the pink image. One buffer dump settled it.</p>
-<p><strong>Don&rsquo;t debug with film.</strong> No-print builds saved me a lot of sheets.</p>
 <h2 id="whats-next">What&rsquo;s next</h2>
 <p>It&rsquo;s still a debug build, and landscape photos haven&rsquo;t been tested since the fix (before it, they froze on &ldquo;Sending&rdquo;). Next, I want to clean it up and turn linkxt into a proper FujiMod mod, so other X-T30 II owners can try it.</p>
 <p>Now if you&rsquo;ll excuse me, I have a Link 3 to fill up.</p>
@@ -395,7 +388,6 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
     <li><a href="#the-pink-ghost">The pink ghost</a></li>
     <li><a href="#it-works">It works!</a></li>
     <li><a href="#tools-and-sources">Tools and sources</a></li>
-    <li><a href="#lessons-learned">Lessons Learned</a></li>
     <li><a href="#whats-next">What&rsquo;s next</a></li>
   </ul>
 </nav>
