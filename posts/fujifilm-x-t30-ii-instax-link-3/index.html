@@ -253,12 +253,9 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 <p>Who reads the card at that point? Not the firmware: it isn&rsquo;t running yet. It&rsquo;s the <strong>boot ROM</strong>, a small piece of code burned into the processor itself, which can&rsquo;t be changed and runs first at every power-on. Its job is to wake up the hardware, then load the firmware from flash, or from the SD card if you hold the button combo. To do that, it carries its own tiny SD driver and FAT file system reader. Since it&rsquo;s burned in the chip, its functions always sit at the same addresses, and the X-T30 II has the very same ROM as the X100V, which the community had already mapped. So my loaders didn&rsquo;t need their own SD driver: they just called the ROM&rsquo;s functions (&ldquo;init the card&rdquo;, &ldquo;read sector N&rdquo;) by their address. For writing, which the ROM never does, I had to drive the SD controller myself, copying the way the ROM sends its read command.</p>
 <p>Then came a long series of black screens. The problem with booting your own code is that you have no screen, no debugger, no <code>printf</code>. The only thing I could control was the small LED on the back. So it became my debugger: the loader blinks green once for each stage it reaches, and goes red when something fails. I counted blinks with a stopwatch in hand.</p>
 <p><img src="/img/fujifilm-instax/09-led.svg" alt="The LED as a debugger"></p>
-<p>The LED taught me a few things the hard way:</p>
-<ul>
-<li><strong>Patience is a feature.</strong> For several trials I thought the loader was stuck on red. It wasn&rsquo;t: the ROM reads the 72 MB image sector by sector, which takes a minute and a half.</li>
-<li><strong>Emulators lie a little.</strong> One of my loaders froze silently. The C compiler had turned a byte read into a 4-byte read at an odd address. That&rsquo;s fine on a normal running system, but this early in boot the processor refuses it and stops. Unicorn didn&rsquo;t model that, so all my tests were green. One compiler flag fixed it.</li>
-<li><strong>Blinks don&rsquo;t scale.</strong> So I taught the loader to write raw sectors on the SD card, inside a file I had created on the Mac beforehand. The ROM&rsquo;s reader found the file, my write routine filled it. After a trial, I opened <code>LOG.BIN</code> on the Mac and read where the boot had stopped.</li>
-</ul>
+<p>The LED taught me a few things the hard way. First, patience. For several trials I thought the loader was stuck on red, but it wasn&rsquo;t: the ROM reads the 72 MB image sector by sector, and that takes a minute and a half.</p>
+<p>Then, emulators lie a little. One of my loaders froze silently. The C compiler had turned a byte read into a 4-byte read at an odd address. That&rsquo;s fine once the system is running, but this early in boot the processor refuses it and stops. Unicorn didn&rsquo;t model that, so all my tests were green. One compiler flag fixed it.</p>
+<p>And blinks don&rsquo;t scale. So I taught the loader to write raw sectors on the SD card, inside a file I had created on the Mac beforehand. The ROM&rsquo;s reader found the file, my write routine filled it, and after each trial I opened <code>LOG.BIN</code> on the Mac to see where the boot had stopped.</p>
 <p>The log said the kernel started, but the app never did. And most of my log points, the ones placed later in the boot, never wrote anything at all.</p>
 <p>So why did it take 30 trials? Because the bug was in none of the places I was looking. The card was fine, the loader was fine, the kernel started fine. The answer came from reading the kernel code on the Mac, not from another trial: just before starting the app, the kernel prepares its log buffers, and &ldquo;prepare&rdquo; means writing a header and filling 128 KB with zeros.</p>
 <p>jitl&rsquo;s first boot recipe (&ldquo;startup&rdquo;) had put a small piece of code right in that spot. As far as I can tell, it&rsquo;s a fake flash: it catches the firmware&rsquo;s writes to the flash memory, most likely so that a camera booted from the card can&rsquo;t damage its real flash. And I had put my debug hooks in the same spot, because it looked empty in the image. So:</p>
@@ -290,7 +287,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 
 <figure>
-<div class="img-compare" id="ic-893425176" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
+<div class="img-compare" id="ic-194625783" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
   <img src="/img/fujifilm-instax/jpeg-after-fix.jpg" alt="Trial 45" style="display:block;width:100%" draggable="false">
   <img src="/img/fujifilm-instax/jpeg-before-fix.jpg" alt="Trial 44" class="img-compare-before" style="position:absolute;top:0;left:0;width:100%;height:100%;clip-path:inset(0 50% 0 0)" draggable="false">
   <div class="img-compare-slider" style="position:absolute;top:0;left:50%;width:3px;height:100%;background:#fff;transform:translateX(-50%);pointer-events:none">
@@ -306,7 +303,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 <script>
 (function(){
-  var container = document.getElementById("ic-893425176");
+  var container = document.getElementById("ic-194625783");
   var before = container.querySelector(".img-compare-before");
   var slider = container.querySelector(".img-compare-slider");
   var active = false;
