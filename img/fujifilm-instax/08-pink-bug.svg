@@ -1,58 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 430" font-family="-apple-system,Helvetica,Arial,sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" font-family="-apple-system,Helvetica,Arial,sans-serif">
   <defs>
     <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#22272a"/></marker>
     <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#d9372b"/></marker>
   </defs>
-  <rect width="800" height="430" fill="#fafafa"/>
-  <!-- column headers -->
-  <g font-size="13" font-weight="700" fill="#22272a" text-anchor="middle">
-    <text x="215" y="30">resize + rotate</text>
-    <text x="395" y="30">"colour pass"</text>
-    <text x="575" y="30">copy A → B</text>
-    <text x="735" y="30">JPEG</text>
-  </g>
-  <g font-size="11" fill="#6b7280" text-anchor="middle">
-    <text x="395" y="46">only if the printer has capability bit 3</text>
-    <text x="575" y="46">meant for "no colour pass"</text>
-  </g>
-  <!-- lanes -->
-  <g font-size="13" font-weight="700" fill="#22272a">
-    <text x="20" y="104">buffer A</text>
-    <text x="20" y="214">buffer B</text>
-  </g>
-  <g font-size="11" fill="#6b7280" font-family="Menlo,monospace">
-    <text x="20" y="120">0x109fe820</text>
-    <text x="20" y="230">0x12c3c040</text>
-  </g>
-  <path d="M110 108 H690 M110 218 H690" stroke="#d1d5db" stroke-width="2"/>
+  <rect width="800" height="560" fill="#fafafa"/>
+  <text x="400" y="26" text-anchor="middle" font-size="13" fill="#6b7280">The photo is resized and rotated into buffer A (YUV). The JPEG encoder always reads buffer B.</text>
 
-  <!-- chips -->
+  <!-- lane 1 -->
+  <text x="30" y="62" font-size="14" font-weight="700" fill="#22272a">Printer without capability bit 3</text>
   <g font-size="12" font-weight="700" text-anchor="middle">
-    <!-- col 1 -->
-    <rect x="165" y="88" width="100" height="40" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/><text x="215" y="113" fill="#1f8a4c">YUV ✓</text>
-    <!-- col 2 -->
-    <rect x="345" y="88" width="100" height="40" rx="8" fill="#fff4e0" stroke="#c27a00" stroke-width="2"/><text x="395" y="113" fill="#c27a00">ARGB</text>
-    <rect x="345" y="198" width="100" height="40" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/><text x="395" y="223" fill="#1f8a4c">YUV ✓</text>
-    <!-- col 3 -->
-    <rect x="525" y="88" width="100" height="40" rx="8" fill="#fff4e0" stroke="#c27a00" stroke-width="2"/><text x="575" y="113" fill="#c27a00">ARGB</text>
-    <rect x="525" y="198" width="100" height="40" rx="8" fill="#fdecea" stroke="#d9372b" stroke-width="2.5"/><text x="575" y="216" fill="#d9372b">½ of the ARGB</text><text x="575" y="231" fill="#d9372b" font-size="11">overwritten ✗</text>
+    <rect x="30" y="74" width="110" height="40" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/><text x="85" y="99" fill="#1f8a4c">A: YUV</text>
+    <rect x="460" y="74" width="110" height="40" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/><text x="515" y="99" fill="#1f8a4c">B: YUV</text>
+    <rect x="640" y="74" width="130" height="40" rx="8" fill="#fff" stroke="#22272a" stroke-width="2"/><text x="705" y="99" fill="#22272a">good JPEG</text>
   </g>
-  <!-- arrows -->
-  <path d="M275 108 H335" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
-  <text x="305" y="100" text-anchor="middle" font-size="10" fill="#6b7280">convert</text>
-  <path d="M395 132 V192" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
-  <text x="402" y="166" font-size="10" fill="#6b7280">back to YUV</text>
-  <path d="M575 132 V192" stroke="#d9372b" stroke-width="3" marker-end="url(#ar)"/>
-  <text x="583" y="166" font-size="11" fill="#d9372b" font-weight="700">memcpy</text>
-  <path d="M630 218 H690" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
-  <rect x="696" y="190" width="80" height="56" rx="6" fill="#f3c6ef" stroke="#22272a" stroke-width="2"/>
-  <text x="736" y="215" text-anchor="middle" font-size="12" font-weight="700" fill="#22272a">pink,</text>
-  <text x="736" y="231" text-anchor="middle" font-size="12" font-weight="700" fill="#22272a">zoomed ×2</text>
+  <path d="M142 94 H454" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
+  <text x="298" y="87" text-anchor="middle" font-size="11" fill="#6b7280">copy A to B</text>
+  <path d="M572 94 H634" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- lane 2 -->
+  <text x="30" y="160" font-size="14" font-weight="700" fill="#22272a">Printer with bit 3: what should happen</text>
+  <g font-size="12" font-weight="700" text-anchor="middle">
+    <rect x="30" y="172" width="110" height="40" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/><text x="85" y="197" fill="#1f8a4c">A: YUV</text>
+    <rect x="245" y="172" width="110" height="40" rx="8" fill="#fff4e0" stroke="#c27a00" stroke-width="2"/><text x="300" y="197" fill="#c27a00">A: ARGB</text>
+    <rect x="460" y="172" width="110" height="40" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/><text x="515" y="197" fill="#1f8a4c">B: YUV</text>
+    <rect x="640" y="172" width="130" height="40" rx="8" fill="#fff" stroke="#22272a" stroke-width="2"/><text x="705" y="197" fill="#22272a">good JPEG</text>
+  </g>
+  <path d="M142 192 H239" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
+  <text x="190" y="185" text-anchor="middle" font-size="11" fill="#6b7280">to ARGB</text>
+  <path d="M357 192 H454" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
+  <text x="406" y="185" text-anchor="middle" font-size="11" fill="#6b7280">colour tweak</text>
+  <text x="406" y="208" text-anchor="middle" font-size="11" fill="#6b7280">back to YUV in B</text>
+  <path d="M572 192 H634" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- lane 3 -->
+  <text x="30" y="270" font-size="14" font-weight="700" fill="#d9372b">Printer with bit 3: what the X-T30 II actually does (the Link 3 has it)</text>
+  <g font-size="12" font-weight="700" text-anchor="middle">
+    <rect x="30" y="282" width="110" height="40" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/><text x="85" y="307" fill="#1f8a4c">A: YUV</text>
+    <rect x="245" y="282" width="110" height="40" rx="8" fill="#fff4e0" stroke="#c27a00" stroke-width="2"/><text x="300" y="307" fill="#c27a00">A: ARGB</text>
+    <rect x="460" y="282" width="110" height="40" rx="8" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/><text x="515" y="307" fill="#1f8a4c">B: YUV</text>
+    <rect x="460" y="370" width="110" height="48" rx="8" fill="#fdecea" stroke="#d9372b" stroke-width="2.5"/><text x="515" y="390" fill="#d9372b">B: half of</text><text x="515" y="406" fill="#d9372b">the ARGB</text>
+    <rect x="640" y="374" width="130" height="40" rx="8" fill="#f3c6ef" stroke="#22272a" stroke-width="2"/><text x="705" y="399" fill="#22272a">pink, zoomed x2</text>
+  </g>
+  <path d="M142 302 H239" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M357 302 H454" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M515 324 V364" stroke="#d9372b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <path d="M300 324 C 300 394, 380 394, 454 394" fill="none" stroke="#d9372b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <text x="40" y="360" font-size="12" fill="#d9372b" font-weight="700">then "copy A to B" runs anyway</text>
+  <text x="40" y="376" font-size="11" fill="#d9372b">and overwrites the good B</text>
+  <path d="M572 394 H634" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
 
   <!-- fix -->
-  <rect x="40" y="280" width="720" height="128" rx="12" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/>
-  <text x="60" y="308" font-size="15" font-weight="700" fill="#1f8a4c">The fix: one line in linkxt</text>
-  <text x="60" y="340" font-size="13" fill="#22272a" font-family="Menlo,monospace">out[5] = rep[13] &amp; ~8;   /* hide capability bit 3 from the app */</text>
-  <text x="60" y="370" font-size="13" fill="#22272a">The app thinks the printer has no colour pass → skips it → the copy A → B now</text>
-  <text x="60" y="390" font-size="13" fill="#22272a">copies the right YUV picture → the encoder gets a clean image.</text>
+  <rect x="30" y="450" width="740" height="92" rx="12" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/>
+  <text x="50" y="476" font-size="14" font-weight="700" fill="#1f8a4c">The fix: hide bit 3 from the app</text>
+  <text x="50" y="502" font-size="13" fill="#22272a" font-family="Menlo,monospace">out[5] = rep[13] &amp; ~8;</text>
+  <text x="50" y="528" font-size="13" fill="#22272a">The app then takes the first path: a plain copy A to B, and a clean JPEG.</text>
 </svg>
