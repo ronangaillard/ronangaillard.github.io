@@ -221,7 +221,8 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 </ol>
 <p>I wrote a small Python script, <code>fujifw.py</code>, that does the three steps. To check it, I had a free test: the firmware contains some well-known data tables from zlib, a public compression library. If they come out byte for byte identical to the published ones, the decompression is right.</p>
 <p><img src="/img/fujifilm-instax/02-unpack.svg" alt="From the update file to Ghidra"></p>
-<p>Three blocks are ARM code: a Cortex-A7 running ThreadX, a small real-time OS. To load them in <a href="https://ghidra-sre.org/" target="_blank">Ghidra</a>, I needed their addresses in memory. I matched pointers in the code with the positions of the strings they should point to, and the addresses came out. Ghidra then found about 59,000 functions. I ran it headless from scripts, so Claude could ask it for decompiled functions without me clicking around.</p>
+<p>Three of the blocks are machine code for the camera&rsquo;s processor (an ARM Cortex-A7 running ThreadX, a small real-time OS). Machine code is just bytes; to read it I used <a href="https://ghidra-sre.org/" target="_blank">Ghidra</a>, a free reverse engineering tool released by the NSA. You give it a binary, it finds the functions, turns the bytes into assembly and then into readable C-like code. No names, no comments, but readable.</p>
+<p>Ghidra first needs to know where each block lives in the camera&rsquo;s memory. The firmware doesn&rsquo;t say, so I found it out: the code is full of pointers to text messages, and there is only one address where they all land on the right strings. Ghidra then found about 59,000 functions. I ran it from scripts, without its interface, so Claude could ask it for any function directly.</p>
 <h2 id="step-2-the-code-was-already-there">Step 2: The code was already there</h2>
 <p>59,000 functions with no names is a lot. But I had a trick: the X-S10 uses the same processor and <strong>does</strong> print to Link printers. So I unpacked its firmware too and compared the two.</p>
 <p>I wrote a fuzzy matcher. It compares whole functions and ignores the addresses that change between builds. Then I ran it on the 176 functions of the X-S10 print code. 109 of them had a twin in my camera that was at least 90% identical.</p>
@@ -265,7 +266,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 
 <figure>
-<div class="img-compare" id="ic-683124579" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
+<div class="img-compare" id="ic-625813497" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
   <img src="/img/fujifilm-instax/jpeg-after-fix.jpg" alt="Trial 45" style="display:block;width:100%" draggable="false">
   <img src="/img/fujifilm-instax/jpeg-before-fix.jpg" alt="Trial 44" class="img-compare-before" style="position:absolute;top:0;left:0;width:100%;height:100%;clip-path:inset(0 50% 0 0)" draggable="false">
   <div class="img-compare-slider" style="position:absolute;top:0;left:50%;width:3px;height:100%;background:#fff;transform:translateX(-50%);pointer-events:none">
@@ -281,7 +282,7 @@ The Problem I travel with a Fujifilm X-T30 II and a small instax mini Link 3 pri
 
 <script>
 (function(){
-  var container = document.getElementById("ic-683124579");
+  var container = document.getElementById("ic-625813497");
   var before = container.querySelector(".img-compare-before");
   var slider = container.querySelector(".img-compare-slider");
   var active = false;
