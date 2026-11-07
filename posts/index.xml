@@ -42,6 +42,13 @@
 				<description>&lt;p&gt;&lt;em&gt;Or, how I turned an annoying daily routine into a Mac app.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-problem-the-tyranny-of-manual-settings&#34;&gt;The Problem: The Tyranny of Manual Settings&lt;/h2&gt;&#xA;&lt;p&gt;Like many developers, my day is punctuated by context switches. I plug my MacBook into a docking station at the office, connect it to an external monitor at home, put on a headset for a call&amp;hellip; and each time, it&amp;rsquo;s the same ritual: open System Settings, find the right Display panel, rearrange my screens, then go to the Sound panel to select the correct microphone and speakers. It&amp;rsquo;s a waste of a few seconds, but repeated multiple times a day, it became a constant source of frustration.&lt;/p&gt;</description>
 			</item>
 			<item>
+				<title>A Cheap and Simple ADB to USB Converter</title>
+				<link>/posts/cheap-adb-to-usb-converter/</link>
+				<pubDate>Fri, 05 Nov 2021 10:44:00 +0100</pubDate>
+				<guid>/posts/cheap-adb-to-usb-converter/</guid>
+				<description>&lt;p&gt;&lt;em&gt;A Pro Micro, a resistor, a mini-DIN connector and a tiny PCB to use my Apple keyboard on a modern Mac&lt;/em&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;Updates&lt;/em&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;[April 2022] Added the tips from the 68kMLA forum thread at the end of this post.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;I discovered the Apple Keyboard M0116 with my Mac SE/30 and I fell in love with it. The Control key is where it should be, next to the A. The Alps switches feel great, a bit noisy but not too much. And the style : the Apple font of the time on the keycaps, the little rainbow Apple logo in the corner&amp;hellip; This keyboard is incredible, so I really wanted to use it every day on my modern Mac. And I have been doing so for more than a year now.&lt;/p&gt;</description>
+			</item>
+			<item>
 				<title>68net : A Modern SCSI2Ethernet Board - Part 1</title>
 				<link>/posts/68net-a-modern-scsi2ethernet-board-part1/</link>
 				<pubDate>Tue, 10 Nov 2020 10:30:29 +0100</pubDate>
