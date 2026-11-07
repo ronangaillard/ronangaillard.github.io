@@ -1,52 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" font-family="-apple-system,Helvetica,Arial,sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 470" font-family="-apple-system,Helvetica,Arial,sans-serif">
   <defs>
-    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="#22272a"/></marker>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="#d9372b"/></marker>
   </defs>
-  <rect width="800" height="360" fill="#fafafa"/>
-  <text x="400" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#22272a">One 128 KB area of RAM, during the first second of boot</text>
+  <rect width="800" height="470" fill="#fafafa"/>
 
-  <!-- step titles -->
-  <g font-size="14" font-weight="700" fill="#22272a" text-anchor="middle">
-    <text x="140" y="66">1. Card copied to RAM</text>
-    <text x="400" y="66">2. Kernel cleans its logs</text>
-    <text x="660" y="66">3. App starts</text>
-  </g>
+  <!-- row 1 -->
+  <text x="30" y="34" font-size="14" font-weight="700" fill="#22272a">1. The loader copies the card's image into RAM</text>
+  <rect x="30" y="48" width="740" height="56" rx="6" fill="#fff" stroke="#22272a" stroke-width="2"/>
+  <text x="120" y="81" text-anchor="middle" font-size="12" fill="#6b7280">kernel</text>
+  <rect x="300" y="48" width="200" height="56" fill="#fff4e0" stroke="#c27a00" stroke-width="2"/>
+  <text x="400" y="71" text-anchor="middle" font-size="12" font-weight="700" fill="#22272a">jitl's code + my debug code</text>
+  <text x="400" y="89" text-anchor="middle" font-size="11" fill="#6b7280">put here because it looked empty</text>
+  <text x="660" y="81" text-anchor="middle" font-size="12" fill="#6b7280">camera app</text>
+  <path d="M210 48 V104 M590 48 V104" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="400" y="122" text-anchor="middle" font-size="11" fill="#6b7280" font-family="Menlo,monospace">128 KB at 0x1a0000</text>
 
-  <!-- 1 -->
-  <rect x="60" y="80" width="160" height="140" rx="8" fill="#fff" stroke="#22272a" stroke-width="2"/>
-  <rect x="72" y="92" width="136" height="54" rx="6" fill="#e8efff" stroke="#2563eb" stroke-width="1.5"/>
-  <text x="140" y="115" text-anchor="middle" font-size="12" font-weight="700" fill="#22272a">jitl's code</text>
-  <text x="140" y="132" text-anchor="middle" font-size="11" fill="#6b7280">needed by the app</text>
-  <rect x="72" y="154" width="136" height="54" rx="6" fill="#fff4e0" stroke="#c27a00" stroke-width="1.5"/>
-  <text x="140" y="177" text-anchor="middle" font-size="12" font-weight="700" fill="#22272a">my debug code</text>
-  <text x="140" y="194" text-anchor="middle" font-size="11" fill="#6b7280">writes the log</text>
+  <!-- row 2 -->
+  <text x="30" y="168" font-size="14" font-weight="700" fill="#22272a">2. The kernel starts and resets its log area, which is the same spot</text>
+  <rect x="30" y="182" width="740" height="56" rx="6" fill="#fff" stroke="#22272a" stroke-width="2"/>
+  <text x="120" y="215" text-anchor="middle" font-size="12" font-weight="700" fill="#22272a">kernel (running)</text>
+  <rect x="300" y="182" width="200" height="56" fill="#e5e7eb" stroke="#9ca3af" stroke-width="2"/>
+  <text x="400" y="205" text-anchor="middle" font-size="11" fill="#22272a" font-family="Menlo,monospace">"syslog Ver 2.3"</text>
+  <text x="400" y="225" text-anchor="middle" font-size="13" fill="#6b7280" font-family="Menlo,monospace">00 00 00 00 00 00</text>
+  <text x="660" y="215" text-anchor="middle" font-size="12" fill="#6b7280">camera app</text>
+  <path d="M210 182 V238 M590 182 V238" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="400" y="256" text-anchor="middle" font-size="12" fill="#d9372b" font-weight="700">our code is gone</text>
 
-  <path d="M230 150 H290" stroke="#22272a" stroke-width="2.5" marker-end="url(#a)"/>
+  <!-- row 3 -->
+  <text x="30" y="302" font-size="14" font-weight="700" fill="#22272a">3. The kernel starts the app, and the app calls jitl's code</text>
+  <rect x="30" y="316" width="740" height="56" rx="6" fill="#fff" stroke="#22272a" stroke-width="2"/>
+  <text x="120" y="349" text-anchor="middle" font-size="12" fill="#6b7280">kernel</text>
+  <rect x="300" y="316" width="200" height="56" fill="#e5e7eb" stroke="#9ca3af" stroke-width="2"/>
+  <text x="400" y="349" text-anchor="middle" font-size="13" fill="#6b7280" font-family="Menlo,monospace">00 00 00 00 00 00</text>
+  <text x="660" y="349" text-anchor="middle" font-size="12" font-weight="700" fill="#22272a">camera app (running)</text>
+  <path d="M210 316 V372 M590 316 V372" stroke="#d1d5db" stroke-width="1.5"/>
+  <path d="M640 374 C 620 400, 520 400, 470 376" fill="none" stroke="#d9372b" stroke-width="2.5" marker-end="url(#r)"/>
+  <text x="560" y="408" text-anchor="middle" font-size="12" fill="#d9372b" font-weight="700">calls</text>
 
-  <!-- 2 -->
-  <rect x="320" y="80" width="160" height="140" rx="8" fill="#fff" stroke="#22272a" stroke-width="2"/>
-  <text x="400" y="130" text-anchor="middle" font-size="20" fill="#9ca3af" font-family="Menlo,monospace">00 00 00 00</text>
-  <text x="400" y="156" text-anchor="middle" font-size="20" fill="#9ca3af" font-family="Menlo,monospace">00 00 00 00</text>
-  <text x="400" y="182" text-anchor="middle" font-size="20" fill="#9ca3af" font-family="Menlo,monospace">00 00 00 00</text>
-
-  <path d="M490 150 H550" stroke="#22272a" stroke-width="2.5" marker-end="url(#a)"/>
-
-  <!-- 3 -->
-  <rect x="580" y="80" width="160" height="140" rx="8" fill="#22272a"/>
-  <text x="660" y="128" text-anchor="middle" font-size="12" fill="#fff">calls jitl's code…</text>
-  <text x="660" y="148" text-anchor="middle" font-size="12" fill="#fff">finds zeros</text>
-  <text x="660" y="184" text-anchor="middle" font-size="16" font-weight="700" fill="#d9372b">frozen</text>
-
-  <!-- captions -->
-  <g font-size="12" fill="#6b7280" text-anchor="middle">
-    <text x="140" y="244">full of zeros in the image,</text>
-    <text x="140" y="260">so it looked free</text>
-    <text x="400" y="244">it's the kernel's log area:</text>
-    <text x="400" y="260">it erases it at every boot</text>
-    <text x="660" y="244">black screen,</text>
-    <text x="660" y="260">no error, no log</text>
-  </g>
-
-  <rect x="90" y="290" width="620" height="48" rx="24" fill="#fff4e0" stroke="#c27a00" stroke-width="2"/>
-  <text x="400" y="319" text-anchor="middle" font-size="13" fill="#22272a">My debug code was erased too: the tool meant to find the bug was erased by the bug.</text>
+  <rect x="150" y="420" width="500" height="38" rx="19" fill="#22272a"/>
+  <text x="400" y="444" text-anchor="middle" font-size="13" fill="#fff">The processor runs zeros and freezes: black screen, no error</text>
 </svg>
