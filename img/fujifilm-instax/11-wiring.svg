@@ -19,8 +19,8 @@
   <text x="130" y="217" text-anchor="middle" font-size="11" fill="#6b7280">~3 KB of ARM code</text>
 
   <path d="M212 203 C 300 203, 330 154, 418 154" fill="none" stroke="#22272a" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#k)"/>
-  <text x="300" y="168" text-anchor="middle" font-size="11" fill="#6b7280">copied into</text>
-  <text x="300" y="182" text-anchor="middle" font-size="11" fill="#6b7280">the empty hole</text>
+  <text x="318" y="216" text-anchor="middle" font-size="11" fill="#6b7280">copied into</text>
+  <text x="318" y="230" text-anchor="middle" font-size="11" fill="#6b7280">the empty hole</text>
 
   <!-- right: firmware in RAM -->
   <text x="560" y="34" text-anchor="middle" font-size="14" font-weight="700" fill="#22272a">The firmware in RAM (from the SD card)</text>
@@ -62,7 +62,7 @@
   <path d="M560 370 V362" stroke="#22272a" stroke-width="2" marker-end="url(#k)"/>
   <!-- stubs -> linkxt (right side) -->
   <path d="M686 310 C 760 310, 760 156, 688 156" fill="none" stroke="#c27a00" stroke-width="2.5" marker-end="url(#o)"/>
-  <text x="764" y="230" font-size="11" fill="#c27a00" font-weight="700" text-anchor="end" transform="rotate(90 744 230)">patched jump</text>
+  <text x="782" y="232" font-size="11" fill="#c27a00" font-weight="700" text-anchor="middle" transform="rotate(90 782 232)">patched jump</text>
   <!-- linkxt -> BLE / file (left side) -->
   <path d="M434 146 C 400 140, 400 96, 434 92" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#b)"/>
   <path d="M434 168 C 400 176, 400 214, 434 220" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#b)"/>
