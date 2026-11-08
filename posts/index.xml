@@ -69,5 +69,12 @@
 				<guid>/posts/arduino-logitech-wireless-mouse/</guid>
 				<description>&lt;p&gt;&lt;em&gt;A 2 euros radio module, a Logitech Unifying dongle and a mouse you wear on your wrist : our last year project at Supélec&lt;/em&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;Updates&lt;/em&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;[10 March 2018] This project was featured on Hackaday : &lt;a href=&#34;https://hackaday.com/2018/03/10/wireless-protocol-reverse-engineered-to-create-wrist-wearable-mouse/&#34; target=&#34;_blank&#34;&gt;WIRELESS PROTOCOL REVERSE ENGINEERED TO CREATE WRIST WEARABLE MOUSE&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;This winter, for our last year project at Supélec, Guilhem and I had to build a wireless 3D mouse : you move your arm, the cursor moves on the screen. I took care of the wireless part and Guilhem of the motion sensing.&lt;/p&gt;</description>
 			</item>
+			<item>
+				<title>MiniOS : an Arduino Talking to a Minitel</title>
+				<link>/posts/minios-arduino-minitel/</link>
+				<pubDate>Thu, 15 Apr 2010 18:54:00 +0200</pubDate>
+				<guid>/posts/minios-arduino-minitel/</guid>
+				<description>&lt;p&gt;&lt;em&gt;A DIN plug, a resistor and an Arduino Mega to bring the good old French Minitel back to life&lt;/em&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;Updates&lt;/em&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;[16 April 2010] This project was featured on the Arduino blog : &lt;a href=&#34;https://blog.arduino.cc/2010/04/16/minitel-is-not-dead/&#34; target=&#34;_blank&#34;&gt;Minitel is not dead!&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;[20 December 2013] The photos were featured on &lt;a href=&#34;https://text-mode.tumblr.com/post/70528088514/le-minitel-nest-pas-mort-sorannefr-used&#34; target=&#34;_blank&#34;&gt;TEXT-MODE&lt;/a&gt;, a blog about text graphics through the ages (ASCII, PETSCII, Teletext, mosaics&amp;hellip;)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;The Minitel is the French terminal that brought online services to millions of homes long before the Internet. There are still plenty of them sleeping in attics, and they have a nice feature : a &amp;ldquo;péri-informatique&amp;rdquo; DIN socket at the back, which is just a serial port. So I plugged an Arduino into one and wrote MiniOS, a tiny OS for the Minitel.&lt;/p&gt;</description>
+			</item>
 	</channel>
 </rss>
