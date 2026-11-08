@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> A Lamp That Reacts to Music | Ronan Gaillard</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:url" content="/posts/a-lamp-that-reacts-to-music/">
+	<meta property="og:site_name" content="Ronan Gaillard">
+	<meta property="og:title" content="A Lamp That Reacts to Music">
+	<meta property="og:description" content="A CD spindle, RGB LEDs, an Arduino, and a beat detection algorithm running on my computer
+I wanted a lamp that changes color on the beat of the music, whatever the song style and whatever the volume. Here it is :
+The lamp The lamp is an old CD spindle case, with RGB LEDs I soldered in bands inside. An Arduino in the lamp drives the LEDs, and listens to the computer on the USB port.">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2015-03-19T16:15:00+01:00">
+		<meta property="article:modified_time" content="2015-03-19T16:15:00+01:00">
+
+  
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="A Lamp That Reacts to Music">
+	<meta name="twitter:description" content="A CD spindle, RGB LEDs, an Arduino, and a beat detection algorithm running on my computer
+I wanted a lamp that changes color on the beat of the music, whatever the song style and whatever the volume. Here it is :
+The lamp The lamp is an old CD spindle case, with RGB LEDs I soldered in bands inside. An Arduino in the lamp drives the LEDs, and listens to the computer on the USB port.">
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="/css/style-classic.css">
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="/images/favicon.ico" />
+
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" /posts/arduino-as-a-pic-programmer/">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="/posts/xtrem-kernel-an-rtos-for-arm-cortex-m3/">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=%2fposts%2fa-lamp-that-reacts-to-music%2f">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&text=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&title=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&is_video=false&description=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=A%20Lamp%20That%20Reacts%20to%20Music&body=Check out this article: %2fposts%2fa-lamp-that-reacts-to-music%2f">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&title=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&title=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.stumbleupon.com/submit?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&title=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-stumbleupon " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://digg.com/submit?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&title=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-digg " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&name=A%20Lamp%20That%20Reacts%20to%20Music&description=%3cp%3e%3cem%3eA%20CD%20spindle%2c%20RGB%20LEDs%2c%20an%20Arduino%2c%20and%20a%20beat%20detection%20algorithm%20running%20on%20my%20computer%3c%2fem%3e%3c%2fp%3e%0a%3cp%3eI%20wanted%20a%20lamp%20that%20changes%20color%20on%20the%20beat%20of%20the%20music%2c%20whatever%20the%20song%20style%20and%20whatever%20the%20volume.%20Here%20it%20is%20%3a%3c%2fp%3e%0a%3cp%3e%3cimg%20src%3d%22%2fimg%2fmusic-light%2flamp.jpg%22%20alt%3d%22The%20lamp%22%3e%3c%2fp%3e%0a%3ch2%20id%3d%22the-lamp%22%3eThe%20lamp%3c%2fh2%3e%0a%3cp%3eThe%20lamp%20is%20an%20old%20CD%20spindle%20case%2c%20with%20RGB%20LEDs%20I%20soldered%20in%20bands%20inside.%20An%20Arduino%20in%20the%20lamp%20drives%20the%20LEDs%2c%20and%20listens%20to%20the%20computer%20on%20the%20USB%20port.%3c%2fp%3e">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=%2fposts%2fa-lamp-that-reacts-to-music%2f&t=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-lamp">The lamp</a></li>
+    <li><a href="#detecting-the-beat">Detecting the beat</a></li>
+    <li><a href="#the-videos">The videos</a></li>
+  </ul>
+</nav>
+    </div>
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        A Lamp That Reacts to Music
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2015-03-19 16:15:00 &#43;0100 &#43;0100" itemprop="datePublished">2015-03-19</time>
+          
+        </div>
+        
+        
+      </div>
+    </header>
+
+  
+    <div class="content" itemprop="articleBody">
+      <p><em>A CD spindle, RGB LEDs, an Arduino, and a beat detection algorithm running on my computer</em></p>
+<p>I wanted a lamp that changes color on the beat of the music, whatever the song style and whatever the volume. Here it is :</p>
+<p><img src="/img/music-light/lamp.jpg" alt="The lamp"></p>
+<h2 id="the-lamp">The lamp</h2>
+<p>The lamp is an old CD spindle case, with RGB LEDs I soldered in bands inside. An Arduino in the lamp drives the LEDs, and listens to the computer on the USB port.</p>
+<h2 id="detecting-the-beat">Detecting the beat</h2>
+<p>The hard part is on the computer side, in <a href="https://processing.org" target="_blank">Processing</a>. The program does an FFT of the sound to split it into frequency bands. For each band it computes two averages of the energy : a long term one and a short term one. When the short term average jumps above the long term one, that&rsquo;s a beat. Since everything is relative to the long term average, it works with a quiet song as well as with a loud one, and with any style of music.</p>
+<p>At each beat the computer sends a random color to the Arduino, and the lamp changes color.</p>
+<h2 id="the-videos">The videos</h2>
+<p>A first version in October 2014, in a tall column lamp :</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+			<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/IFvY5JlcUlU?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+		</div>
+
+<p>The new lamp in its CD case, with the Processing program on the laptop :</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+			<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/O7FlwIoSKgs?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+		</div>
+
+<p>And the final version :</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+			<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/3VuRS4iNBno?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+		</div>
+
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-lamp">The lamp</a></li>
+    <li><a href="#detecting-the-beat">Detecting the beat</a></li>
+    <li><a href="#the-videos">The videos</a></li>
+  </ul>
+</nav>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=%2fposts%2fa-lamp-that-reacts-to-music%2f">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&text=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&title=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&is_video=false&description=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=A%20Lamp%20That%20Reacts%20to%20Music&body=Check out this article: %2fposts%2fa-lamp-that-reacts-to-music%2f">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&title=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&title=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.stumbleupon.com/submit?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&title=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://digg.com/submit?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&title=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-digg fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=%2fposts%2fa-lamp-that-reacts-to-music%2f&name=A%20Lamp%20That%20Reacts%20to%20Music&description=%3cp%3e%3cem%3eA%20CD%20spindle%2c%20RGB%20LEDs%2c%20an%20Arduino%2c%20and%20a%20beat%20detection%20algorithm%20running%20on%20my%20computer%3c%2fem%3e%3c%2fp%3e%0a%3cp%3eI%20wanted%20a%20lamp%20that%20changes%20color%20on%20the%20beat%20of%20the%20music%2c%20whatever%20the%20song%20style%20and%20whatever%20the%20volume.%20Here%20it%20is%20%3a%3c%2fp%3e%0a%3cp%3e%3cimg%20src%3d%22%2fimg%2fmusic-light%2flamp.jpg%22%20alt%3d%22The%20lamp%22%3e%3c%2fp%3e%0a%3ch2%20id%3d%22the-lamp%22%3eThe%20lamp%3c%2fh2%3e%0a%3cp%3eThe%20lamp%20is%20an%20old%20CD%20spindle%20case%2c%20with%20RGB%20LEDs%20I%20soldered%20in%20bands%20inside.%20An%20Arduino%20in%20the%20lamp%20drives%20the%20LEDs%2c%20and%20listens%20to%20the%20computer%20on%20the%20USB%20port.%3c%2fp%3e">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=%2fposts%2fa-lamp-that-reacts-to-music%2f&t=A%20Lamp%20That%20Reacts%20to%20Music">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2026  Ronan Gaillard 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+
+
+</html>

@@ -70,6 +70,20 @@
 				<description>&lt;p&gt;&lt;em&gt;A 2 euros radio module, a Logitech Unifying dongle and a mouse you wear on your wrist : our last year project at Supélec&lt;/em&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;Updates&lt;/em&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;[10 March 2018] This project was featured on Hackaday : &lt;a href=&#34;https://hackaday.com/2018/03/10/wireless-protocol-reverse-engineered-to-create-wrist-wearable-mouse/&#34; target=&#34;_blank&#34;&gt;WIRELESS PROTOCOL REVERSE ENGINEERED TO CREATE WRIST WEARABLE MOUSE&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;This winter, for our last year project at Supélec, Guilhem and I had to build a wireless 3D mouse : you move your arm, the cursor moves on the screen. I took care of the wireless part and Guilhem of the motion sensing.&lt;/p&gt;</description>
 			</item>
 			<item>
+				<title>XTrem Kernel : my Own RTOS for ARM Cortex M3</title>
+				<link>/posts/xtrem-kernel-an-rtos-for-arm-cortex-m3/</link>
+				<pubDate>Thu, 14 Jul 2016 22:20:00 +0200</pubDate>
+				<guid>/posts/xtrem-kernel-an-rtos-for-arm-cortex-m3/</guid>
+				<description>&lt;p&gt;&lt;em&gt;Tasks, priorities, semaphores, mutexes and a little shell, written from scratch for the mbed LPC1768&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;I wrote XTrem Kernel in 2015 and it has been sitting on my hard drive since then, so I just put it on GitHub : &lt;a href=&#34;https://github.com/ronangaillard/xtremkernel&#34; target=&#34;_blank&#34;&gt;ronangaillard/xtremkernel&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I wanted to know what really happens inside a real time operating system, and the best way to know was to write one. In less than two months I wrote a multitask kernel for ARM Cortex M3 processors : thousands of lines of low level C and a few hundred lines of assembly. It runs on the NXP LPC17XX chips, so on the original &lt;a href=&#34;https://os.mbed.com/platforms/mbed-LPC1768/&#34; target=&#34;_blank&#34;&gt;mbed LPC1768&lt;/a&gt; board.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>A Lamp That Reacts to Music</title>
+				<link>/posts/a-lamp-that-reacts-to-music/</link>
+				<pubDate>Thu, 19 Mar 2015 16:15:00 +0100</pubDate>
+				<guid>/posts/a-lamp-that-reacts-to-music/</guid>
+				<description>&lt;p&gt;&lt;em&gt;A CD spindle, RGB LEDs, an Arduino, and a beat detection algorithm running on my computer&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;I wanted a lamp that changes color on the beat of the music, whatever the song style and whatever the volume. Here it is :&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;/img/music-light/lamp.jpg&#34; alt=&#34;The lamp&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-lamp&#34;&gt;The lamp&lt;/h2&gt;&#xA;&lt;p&gt;The lamp is an old CD spindle case, with RGB LEDs I soldered in bands inside. An Arduino in the lamp drives the LEDs, and listens to the computer on the USB port.&lt;/p&gt;</description>
+			</item>
+			<item>
 				<title>Arduino as a PIC Programmer</title>
 				<link>/posts/arduino-as-a-pic-programmer/</link>
 				<pubDate>Mon, 20 Feb 2012 19:12:00 +0100</pubDate>

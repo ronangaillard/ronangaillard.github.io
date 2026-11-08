@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> XTrem Kernel : my Own RTOS for ARM Cortex M3 | Ronan Gaillard</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:url" content="/posts/xtrem-kernel-an-rtos-for-arm-cortex-m3/">
+	<meta property="og:site_name" content="Ronan Gaillard">
+	<meta property="og:title" content="XTrem Kernel : my Own RTOS for ARM Cortex M3">
+	<meta property="og:description" content="Tasks, priorities, semaphores, mutexes and a little shell, written from scratch for the mbed LPC1768
+I wrote XTrem Kernel in 2015 and it has been sitting on my hard drive since then, so I just put it on GitHub : ronangaillard/xtremkernel.
+I wanted to know what really happens inside a real time operating system, and the best way to know was to write one. In less than two months I wrote a multitask kernel for ARM Cortex M3 processors : thousands of lines of low level C and a few hundred lines of assembly. It runs on the NXP LPC17XX chips, so on the original mbed LPC1768 board.">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2016-07-14T22:20:00+02:00">
+		<meta property="article:modified_time" content="2016-07-14T22:20:00+02:00">
+
+  
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="XTrem Kernel : my Own RTOS for ARM Cortex M3">
+	<meta name="twitter:description" content="Tasks, priorities, semaphores, mutexes and a little shell, written from scratch for the mbed LPC1768
+I wrote XTrem Kernel in 2015 and it has been sitting on my hard drive since then, so I just put it on GitHub : ronangaillard/xtremkernel.
+I wanted to know what really happens inside a real time operating system, and the best way to know was to write one. In less than two months I wrote a multitask kernel for ARM Cortex M3 processors : thousands of lines of low level C and a few hundred lines of assembly. It runs on the NXP LPC17XX chips, so on the original mbed LPC1768 board.">
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="/css/style-classic.css">
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="/images/favicon.ico" />
+
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" /posts/a-lamp-that-reacts-to-music/">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="/posts/arduino-logitech-wireless-mouse/">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&text=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&title=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&is_video=false&description=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3&body=Check out this article: %2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&title=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&title=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.stumbleupon.com/submit?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&title=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-stumbleupon " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://digg.com/submit?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&title=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-digg " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&name=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3&description=%3cp%3e%3cem%3eTasks%2c%20priorities%2c%20semaphores%2c%20mutexes%20and%20a%20little%20shell%2c%20written%20from%20scratch%20for%20the%20mbed%20LPC1768%3c%2fem%3e%3c%2fp%3e%0a%3cp%3eI%20wrote%20XTrem%20Kernel%20in%202015%20and%20it%20has%20been%20sitting%20on%20my%20hard%20drive%20since%20then%2c%20so%20I%20just%20put%20it%20on%20GitHub%20%3a%20%3ca%20href%3d%22https%3a%2f%2fgithub.com%2fronangaillard%2fxtremkernel%22%20target%3d%22_blank%22%3eronangaillard%2fxtremkernel%3c%2fa%3e.%3c%2fp%3e%0a%3cp%3eI%20wanted%20to%20know%20what%20really%20happens%20inside%20a%20real%20time%20operating%20system%2c%20and%20the%20best%20way%20to%20know%20was%20to%20write%20one.%20In%20less%20than%20two%20months%20I%20wrote%20a%20multitask%20kernel%20for%20ARM%20Cortex%20M3%20processors%20%3a%20thousands%20of%20lines%20of%20low%20level%20C%20and%20a%20few%20hundred%20lines%20of%20assembly.%20It%20runs%20on%20the%20NXP%20LPC17XX%20chips%2c%20so%20on%20the%20original%20%3ca%20href%3d%22https%3a%2f%2fos.mbed.com%2fplatforms%2fmbed-LPC1768%2f%22%20target%3d%22_blank%22%3embed%20LPC1768%3c%2fa%3e%20board.%3c%2fp%3e">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&t=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-kernel">The kernel</a></li>
+    <li><a href="#a-small-computer">A small computer</a></li>
+  </ul>
+</nav>
+    </div>
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        XTrem Kernel : my Own RTOS for ARM Cortex M3
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2016-07-14 22:20:00 &#43;0200 &#43;0200" itemprop="datePublished">2016-07-14</time>
+          
+        </div>
+        
+        
+      </div>
+    </header>
+
+  
+    <div class="content" itemprop="articleBody">
+      <p><em>Tasks, priorities, semaphores, mutexes and a little shell, written from scratch for the mbed LPC1768</em></p>
+<p>I wrote XTrem Kernel in 2015 and it has been sitting on my hard drive since then, so I just put it on GitHub : <a href="https://github.com/ronangaillard/xtremkernel" target="_blank">ronangaillard/xtremkernel</a>.</p>
+<p>I wanted to know what really happens inside a real time operating system, and the best way to know was to write one. In less than two months I wrote a multitask kernel for ARM Cortex M3 processors : thousands of lines of low level C and a few hundred lines of assembly. It runs on the NXP LPC17XX chips, so on the original <a href="https://os.mbed.com/platforms/mbed-LPC1768/" target="_blank">mbed LPC1768</a> board.</p>
+<p><img src="/img/xtremkernel/boot.png" alt="XTrem Kernel booting"></p>
+<h2 id="the-kernel">The kernel</h2>
+<p>A SysTick interrupt every millisecond gives the kernel its heartbeat. The scheduler keeps one queue of runnable tasks per priority level, always runs the highest priority one, and does round robin between tasks of the same priority.</p>
+<p>The context switch itself is a few lines of assembly in the PendSV handler, the lowest priority interrupt of the Cortex M3 : it saves the registers of the current task on its stack, switches the stack pointer, and restores the registers of the next one. The Cortex M3 port of <a href="http://www.tnkernel.com/" target="_blank">TNKernel</a> was a great help to understand how to do it.</p>
+<p>On top of that the kernel provides what you expect from an RTOS :</p>
+<ul>
+<li>tasks with priorities, created with their own stack, and <code>sleep()</code></li>
+<li>timers and timeouts</li>
+<li>semaphores</li>
+<li>mutexes, with priority inheritance : when a high priority task waits for a mutex, the task holding it temporarily gets its priority, so it can&rsquo;t be blocked by a medium priority task</li>
+</ul>
+<p>The screenshot above is the classic first test : two tasks printing on the serial port, task 1 more often than task 2.</p>
+<h2 id="a-small-computer">A small computer</h2>
+<p>Once the kernel worked, I wanted to use it for something. So I added :</p>
+<ul>
+<li>a basic shell (<code>ls</code>, <code>mount</code>, <code>whoami</code>, <code>reboot</code>&hellip;)</li>
+<li>a PS/2 keyboard driver</li>
+<li>a VGA output through a Gameduino board on the SPI bus, with an 8x8 font</li>
+<li>SD card support, with the <a href="http://elm-chan.org/fsw/ff/00index_e.html" target="_blank">FatFs</a> module to read files and navigate in folders</li>
+</ul>
+<p>With the keyboard and the screen, the mbed became a small standalone computer, running my own OS.</p>
+<p>The next steps were to load binaries from the SD card and run them as tasks, and to move the shell and the FAT support out of the kernel and load them as modules, UNIX style. The hardware specific code is well separated from the kernel core, so porting it to other ARM processors should be easy too.</p>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-kernel">The kernel</a></li>
+    <li><a href="#a-small-computer">A small computer</a></li>
+  </ul>
+</nav>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&text=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&title=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&is_video=false&description=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3&body=Check out this article: %2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&title=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&title=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.stumbleupon.com/submit?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&title=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://digg.com/submit?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&title=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-digg fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&name=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3&description=%3cp%3e%3cem%3eTasks%2c%20priorities%2c%20semaphores%2c%20mutexes%20and%20a%20little%20shell%2c%20written%20from%20scratch%20for%20the%20mbed%20LPC1768%3c%2fem%3e%3c%2fp%3e%0a%3cp%3eI%20wrote%20XTrem%20Kernel%20in%202015%20and%20it%20has%20been%20sitting%20on%20my%20hard%20drive%20since%20then%2c%20so%20I%20just%20put%20it%20on%20GitHub%20%3a%20%3ca%20href%3d%22https%3a%2f%2fgithub.com%2fronangaillard%2fxtremkernel%22%20target%3d%22_blank%22%3eronangaillard%2fxtremkernel%3c%2fa%3e.%3c%2fp%3e%0a%3cp%3eI%20wanted%20to%20know%20what%20really%20happens%20inside%20a%20real%20time%20operating%20system%2c%20and%20the%20best%20way%20to%20know%20was%20to%20write%20one.%20In%20less%20than%20two%20months%20I%20wrote%20a%20multitask%20kernel%20for%20ARM%20Cortex%20M3%20processors%20%3a%20thousands%20of%20lines%20of%20low%20level%20C%20and%20a%20few%20hundred%20lines%20of%20assembly.%20It%20runs%20on%20the%20NXP%20LPC17XX%20chips%2c%20so%20on%20the%20original%20%3ca%20href%3d%22https%3a%2f%2fos.mbed.com%2fplatforms%2fmbed-LPC1768%2f%22%20target%3d%22_blank%22%3embed%20LPC1768%3c%2fa%3e%20board.%3c%2fp%3e">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=%2fposts%2fxtrem-kernel-an-rtos-for-arm-cortex-m3%2f&t=XTrem%20Kernel%20%3a%20my%20Own%20RTOS%20for%20ARM%20Cortex%20M3">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2026  Ronan Gaillard 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+
+
+</html>
