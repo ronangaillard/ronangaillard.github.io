@@ -56,10 +56,20 @@ a:focus-visible { outline: 2px dotted var(--encre); outline-offset: 2px; }
 
 /* En-tête */
 .entete { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center; padding: 12px; background: var(--blanc); }
-.fenetre-mac { width: 148px; background: var(--blanc); border: 2px solid var(--encre); box-shadow: 3px 3px 0 var(--encre); }
+.fenetre-mac { width: 184px; background: var(--blanc); border: 2px solid var(--encre); box-shadow: 3px 3px 0 var(--encre); }
 .fenetre-mac .barre { height: 16px; border-bottom: 2px solid var(--encre); background: repeating-linear-gradient(to bottom, var(--encre) 0 1px, var(--blanc) 1px 3px); display: grid; place-items: center; }
 .fenetre-mac .barre span { background: var(--blanc); padding: 0 6px; font-family: var(--mono); font-size: 11px; font-weight: bold; line-height: 14px; }
-.fenetre-mac canvas { display: block; width: 110px; height: 120px; margin: 8px auto; image-rendering: pixelated; image-rendering: crisp-edges; }
+.fenetre-mac { position: relative; }
+.fenetre-mac summary { display: block; list-style: none; cursor: pointer; }
+.fenetre-mac summary::-webkit-details-marker { display: none; }
+.fenetre-mac .barre { display: grid; }
+.fenetre-mac img { display: block; width: 180px; height: 196px; margin: 0; image-rendering: pixelated; image-rendering: crisp-edges; }
+.fenetre-mac summary:focus-visible { outline: 2px dotted var(--encre); outline-offset: 2px; }
+.note-photo {
+  position: absolute; z-index: 5; left: 0; top: calc(100% + 8px); width: 220px; margin: 0; padding: 8px 10px;
+  font-size: 14px; font-style: italic; text-align: left;
+  background: var(--creme); border: 1px solid var(--encre); box-shadow: 3px 3px 0 var(--encre);
+}
 .titre { margin: 0; font-size: clamp(2rem, 6vw, 3.2rem); font-style: italic; font-weight: bold; line-height: 1.05; color: var(--marine); text-shadow: 3px 3px 0 var(--gris); text-wrap: balance; }
 .titre a, .titre a:visited { color: inherit; text-decoration: none; }
 .titre .arc { background: linear-gradient(90deg, var(--marine), var(--sarcelle), var(--rouge)); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: none; }

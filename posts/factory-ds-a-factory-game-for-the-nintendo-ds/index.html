@@ -43,10 +43,13 @@ Why the Nintendo DS? I think the Nintendo DS is one of the best consoles ever ma
     </div>
 
     <header class="entete biseau">
-      <div class="fenetre-mac" aria-hidden="true">
-        <div class="barre"><span>ronan.pict</span></div>
-        <canvas id="pixel-mac" width="22" height="24"></canvas>
-      </div>
+      <details class="fenetre-mac">
+        <summary title="Click me !">
+          <span class="barre"><span>ronan.pict</span></span>
+          <img src="/img/me/ronan.png" width="180" height="196" alt="Portrait of Ronan Gaillard">
+        </summary>
+        <p class="note-photo">Shot on black &amp; white film, developed and scanned by me at home.</p>
+      </details>
       <div>
         <p class="titre"><a href="/">Ronan Gaillard<span class="arc">'s Workshop</span></a></p>
         <p class="sous-titre">Embedded systems, retro computers and sailing, from Saint-Malo. Things I built, and how.</p>
@@ -207,7 +210,7 @@ Why the Nintendo DS? I think the Nintendo DS is one of the best consoles ever ma
 
 
 
-<figure class="fdsn" id="fdsn-836917254" data-mode="power" style="margin:1.5em 0">
+<figure class="fdsn" id="fdsn-936547281" data-mode="power" style="margin:1.5em 0">
   <div class="fdsn-nav" style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:6px"></div>
   <div class="fdsn-step" style="font-size:.9em;line-height:1.5;margin-bottom:8px"></div>
   <canvas width="384" height="160" style="width:100%;max-width:768px;display:block;margin:0 auto;image-rendering:pixelated;image-rendering:crisp-edges;border-radius:8px;background:#1d1b24;border:6px solid #1d1b24;box-sizing:border-box;cursor:pointer"></canvas>
@@ -216,7 +219,7 @@ Why the Nintendo DS? I think the Nintendo DS is one of the best consoles ever ma
 </figure>
 <script>
 (function () {
-  var root = document.getElementById("fdsn-836917254");
+  var root = document.getElementById("fdsn-936547281");
   var MODE = root.getAttribute("data-mode");
   var cv = root.querySelector("canvas"), g = cv.getContext("2d");
   var stepEl = root.querySelector(".fdsn-step"), panel = root.querySelector(".fdsn-panel");
@@ -493,7 +496,7 @@ Why the Nintendo DS? I think the Nintendo DS is one of the best consoles ever ma
 
 
 
-<figure class="fdsn" id="fdsn-815436792" data-mode="fluid" style="margin:1.5em 0">
+<figure class="fdsn" id="fdsn-591348267" data-mode="fluid" style="margin:1.5em 0">
   <div class="fdsn-nav" style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:6px"></div>
   <div class="fdsn-step" style="font-size:.9em;line-height:1.5;margin-bottom:8px"></div>
   <canvas width="384" height="160" style="width:100%;max-width:768px;display:block;margin:0 auto;image-rendering:pixelated;image-rendering:crisp-edges;border-radius:8px;background:#1d1b24;border:6px solid #1d1b24;box-sizing:border-box;cursor:pointer"></canvas>
@@ -502,7 +505,7 @@ Why the Nintendo DS? I think the Nintendo DS is one of the best consoles ever ma
 </figure>
 <script>
 (function () {
-  var root = document.getElementById("fdsn-815436792");
+  var root = document.getElementById("fdsn-591348267");
   var MODE = root.getAttribute("data-mode");
   var cv = root.querySelector("canvas"), g = cv.getContext("2d");
   var stepEl = root.querySelector(".fdsn-step"), panel = root.querySelector(".fdsn-panel");
@@ -872,46 +875,5 @@ Why the Nintendo DS? I think the Nintendo DS is one of the best consoles ever ma
     </footer>
   </div>
 
-  <script>
-  (function () {
-    
-    var art = [
-      "  ##################  ",
-      " #..................# ",
-      " #..##############..# ",
-      " #..#............#..# ",
-      " #..#..#......#..#..# ",
-      " #..#..#......#..#..# ",
-      " #..#......#.....#..# ",
-      " #..#.....##.....#..# ",
-      " #..#..#......#..#..# ",
-      " #..#...######...#..# ",
-      " #..#............#..# ",
-      " #..##############..# ",
-      " #..................# ",
-      " #..................# ",
-      " #..................# ",
-      " #...##.....######..# ",
-      " #..................# ",
-      " #..................# ",
-      " #..................# ",
-      " #..................# ",
-      " #..................# ",
-      " #..................# ",
-      " #################### ",
-      "  ##################  "
-    ];
-    var c = document.getElementById("pixel-mac");
-    if (!c) return;
-    var g = c.getContext("2d");
-    art.forEach(function (row, y) {
-      for (var x = 0; x < row.length; x++) {
-        if (row[x] === " ") continue;
-        g.fillStyle = row[x] === "#" ? "#000" : "#fff";
-        g.fillRect(x, y, 1, 1);
-      }
-    });
-  })();
-  </script>
 </body>
 </html>
