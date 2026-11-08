@@ -70,6 +70,13 @@
 				<description>&lt;p&gt;&lt;em&gt;A 2 euros radio module, a Logitech Unifying dongle and a mouse you wear on your wrist : our last year project at Supélec&lt;/em&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;Updates&lt;/em&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;[10 March 2018] This project was featured on Hackaday : &lt;a href=&#34;https://hackaday.com/2018/03/10/wireless-protocol-reverse-engineered-to-create-wrist-wearable-mouse/&#34; target=&#34;_blank&#34;&gt;WIRELESS PROTOCOL REVERSE ENGINEERED TO CREATE WRIST WEARABLE MOUSE&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;This winter, for our last year project at Supélec, Guilhem and I had to build a wireless 3D mouse : you move your arm, the cursor moves on the screen. I took care of the wireless part and Guilhem of the motion sensing.&lt;/p&gt;</description>
 			</item>
 			<item>
+				<title>Arduino as a PIC Programmer</title>
+				<link>/posts/arduino-as-a-pic-programmer/</link>
+				<pubDate>Mon, 20 Feb 2012 19:12:00 +0100</pubDate>
+				<guid>/posts/arduino-as-a-pic-programmer/</guid>
+				<description>&lt;p&gt;&lt;em&gt;Burning Microchip PICs from USB with an Arduino Uno, a resistor and a 12V supply&lt;/em&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;Updates&lt;/em&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;[3 March 2012] New version of the C# program and of the Arduino firmware, it now works with many 16F PICs.&lt;/li&gt;&#xA;&lt;li&gt;[May 2012] Other people built on it : a &lt;a href=&#34;https://sites.google.com/site/thehighspark/arduino-pic18f&#34; target=&#34;_blank&#34;&gt;version for the PIC18F family&lt;/a&gt; and a programmer for PIC32. Each PIC family has its own programming protocol and I am a student with a lot of homework, so I can&amp;rsquo;t maintain it anymore.&lt;/li&gt;&#xA;&lt;li&gt;[2016] More than 20,000 downloads !&lt;/li&gt;&#xA;&lt;li&gt;[2020] Eight years later, people are still posting their PIC references in the &lt;a href=&#34;https://forum.arduino.cc/t/arduino-as-a-pic-programmer/90967&#34; target=&#34;_blank&#34;&gt;forum thread&lt;/a&gt;, hoping theirs is supported.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;PIC microcontrollers are everywhere, but programming them needs a dedicated programmer. The cheap ones use a serial or parallel port that no modern computer has anymore, and the USB ones are expensive. I had an Arduino, so I wondered : why not make it do the job ?&lt;/p&gt;</description>
+			</item>
+			<item>
 				<title>MiniOS : an Arduino Talking to a Minitel</title>
 				<link>/posts/minios-arduino-minitel/</link>
 				<pubDate>Thu, 15 Apr 2010 18:54:00 +0200</pubDate>

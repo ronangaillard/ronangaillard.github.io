@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Arduino as a PIC Programmer | Ronan Gaillard</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:url" content="/posts/arduino-as-a-pic-programmer/">
+	<meta property="og:site_name" content="Ronan Gaillard">
+	<meta property="og:title" content="Arduino as a PIC Programmer">
+	<meta property="og:description" content="Burning Microchip PICs from USB with an Arduino Uno, a resistor and a 12V supply
+Updates
+[3 March 2012] New version of the C# program and of the Arduino firmware, it now works with many 16F PICs. [May 2012] Other people built on it : a version for the PIC18F family and a programmer for PIC32. Each PIC family has its own programming protocol and I am a student with a lot of homework, so I can’t maintain it anymore. [2016] More than 20,000 downloads ! [2020] Eight years later, people are still posting their PIC references in the forum thread, hoping theirs is supported. PIC microcontrollers are everywhere, but programming them needs a dedicated programmer. The cheap ones use a serial or parallel port that no modern computer has anymore, and the USB ones are expensive. I had an Arduino, so I wondered : why not make it do the job ?">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2012-02-20T19:12:00+01:00">
+		<meta property="article:modified_time" content="2012-02-20T19:12:00+01:00">
+
+  
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Arduino as a PIC Programmer">
+	<meta name="twitter:description" content="Burning Microchip PICs from USB with an Arduino Uno, a resistor and a 12V supply
+Updates
+[3 March 2012] New version of the C# program and of the Arduino firmware, it now works with many 16F PICs. [May 2012] Other people built on it : a version for the PIC18F family and a programmer for PIC32. Each PIC family has its own programming protocol and I am a student with a lot of homework, so I can’t maintain it anymore. [2016] More than 20,000 downloads ! [2020] Eight years later, people are still posting their PIC references in the forum thread, hoping theirs is supported. PIC microcontrollers are everywhere, but programming them needs a dedicated programmer. The cheap ones use a serial or parallel port that no modern computer has anymore, and the USB ones are expensive. I had an Arduino, so I wondered : why not make it do the job ?">
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="/css/style-classic.css">
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="/images/favicon.ico" />
+
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" /posts/minios-arduino-minitel/">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="/posts/arduino-logitech-wireless-mouse/">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=%2fposts%2farduino-as-a-pic-programmer%2f">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=%2fposts%2farduino-as-a-pic-programmer%2f&text=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=%2fposts%2farduino-as-a-pic-programmer%2f&title=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=%2fposts%2farduino-as-a-pic-programmer%2f&is_video=false&description=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=Arduino%20as%20a%20PIC%20Programmer&body=Check out this article: %2fposts%2farduino-as-a-pic-programmer%2f">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=%2fposts%2farduino-as-a-pic-programmer%2f&title=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=%2fposts%2farduino-as-a-pic-programmer%2f&title=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.stumbleupon.com/submit?url=%2fposts%2farduino-as-a-pic-programmer%2f&title=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-stumbleupon " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://digg.com/submit?url=%2fposts%2farduino-as-a-pic-programmer%2f&title=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-digg " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=%2fposts%2farduino-as-a-pic-programmer%2f&name=Arduino%20as%20a%20PIC%20Programmer&description=%3cp%3e%3cem%3eBurning%20Microchip%20PICs%20from%20USB%20with%20an%20Arduino%20Uno%2c%20a%20resistor%20and%20a%2012V%20supply%3c%2fem%3e%3c%2fp%3e%0a%3chr%3e%0a%3cp%3e%3cem%3eUpdates%3c%2fem%3e%3c%2fp%3e%0a%3cul%3e%0a%3cli%3e%5b3%20March%202012%5d%20New%20version%20of%20the%20C%23%20program%20and%20of%20the%20Arduino%20firmware%2c%20it%20now%20works%20with%20many%2016F%20PICs.%3c%2fli%3e%0a%3cli%3e%5bMay%202012%5d%20Other%20people%20built%20on%20it%20%3a%20a%20%3ca%20href%3d%22https%3a%2f%2fsites.google.com%2fsite%2fthehighspark%2farduino-pic18f%22%20target%3d%22_blank%22%3eversion%20for%20the%20PIC18F%20family%3c%2fa%3e%20and%20a%20programmer%20for%20PIC32.%20Each%20PIC%20family%20has%20its%20own%20programming%20protocol%20and%20I%20am%20a%20student%20with%20a%20lot%20of%20homework%2c%20so%20I%20can%26rsquo%3bt%20maintain%20it%20anymore.%3c%2fli%3e%0a%3cli%3e%5b2016%5d%20More%20than%2020%2c000%20downloads%20%21%3c%2fli%3e%0a%3cli%3e%5b2020%5d%20Eight%20years%20later%2c%20people%20are%20still%20posting%20their%20PIC%20references%20in%20the%20%3ca%20href%3d%22https%3a%2f%2fforum.arduino.cc%2ft%2farduino-as-a-pic-programmer%2f90967%22%20target%3d%22_blank%22%3eforum%20thread%3c%2fa%3e%2c%20hoping%20theirs%20is%20supported.%3c%2fli%3e%0a%3c%2ful%3e%0a%3chr%3e%0a%3cp%3ePIC%20microcontrollers%20are%20everywhere%2c%20but%20programming%20them%20needs%20a%20dedicated%20programmer.%20The%20cheap%20ones%20use%20a%20serial%20or%20parallel%20port%20that%20no%20modern%20computer%20has%20anymore%2c%20and%20the%20USB%20ones%20are%20expensive.%20I%20had%20an%20Arduino%2c%20so%20I%20wondered%20%3a%20why%20not%20make%20it%20do%20the%20job%20%3f%3c%2fp%3e">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=%2fposts%2farduino-as-a-pic-programmer%2f&t=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-circuit">The circuit</a></li>
+    <li><a href="#the-firmware">The firmware</a></li>
+    <li><a href="#the-software">The software</a></li>
+  </ul>
+</nav>
+    </div>
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        Arduino as a PIC Programmer
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2012-02-20 19:12:00 &#43;0100 &#43;0100" itemprop="datePublished">2012-02-20</time>
+          
+        </div>
+        
+        
+      </div>
+    </header>
+
+  
+    <div class="content" itemprop="articleBody">
+      <p><em>Burning Microchip PICs from USB with an Arduino Uno, a resistor and a 12V supply</em></p>
+<hr>
+<p><em>Updates</em></p>
+<ul>
+<li>[3 March 2012] New version of the C# program and of the Arduino firmware, it now works with many 16F PICs.</li>
+<li>[May 2012] Other people built on it : a <a href="https://sites.google.com/site/thehighspark/arduino-pic18f" target="_blank">version for the PIC18F family</a> and a programmer for PIC32. Each PIC family has its own programming protocol and I am a student with a lot of homework, so I can&rsquo;t maintain it anymore.</li>
+<li>[2016] More than 20,000 downloads !</li>
+<li>[2020] Eight years later, people are still posting their PIC references in the <a href="https://forum.arduino.cc/t/arduino-as-a-pic-programmer/90967" target="_blank">forum thread</a>, hoping theirs is supported.</li>
+</ul>
+<hr>
+<p>PIC microcontrollers are everywhere, but programming them needs a dedicated programmer. The cheap ones use a serial or parallel port that no modern computer has anymore, and the USB ones are expensive. I had an Arduino, so I wondered : why not make it do the job ?</p>
+<h2 id="the-circuit">The circuit</h2>
+<p>A PIC is programmed through ICSP (In-Circuit Serial Programming) : a clock line, a data line, and 12V on the MCLR pin to put the chip in programming mode. The Arduino handles the clock and data, and the 12V comes from an external supply.</p>
+<p><img src="/img/arduino-pic/schematic.png" alt="The circuit"></p>
+<p>That&rsquo;s all : pin 8 is the data line through a 330 Ω resistor, pin 9 the clock, and pins 4, 5 and 6 are tied together to power the PIC. I used a PIC 16F628, but it should work with most 16F PICs. One safety rule : always reset the Arduino before putting the 12V.</p>
+<h2 id="the-firmware">The firmware</h2>
+<p>The Arduino sketch bit-bangs the ICSP protocol described in the Microchip datasheets : a 6 bit command, then a 16 bit word for the data (a start bit, 14 bits of data and a stop bit). On the USB side it accepts simple one letter commands on the serial port :</p>
+<pre tabindex="0"><code>s : start in High Voltage Programming mode (S for Low Voltage)
+wXXXXXXXXXXXXXX : write a word at the location pointed by the program counter
+i : increment the program counter
+r : read the current location
+e : erase the full program memory
+R : reset the PIC (program counter back to 0)
+</code></pre><p>Every command answers <code>D</code> when it is done.</p>
+<h2 id="the-software">The software</h2>
+<p>Typing words one by one in the serial monitor gets old fast, so I wrote a small C# program for Windows. It reads a <code>.hex</code> file, sends it word by word to the Arduino, writes the configuration word, and can read the program memory back to check it.</p>
+<p><img src="/img/arduino-pic/gui.jpg" alt="The Arduino PIC Programmer">
+<em>Screenshot : Nishant_Sood, the first one to try it on the forum</em></p>
+<p>It&rsquo;s still a first version, so check your PIC with a regular programmer if you can. The code, the C# program and the list of tested PICs are on the <a href="https://forum.arduino.cc/t/arduino-as-a-pic-programmer/90967" target="_blank">Arduino forum</a> : if you try it with another PIC, tell me there so I can add it to the list !</p>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-circuit">The circuit</a></li>
+    <li><a href="#the-firmware">The firmware</a></li>
+    <li><a href="#the-software">The software</a></li>
+  </ul>
+</nav>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=%2fposts%2farduino-as-a-pic-programmer%2f">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=%2fposts%2farduino-as-a-pic-programmer%2f&text=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=%2fposts%2farduino-as-a-pic-programmer%2f&title=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=%2fposts%2farduino-as-a-pic-programmer%2f&is_video=false&description=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=Arduino%20as%20a%20PIC%20Programmer&body=Check out this article: %2fposts%2farduino-as-a-pic-programmer%2f">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=%2fposts%2farduino-as-a-pic-programmer%2f&title=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=%2fposts%2farduino-as-a-pic-programmer%2f&title=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.stumbleupon.com/submit?url=%2fposts%2farduino-as-a-pic-programmer%2f&title=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://digg.com/submit?url=%2fposts%2farduino-as-a-pic-programmer%2f&title=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-digg fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=%2fposts%2farduino-as-a-pic-programmer%2f&name=Arduino%20as%20a%20PIC%20Programmer&description=%3cp%3e%3cem%3eBurning%20Microchip%20PICs%20from%20USB%20with%20an%20Arduino%20Uno%2c%20a%20resistor%20and%20a%2012V%20supply%3c%2fem%3e%3c%2fp%3e%0a%3chr%3e%0a%3cp%3e%3cem%3eUpdates%3c%2fem%3e%3c%2fp%3e%0a%3cul%3e%0a%3cli%3e%5b3%20March%202012%5d%20New%20version%20of%20the%20C%23%20program%20and%20of%20the%20Arduino%20firmware%2c%20it%20now%20works%20with%20many%2016F%20PICs.%3c%2fli%3e%0a%3cli%3e%5bMay%202012%5d%20Other%20people%20built%20on%20it%20%3a%20a%20%3ca%20href%3d%22https%3a%2f%2fsites.google.com%2fsite%2fthehighspark%2farduino-pic18f%22%20target%3d%22_blank%22%3eversion%20for%20the%20PIC18F%20family%3c%2fa%3e%20and%20a%20programmer%20for%20PIC32.%20Each%20PIC%20family%20has%20its%20own%20programming%20protocol%20and%20I%20am%20a%20student%20with%20a%20lot%20of%20homework%2c%20so%20I%20can%26rsquo%3bt%20maintain%20it%20anymore.%3c%2fli%3e%0a%3cli%3e%5b2016%5d%20More%20than%2020%2c000%20downloads%20%21%3c%2fli%3e%0a%3cli%3e%5b2020%5d%20Eight%20years%20later%2c%20people%20are%20still%20posting%20their%20PIC%20references%20in%20the%20%3ca%20href%3d%22https%3a%2f%2fforum.arduino.cc%2ft%2farduino-as-a-pic-programmer%2f90967%22%20target%3d%22_blank%22%3eforum%20thread%3c%2fa%3e%2c%20hoping%20theirs%20is%20supported.%3c%2fli%3e%0a%3c%2ful%3e%0a%3chr%3e%0a%3cp%3ePIC%20microcontrollers%20are%20everywhere%2c%20but%20programming%20them%20needs%20a%20dedicated%20programmer.%20The%20cheap%20ones%20use%20a%20serial%20or%20parallel%20port%20that%20no%20modern%20computer%20has%20anymore%2c%20and%20the%20USB%20ones%20are%20expensive.%20I%20had%20an%20Arduino%2c%20so%20I%20wondered%20%3a%20why%20not%20make%20it%20do%20the%20job%20%3f%3c%2fp%3e">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=%2fposts%2farduino-as-a-pic-programmer%2f&t=Arduino%20as%20a%20PIC%20Programmer">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2026  Ronan Gaillard 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+
+
+</html>
