@@ -99,7 +99,6 @@ h4 { margin: 14px 0 4px; font-size: 1.05rem; }
 .puce { display: inline-block; width: 14px; height: 14px; margin-right: 8px; background: radial-gradient(circle at 35% 35%, var(--blanc), var(--rouge) 45%, #800000); border-radius: 50%; vertical-align: 3px; }
 h2::before { content: ""; display: inline-block; width: 12px; height: 12px; margin-right: 8px; background: radial-gradient(circle at 35% 35%, var(--blanc), var(--sarcelle) 45%, #003c3c); border-radius: 50%; vertical-align: 2px; }
 p { margin: 0 0 12px; }
-.contenu p, .contenu li { max-width: 72ch; }
 hr { border: 0; border-top: 2px groove var(--gris); margin: 18px 0 10px; }
 .date { font-family: var(--mono); font-size: 14px; color: var(--sarcelle); font-weight: bold; margin-bottom: 14px; }
 .petit { font-size: 14px; }
