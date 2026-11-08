@@ -129,7 +129,7 @@
 <h2 id="step-4-running-it-without-flashing">Step 4: Running it without flashing</h2>
 <p>Now, how do you run modified firmware without writing it to the flash?</p>
 <p>The answer came from <strong>jitl</strong> and the <a href="https://fujimod.com/" target="_blank">FujiMod</a> project, found on the FujiHack Discord. Fujifilm cameras can boot from the SD card if you hold a secret button combo at power-on (on mine: Delete + press the rear dial). The card holds two files. <code>ffinit.bin</code> is a tiny loader. <code>ffboot.bin</code> is an image of the whole RAM (72 MB), built from the official firmware. The camera loads that image into RAM and runs it. The flash is never touched.</p>
-<p><img src="/img/fujifilm-instax/04-sdboot.svg?v=2" alt="SD boot"></p>
+<p><img src="/img/fujifilm-instax/04-sdboot.svg?v=3" alt="SD boot"></p>
 <p>This had been shown to work on other bodies, but nobody had tried it on an X-T30 II. Getting there took 30 trials.</p>
 <p><strong>Trial 1: nothing.</strong> The camera started normally. I had pressed the front dial instead of the rear one. <strong>Trial 2:</strong> green LED, black screen. That green LED was jitl&rsquo;s test loader saying hello: the camera&rsquo;s boot ROM had read my card. First win.</p>
 <p>Who reads the card at that point? Not the firmware, which isn&rsquo;t running yet. It&rsquo;s the <strong>boot ROM</strong>, a small piece of code burned into the processor itself. It can&rsquo;t be changed and it runs first at every power-on. Its job is to wake up the hardware, then load the firmware from flash, or from the SD card if you hold the button combo. For that it carries its own tiny SD card driver and a FAT reader. Since it&rsquo;s burned into the chip, its functions always sit at the same addresses. The X-T30 II has the very same ROM as the X100V, and the community had already mapped where everything is in it. So my loaders didn&rsquo;t need their own SD driver. They just called the ROM&rsquo;s functions (&ldquo;init the card&rdquo;, &ldquo;read sector N&rdquo;) by their address. Writing was harder, because the ROM never writes. I had to drive the SD card hardware myself, copying the way the ROM sends its read command.</p>
@@ -167,7 +167,7 @@
 
 
 <figure>
-<div class="img-compare" id="ic-652971843" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
+<div class="img-compare" id="ic-782314956" style="position:relative;overflow:hidden;cursor:col-resize;max-width:800px;margin:0 auto;user-select:none;-webkit-user-select:none;line-height:0">
   <img src="/img/fujifilm-instax/jpeg-after-fix.jpg" alt="Trial 45" style="display:block;width:100%" draggable="false">
   <img src="/img/fujifilm-instax/jpeg-before-fix.jpg" alt="Trial 44" class="img-compare-before" style="position:absolute;top:0;left:0;width:100%;height:100%;clip-path:inset(0 50% 0 0)" draggable="false">
   <div class="img-compare-slider" style="position:absolute;top:0;left:50%;width:3px;height:100%;background:#fff;transform:translateX(-50%);pointer-events:none">
@@ -183,7 +183,7 @@
 
 <script>
 (function(){
-  var container = document.getElementById("ic-652971843");
+  var container = document.getElementById("ic-782314956");
   var before = container.querySelector(".img-compare-before");
   var slider = container.querySelector(".img-compare-slider");
   var active = false;
