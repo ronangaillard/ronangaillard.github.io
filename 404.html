@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <title>Ronan Gaillard</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:url" content="/404.html">
+	<meta property="og:site_name" content="Ronan Gaillard">
+	<meta property="og:title" content="404 Page not found">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="website">
+
+  
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="404 Page not found">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+  <link rel="stylesheet" href="/css/refuge.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  
+</head>
+
+<body>
+  
+  
+  <div class="cadre">
+    <div class="defile biseau" aria-hidden="true">
+      <span>*** Latest : Teaching my Fujifilm X-T30 II to Print on an instax Link 3 (6 November 2026) *** Embedded systems, retro computers and sailing from Saint-Malo *** Thanks for visiting ! ***</span>
+    </div>
+
+    <header class="entete biseau">
+      <div class="fenetre-mac" aria-hidden="true">
+        <div class="barre"><span>ronan.pict</span></div>
+        <canvas id="pixel-mac" width="22" height="24"></canvas>
+      </div>
+      <div>
+        <p class="titre"><a href="/">Ronan Gaillard<span class="arc">'s Workshop</span></a></p>
+        <p class="sous-titre">Embedded systems, retro computers and sailing, from Saint-Malo. Things I built, and how.</p>
+        <span class="travaux"><b>ALWAYS UNDER CONSTRUCTION</b></span>
+      </div>
+    </header>
+
+    <div class="corps">
+      <nav class="nav biseau" aria-label="Contents">
+        <p>CONTENTS</p>
+        
+        <a href="/">Home</a>
+        
+        <a href="/posts/">Writings</a>
+        
+        <a href="/about/">About</a>
+        
+        <a href="/index.xml">RSS feed</a>
+        
+        <a href="https://github.com/ronangaillard">Github</a>
+        
+        <a href="https://www.linkedin.com/in/ronangaillard/">Linkedin</a>
+        
+        <div class="compteur">
+          Last update
+          <div class="chiffres"><span>0</span><span>6</span><span>.</span><span>1</span><span>1</span><span>.</span><span>2</span><span>6</span></div>
+          12 pages written
+        </div>
+      </nav>
+
+      <main>
+        
+<section>
+  <h1><span class="puce"></span>404 : page not found</h1>
+  <p>This page does not exist, or it went away with my old free.fr website.</p>
+  <p><a href="/">Back to the home page</a></p>
+</section>
+
+      </main>
+    </div>
+
+    <footer class="biseau">
+      <div class="badges">
+        <span class="badge b1">MADE WITH<br>HUGO</span>
+        <span class="badge b2">ANY BROWSER<br>WELCOME</span>
+        <span class="badge b3">HOSTED ON<br>GITHUB PAGES</span>
+        <a class="badge b4" href="/index.xml">RSS 2.0</a>
+      </div>
+      <div>© 2026 Ronan Gaillard · Written by hand, one post at a time.</div>
+    </footer>
+  </div>
+
+  <script>
+  (function () {
+    
+    var art = [
+      "  ##################  ",
+      " #..................# ",
+      " #..##############..# ",
+      " #..#............#..# ",
+      " #..#..#......#..#..# ",
+      " #..#..#......#..#..# ",
+      " #..#......#.....#..# ",
+      " #..#.....##.....#..# ",
+      " #..#..#......#..#..# ",
+      " #..#...######...#..# ",
+      " #..#............#..# ",
+      " #..##############..# ",
+      " #..................# ",
+      " #..................# ",
+      " #..................# ",
+      " #...##.....######..# ",
+      " #..................# ",
+      " #..................# ",
+      " #..................# ",
+      " #..................# ",
+      " #..................# ",
+      " #..................# ",
+      " #################### ",
+      "  ##################  "
+    ];
+    var c = document.getElementById("pixel-mac");
+    if (!c) return;
+    var g = c.getContext("2d");
+    art.forEach(function (row, y) {
+      for (var x = 0; x < row.length; x++) {
+        if (row[x] === " ") continue;
+        g.fillStyle = row[x] === "#" ? "#000" : "#fff";
+        g.fillRect(x, y, 1, 1);
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
