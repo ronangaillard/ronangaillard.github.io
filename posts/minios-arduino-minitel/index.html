@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
   
-  <link rel="stylesheet" href="/css/refuge.117a174f3c8c5f041689c99ea126f7aaa46cbef7b819abe20113b93621c89ef0.css" integrity="sha256-EXoXTzyMXwQWicmeoSb3qqRsvve4GaviARO5NiHInvA=">
+  <link rel="stylesheet" href="/css/refuge.618495172c3893420a8a6887f1862ab1f04e97df1f77a65ee767cdc1fe0248af.css" integrity="sha256-YYSVFyw4k0IKimiH8YYqsfBOl98fd6Ze52fNwf4CSK8=">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   
 </head>
@@ -96,10 +96,10 @@
 </ul>
 <hr>
 <p>The Minitel is the French terminal that brought online services to millions of homes long before the Internet. There are still plenty of them sleeping in attics, and they have a nice feature : a &ldquo;péri-informatique&rdquo; DIN socket at the back, which is just a serial port. So I plugged an Arduino into one and wrote MiniOS, a tiny OS for the Minitel.</p>
-<p><img src="/img/minitel/boot.jpg" alt="The MiniOS boot screen"></p>
+<p><a class="agrandir" href="/img/minitel/boot.jpg" title="Open the full size image"><img src="/img/minitel/boot.jpg" alt="The MiniOS boot screen" loading="lazy"></a></p>
 <h2 id="the-wiring">The wiring</h2>
 <p>There is not much to it : a male DIN plug wired to the second serial port of an Arduino Mega, and a 4.7 kΩ resistor. The two LEDs are only there to show what is going on.</p>
-<p><img src="/img/minitel/arduino-mega.jpg" alt="The Arduino Mega with its prototype shield"></p>
+<p><a class="agrandir" href="/img/minitel/arduino-mega.jpg" title="Open the full size image"><img src="/img/minitel/arduino-mega.jpg" alt="The Arduino Mega with its prototype shield" loading="lazy"></a></p>
 <p>The Minitel speaks at 1200 bauds, with 7 data bits and an even parity bit. The Arduino serial library could not do that at the time, so I set the UART register directly before starting the port :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>UCSR1C <span style="color:#f92672">=</span> B00100100; <span style="color:#75715e">// 7 bits + parity bit
 </span></span></span><span style="display:flex;"><span>Serial1.begin(<span style="color:#ae81ff">1200</span>);
@@ -111,8 +111,8 @@
 <li>&ldquo;Fakebook&rdquo;, for fun</li>
 <li>the credits</li>
 </ul>
-<p><img src="/img/minitel/menu.jpg" alt="The menu"></p>
-<p><img src="/img/minitel/fakebook.jpg" alt="3615 FACEBOOK"></p>
+<p><a class="agrandir" href="/img/minitel/menu.jpg" title="Open the full size image"><img src="/img/minitel/menu.jpg" alt="The menu" loading="lazy"></a></p>
+<p><a class="agrandir" href="/img/minitel/fakebook.jpg" title="Open the full size image"><img src="/img/minitel/fakebook.jpg" alt="3615 FACEBOOK" loading="lazy"></a></p>
 <p>All the code (a single file) is in the <a href="https://forum.arduino.cc/t/le-minitel-nest-pas-mort/33619" target="_blank">forum thread</a>.</p>
 <h2 id="what-happened-next">What happened next</h2>
 <p>I posted it on the French Arduino forum and the Arduino blog picked it up the next day. Other people rebuilt it, ported it to the Duemilanove (replace <code>Serial1</code> with <code>Serial</code> and <code>UCSR1C</code> with <code>UCSR0C</code>), mapped the keys of the keyboard, and even added a speaker to play music. Not bad for a menu with two entries !</p>

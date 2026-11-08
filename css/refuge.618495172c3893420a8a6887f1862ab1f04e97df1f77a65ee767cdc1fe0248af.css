@@ -105,12 +105,14 @@ hr { border: 0; border-top: 2px groove var(--gris); margin: 18px 0 10px; }
 
 /* Contenu des articles */
 .contenu img { display: block; max-width: 100%; height: auto; margin: 6px auto; border: 1px solid var(--encre); box-shadow: 4px 4px 0 var(--gris-fonce); background: var(--blanc); }
-.contenu p:has(> img:only-child) { max-width: none; text-align: center; margin-bottom: 8px; }
-.contenu p:has(> img):has(> em) { max-width: none; text-align: center; }
-.contenu p:has(> img) > em { display: block; margin-top: 8px; font-size: 14px; color: #333; }
-.contenu p:has(> img:only-child) + p:has(> em:only-child) { max-width: none; text-align: center; font-size: 14px; color: #333; margin-top: -2px; }
+.contenu p:has(> .agrandir:only-child), .contenu p:has(> img:only-child) { max-width: none; text-align: center; margin-bottom: 8px; }
+.contenu p:has(> .agrandir):has(> em), .contenu p:has(> img):has(> em) { max-width: none; text-align: center; }
+.contenu p:has(> .agrandir) > em, .contenu p:has(> img) > em { display: block; margin-top: 8px; font-size: 14px; color: #333; }
+.contenu p:has(> .agrandir:only-child) + p:has(> em:only-child), .contenu p:has(> img:only-child) + p:has(> em:only-child) { max-width: none; text-align: center; font-size: 14px; color: #333; margin-top: -2px; }
 .contenu figure { margin: 14px 0; }
 .contenu figure img { box-shadow: none; }
+.contenu a.agrandir { display: block; cursor: zoom-in; }
+.contenu a.agrandir:focus-visible img { outline: 2px dotted var(--encre); outline-offset: 2px; }
 .contenu blockquote { margin: 12px 0; padding: 8px 12px; background: var(--creme); border: 1px dashed var(--gris-fonce); }
 .contenu blockquote p:last-child { margin-bottom: 0; }
 .contenu ul, .contenu ol { padding-left: 1.6em; margin: 0 0 12px; }

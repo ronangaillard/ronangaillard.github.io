@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
   
-  <link rel="stylesheet" href="/css/refuge.117a174f3c8c5f041689c99ea126f7aaa46cbef7b819abe20113b93621c89ef0.css" integrity="sha256-EXoXTzyMXwQWicmeoSb3qqRsvve4GaviARO5NiHInvA=">
+  <link rel="stylesheet" href="/css/refuge.618495172c3893420a8a6887f1862ab1f04e97df1f77a65ee767cdc1fe0248af.css" integrity="sha256-YYSVFyw4k0IKimiH8YYqsfBOl98fd6Ze52fNwf4CSK8=">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   
 </head>
@@ -95,31 +95,31 @@
 </ul>
 <hr>
 <p>This winter, for our last year project at Supélec, Guilhem and I had to build a wireless 3D mouse : you move your arm, the cursor moves on the screen. I took care of the wireless part and Guilhem of the motion sensing.</p>
-<p><img src="/img/logitech-mouse/wrist-mouse.jpg" alt="The wrist mouse"></p>
+<p><a class="agrandir" href="/img/logitech-mouse/wrist-mouse.jpg" title="Open the full size image"><img src="/img/logitech-mouse/wrist-mouse.jpg" alt="The wrist mouse" loading="lazy"></a></p>
 <h2 id="why-not-just-make-our-own-dongle-">Why not just make our own dongle ?</h2>
 <p>The obvious way to do it is to make two boards : one in the mouse and one plugged into the computer. Our first version did exactly that, with an mbed board and an nRF24L01 radio module acting as a USB mouse. It worked, but it was boring. Everybody already has a Logitech dongle plugged into their computer, so why not talk to it directly ?</p>
 <h2 id="opening-a-logitech-keyboard">Opening a Logitech keyboard</h2>
 <p>I had a Logitech wireless keyboard (the one with the touchpad) at home, so I opened it to see which radio it used. The chip is an nRF24LE1 from Nordic : basically an nRF24L01, the 2 euros module everybody uses with Arduinos, with a microcontroller in the same package. That was great news : it meant we could speak the same &ldquo;language&rdquo; as the dongle with cheap off the shelf modules.</p>
-<p><img src="/img/logitech-mouse/teardown.jpg" alt="Inside the Logitech keyboard"></p>
+<p><a class="agrandir" href="/img/logitech-mouse/teardown.jpg" title="Open the full size image"><img src="/img/logitech-mouse/teardown.jpg" alt="Inside the Logitech keyboard" loading="lazy"></a></p>
 <h2 id="listening-to-the-pairing">Listening to the pairing</h2>
 <p>With an nRF24 in sniffing mode we found the address the dongle listens to when it is in pairing mode, and the channels it uses : 25 channels, 3 MHz apart starting at 2402 MHz.</p>
-<p><img src="/img/logitech-mouse/address-channel.jpg" alt="Pairing address and channels"></p>
+<p><a class="agrandir" href="/img/logitech-mouse/address-channel.jpg" title="Open the full size image"><img src="/img/logitech-mouse/address-channel.jpg" alt="Pairing address and channels" loading="lazy"></a></p>
 <p>Then we put the dongle in pairing mode with the Unifying software, paired the keyboard and recorded everything. The pairing is made of 4 packets sent by the device. Each one starts with a packet type and the step number of the pairing, and ends with a checksum. The checksum turned out to be simple : add up all the bytes and negate the result.</p>
-<p><img src="/img/logitech-mouse/pairing-packet.jpg" alt="First pairing packet"></p>
+<p><a class="agrandir" href="/img/logitech-mouse/pairing-packet.jpg" title="Open the full size image"><img src="/img/logitech-mouse/pairing-packet.jpg" alt="First pairing packet" loading="lazy"></a></p>
 <p>The tricky part was the answers. The dongle never sends packets of its own : it replies inside the acknowledgement of our packets (the nRF24 &ldquo;ACK payload&rdquo; feature). So the device sends a packet, then a short one just to give the dongle a chance to reply, and reads the answer in the ACK. In the first answer the dongle gives the new address the device must use from now on.</p>
-<p><img src="/img/logitech-mouse/pairing-ack.jpg" alt="The dongle answer with the new address"></p>
+<p><a class="agrandir" href="/img/logitech-mouse/pairing-ack.jpg" title="Open the full size image"><img src="/img/logitech-mouse/pairing-ack.jpg" alt="The dongle answer with the new address" loading="lazy"></a></p>
 <p>Once we replayed these 4 packets from an Arduino, with the new address and the right checksums, the Unifying software was happy. It even told us our Arduino was a keyboard, since we had copied the keyboard&rsquo;s packets !</p>
 <h2 id="moving-the-mouse">Moving the mouse</h2>
 <p>Once paired, moving the mouse is easy. A movement packet holds the state of the buttons, the X and Y velocity, the vertical and horizontal scroll and, of course, the checksum.</p>
-<p><img src="/img/logitech-mouse/move-packet.jpg" alt="Movement packet"></p>
+<p><a class="agrandir" href="/img/logitech-mouse/move-packet.jpg" title="Open the full size image"><img src="/img/logitech-mouse/move-packet.jpg" alt="Movement packet" loading="lazy"></a></p>
 <p>We wrapped all of this in a small Arduino library : <code>begin()</code>, <code>pair()</code>, <code>reconnect()</code> to reuse a previous pairing, then <code>move()</code>, <code>scroll()</code> and <code>click()</code>. The code is on GitHub : <a href="https://github.com/ronangaillard/logitech-mouse" target="_blank">ronangaillard/logitech-mouse</a>. The example makes the cursor draw circles on the screen.</p>
 <h2 id="the-3d-mouse">The 3D mouse</h2>
 <p>For the motion part Guilhem used an MPU6050, a 6 axis IMU that costs less than 2 dollars. The first idea was to integrate the acceleration to get the speed of the arm. It did not work : the small error on the acceleration adds up and the speed drifts away, even when the sensor does not move.</p>
-<p><img src="/img/logitech-mouse/drift.jpg" alt="Speed drift"></p>
+<p><a class="agrandir" href="/img/logitech-mouse/drift.jpg" title="Open the full size image"><img src="/img/logitech-mouse/drift.jpg" alt="Speed drift" loading="lazy"></a></p>
 <p>So we switched to the orientation of the sensor, computed by the MPU6050 itself. The yaw moves the cursor horizontally, the pitch vertically, and the roll changes the behaviour (right click, scrolling). A click is detected when you tap your fingers : it makes a very characteristic high frequency signal on the 3 axes.</p>
-<p><img src="/img/logitech-mouse/yaw-pitch-roll.jpg" alt="Yaw, pitch and roll"></p>
+<p><a class="agrandir" href="/img/logitech-mouse/yaw-pitch-roll.jpg" title="Open the full size image"><img src="/img/logitech-mouse/yaw-pitch-roll.jpg" alt="Yaw, pitch and roll" loading="lazy"></a></p>
 <p>Everything fits in a 3D printed case : an Arduino Nano, the nRF24L01, the MPU6050 and 4 CR2025 coin cells.</p>
-<p><img src="/img/logitech-mouse/case.jpg" alt="The case"></p>
+<p><a class="agrandir" href="/img/logitech-mouse/case.jpg" title="Open the full size image"><img src="/img/logitech-mouse/case.jpg" alt="The case" loading="lazy"></a></p>
 <p>And here it is in action :</p>
 
 			<div

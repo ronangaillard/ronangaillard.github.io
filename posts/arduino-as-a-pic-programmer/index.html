@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
   
-  <link rel="stylesheet" href="/css/refuge.117a174f3c8c5f041689c99ea126f7aaa46cbef7b819abe20113b93621c89ef0.css" integrity="sha256-EXoXTzyMXwQWicmeoSb3qqRsvve4GaviARO5NiHInvA=">
+  <link rel="stylesheet" href="/css/refuge.618495172c3893420a8a6887f1862ab1f04e97df1f77a65ee767cdc1fe0248af.css" integrity="sha256-YYSVFyw4k0IKimiH8YYqsfBOl98fd6Ze52fNwf4CSK8=">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   
 </head>
@@ -100,7 +100,7 @@
 <p>PIC microcontrollers are everywhere, but programming them needs a dedicated programmer. The cheap ones use a serial or parallel port that no modern computer has anymore, and the USB ones are expensive. I had an Arduino, so I wondered : why not make it do the job ?</p>
 <h2 id="the-circuit">The circuit</h2>
 <p>A PIC is programmed through ICSP (In-Circuit Serial Programming) : a clock line, a data line, and 12V on the MCLR pin to put the chip in programming mode. The Arduino handles the clock and data, and the 12V comes from an external supply.</p>
-<p><img src="/img/arduino-pic/schematic.png" alt="The circuit"></p>
+<p><a class="agrandir" href="/img/arduino-pic/schematic.png" title="Open the full size image"><img src="/img/arduino-pic/schematic.png" alt="The circuit" loading="lazy"></a></p>
 <p>That&rsquo;s all : pin 8 is the data line through a 330 Ω resistor, pin 9 the clock, and pins 4, 5 and 6 are tied together to power the PIC. I used a PIC 16F628, but it should work with most 16F PICs. One safety rule : always reset the Arduino before putting the 12V.</p>
 <h2 id="the-firmware">The firmware</h2>
 <p>The Arduino sketch bit-bangs the ICSP protocol described in the Microchip datasheets : a 6 bit command, then a 16 bit word for the data (a start bit, 14 bits of data and a stop bit). On the USB side it accepts simple one letter commands on the serial port :</p>
@@ -113,7 +113,7 @@ R : reset the PIC (program counter back to 0)
 </code></pre><p>Every command answers <code>D</code> when it is done.</p>
 <h2 id="the-software">The software</h2>
 <p>Typing words one by one in the serial monitor gets old fast, so I wrote a small C# program for Windows. It reads a <code>.hex</code> file, sends it word by word to the Arduino, writes the configuration word, and can read the program memory back to check it.</p>
-<p><img src="/img/arduino-pic/gui.jpg" alt="The Arduino PIC Programmer">
+<p><a class="agrandir" href="/img/arduino-pic/gui.jpg" title="Open the full size image"><img src="/img/arduino-pic/gui.jpg" alt="The Arduino PIC Programmer" loading="lazy"></a>
 <em>Screenshot : Nishant_Sood, the first one to try it on the forum</em></p>
 <p>It&rsquo;s still a first version, so check your PIC with a regular programmer if you can. The code, the C# program and the list of tested PICs are on the <a href="https://forum.arduino.cc/t/arduino-as-a-pic-programmer/90967" target="_blank">Arduino forum</a> : if you try it with another PIC, tell me there so I can add it to the list !</p>
 

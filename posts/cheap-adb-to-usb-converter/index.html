@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
   
-  <link rel="stylesheet" href="/css/refuge.117a174f3c8c5f041689c99ea126f7aaa46cbef7b819abe20113b93621c89ef0.css" integrity="sha256-EXoXTzyMXwQWicmeoSb3qqRsvve4GaviARO5NiHInvA=">
+  <link rel="stylesheet" href="/css/refuge.618495172c3893420a8a6887f1862ab1f04e97df1f77a65ee767cdc1fe0248af.css" integrity="sha256-YYSVFyw4k0IKimiH8YYqsfBOl98fd6Ze52fNwf4CSK8=">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   
 </head>
@@ -95,18 +95,18 @@
 </ul>
 <hr>
 <p>I discovered the Apple Keyboard M0116 with my Mac SE/30 and I fell in love with it. The Control key is where it should be, next to the A. The Alps switches feel great, a bit noisy but not too much. And the style : the Apple font of the time on the keycaps, the little rainbow Apple logo in the corner&hellip; This keyboard is incredible, so I really wanted to use it every day on my modern Mac. And I have been doing so for more than a year now.</p>
-<p><img src="/img/adb2usb/m0116.jpg" alt="The Apple Keyboard M0116">
+<p><a class="agrandir" href="/img/adb2usb/m0116.jpg" title="Open the full size image"><img src="/img/adb2usb/m0116.jpg" alt="The Apple Keyboard M0116" loading="lazy"></a>
 <em>Photo : <a href="https://commons.wikimedia.org/wiki/File:Apple_%28Standard%29_Keyboard_M0116.jpg" target="_blank">baku13, Wikimedia Commons</a>, CC BY-SA 3.0</em></p>
 <p>The only problem is that it speaks ADB, the bus Apple used before USB.</p>
 <p>When I looked for an ADB to USB converter I was shocked by the price. Then I found out that <a href="https://qmk.fm" target="_blank">QMK</a>, the firmware a lot of people use on their DIY mechanical keyboards, supports ADB keyboards. All you need is a microcontroller with native USB like the ATmega32U4.</p>
 <p>So I bought an Arduino Pro Micro, flashed it with QMK and I was good to go. Except that for more than a year I had three wires flying between the Pro Micro and the ADB connector, and they kept disconnecting. So I finally drew a small PCB to clean this up.</p>
-<p><img src="/img/adb2usb/keyboard.jpg" alt="The converter on my keyboard"></p>
+<p><a class="agrandir" href="/img/adb2usb/keyboard.jpg" title="Open the full size image"><img src="/img/adb2usb/keyboard.jpg" alt="The converter on my keyboard" loading="lazy"></a></p>
 <h2 id="the-board">The board</h2>
 <p>There is not much on it : the footprint of the Pro Micro, a 4 pin mini-DIN connector for the ADB cable, and a resistor. The resistor is a pull-up on the ADB data line, anything between 1k and 10k works. Everything is through hole so anyone can solder it.</p>
-<p><img src="/img/adb2usb/render.jpg" alt="The PCB in KiCad"></p>
+<p><a class="agrandir" href="/img/adb2usb/render.jpg" title="Open the full size image"><img src="/img/adb2usb/render.jpg" alt="The PCB in KiCad" loading="lazy"></a></p>
 <p>The ADB connector is a standard 4 pin mini-DIN, the same one used for S-Video, so it is easy to find.</p>
-<p><img src="/img/adb2usb/pro-micro.jpg" alt="The Pro Micro side"></p>
-<p><img src="/img/adb2usb/back.jpg" alt="The back of the board"></p>
+<p><a class="agrandir" href="/img/adb2usb/pro-micro.jpg" title="Open the full size image"><img src="/img/adb2usb/pro-micro.jpg" alt="The Pro Micro side" loading="lazy"></a></p>
+<p><a class="agrandir" href="/img/adb2usb/back.jpg" title="Open the full size image"><img src="/img/adb2usb/back.jpg" alt="The back of the board" loading="lazy"></a></p>
 <p>The KiCad files are on GitHub : <a href="https://github.com/ronangaillard/adb2usb" target="_blank">ronangaillard/adb2usb</a>. I ordered mine from JLCPCB, it was around 4.50$ for 5 boards shipping included. Add a Pro Micro (around 10$) and the converter costs a fraction of the commercial ones.</p>
 <h2 id="flashing">Flashing</h2>
 <p>The first time, you need to flash the DFU bootloader on the Pro Micro with an ISP programmer, following the <a href="https://github.com/qmk/qmk_firmware/blob/master/docs/isp_flashing_guide.md" target="_blank">QMK guide</a>. Then on macOS install QMK :</p>

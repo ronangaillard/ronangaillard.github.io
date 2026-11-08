@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
   
-  <link rel="stylesheet" href="/css/refuge.117a174f3c8c5f041689c99ea126f7aaa46cbef7b819abe20113b93621c89ef0.css" integrity="sha256-EXoXTzyMXwQWicmeoSb3qqRsvve4GaviARO5NiHInvA=">
+  <link rel="stylesheet" href="/css/refuge.618495172c3893420a8a6887f1862ab1f04e97df1f77a65ee767cdc1fe0248af.css" integrity="sha256-YYSVFyw4k0IKimiH8YYqsfBOl98fd6Ze52fNwf4CSK8=">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   
 </head>
@@ -90,11 +90,11 @@
   <p><em>How I wrote a SCSI driver from scratch to scan 35mm film on a Mac SE/30 running System 7</em></p>
 <h2 id="the-problem">The Problem</h2>
 <p>I shoot and develop 35mm film at home. It&rsquo;s a nice hobby, and I do my own prints in a small darkroom. But sometimes I want digital copies to share online or just to archive.</p>
-<p><img src="/img/filmscan/cameras.jpg" alt="My analog cameras"></p>
+<p><a class="agrandir" href="/img/filmscan/cameras.jpg" title="Open the full size image"><img src="/img/filmscan/cameras.jpg" alt="My analog cameras" loading="lazy"></a></p>
 <p>A while ago I found an Epson FilmScan 200 on leboncoin (the French Craigslist) for 10 euros. It&rsquo;s a dedicated 35mm film scanner from 1997 that scans at 1200 DPI optical. At that price, worth a try.</p>
 <p>The catch? This scanner only has a SCSI interface and the official drivers only work on Mac System 7/8 or Windows 95/98. My main machines are modern Macs. I could install a virtual machine, but SCSI passthrough is basically impossible. I could use a USB-to-SCSI adapter, but those are expensive and often don&rsquo;t work well with scanners.</p>
 <p>But wait. I have a Mac SE/30 sitting on my desk. The same one I <a href="/posts/my-mac-se30-is-back-alive/">brought back to life</a> a few years ago. It has SCSI. It runs System 7. Could I scan directly on it?</p>
-<p><img src="/img/filmscan/scanner-mac.jpg" alt="The FilmScan 200 next to my Mac SE/30"></p>
+<p><a class="agrandir" href="/img/filmscan/scanner-mac.jpg" title="Open the full size image"><img src="/img/filmscan/scanner-mac.jpg" alt="The FilmScan 200 next to my Mac SE/30" loading="lazy"></a></p>
 <p>The official Epson TWAIN driver exists, but it&rsquo;s a complex plugin designed for Photoshop. I wanted something simpler: a standalone app that scans frames and saves them as files I can transfer via FTP.</p>
 <p>Time to write my own driver.</p>
 <h2 id="understanding-the-hardware">Understanding the Hardware</h2>
@@ -126,7 +126,7 @@
 	</tbody>
 </table>
 <p>The &ldquo;Processor&rdquo; device type was interesting. Unlike standard SCSI scanners that use vendor-specific commands, this one uses generic SEND (0x0A) and RECEIVE (0x08) commands to exchange ESC/I protocol data. The ESC/I protocol is Epson&rsquo;s standard scanner command language, same family as what their flatbed scanners use.</p>
-<p><img src="/img/filmscan/manual-extract.png" alt="Extract from the service manual"></p>
+<p><a class="agrandir" href="/img/filmscan/manual-extract.png" title="Open the full size image"><img src="/img/filmscan/manual-extract.png" alt="Extract from the service manual" loading="lazy"></a></p>
 <p><em>I was surprised by how technical the service manual is. It details SCSI timings, command sequences, data exchange formats&hellip; Did technicians really use this to repair people&rsquo;s scanners back in the day? I guess they did. Either way, it gave me a solid foundation, even if it stayed a bit high-level and didn&rsquo;t detail every command parameter.</em></p>
 <p>I also extracted the original 68k driver from the Epson TWAIN plugin (a 748KB resource fork) and started disassembling it to understand the command flow. Why not just use SANE on Linux? Because SANE doesn&rsquo;t actually support the FilmScan 200 out of the box. The mainline epson backend doesn&rsquo;t include it. So I was on my own.</p>
 <h2 id="setting-up-the-development-environment">Setting Up the Development Environment</h2>
@@ -149,11 +149,11 @@ Loop: RECEIVE header + data, SEND ACK until done
 Save as PGM file
 </code></pre><p>The data comes back line by line, each with a 4-byte header containing status flags and byte count. You keep reading until the &ldquo;end of data&rdquo; status bit is set.</p>
 <p>I saved the raw data as a PGM (Portable GrayMap) file, a dead simple format that&rsquo;s just a header followed by raw pixel bytes. Preview on modern macOS opens them directly.</p>
-<p><img src="/img/filmscan/scan-bw.jpg" alt="First successful scan"></p>
+<p><a class="agrandir" href="/img/filmscan/scan-bw.jpg" title="Open the full size image"><img src="/img/filmscan/scan-bw.jpg" alt="First successful scan" loading="lazy"></a></p>
 <p><em>The scratches on the film? One of my first home developments. I had a hard time getting the film out of the reel. Image inverted with <a href="https://github.com/montoyatim01/Filmvert" target="_blank">Filmvert</a> for viewing.</em></p>
 <h2 id="the-frame-selection-problem">The Frame Selection Problem</h2>
 <p>Here&rsquo;s where things got frustrating. The FilmScan 200 has a 6-frame carrier. You load a strip of film and can scan frames 1 through 6. My first scan worked, but I couldn&rsquo;t figure out how to select different frames.</p>
-<p><img src="/img/filmscan/carrier.jpg" alt="The film carrier with a strip of 35mm film"></p>
+<p><a class="agrandir" href="/img/filmscan/carrier.jpg" title="Open the full size image"><img src="/img/filmscan/carrier.jpg" alt="The film carrier with a strip of 35mm film" loading="lazy"></a></p>
 <p>The service manual mentioned an ESC P (SetBay) command with 2 parameter bytes. I tried everything:</p>
 <pre tabindex="0"><code>[frame-1, 0]    what the disassembled 68k driver seemed to use
 [frame, 0]
@@ -177,7 +177,7 @@ Save as PGM file
 <p>Mono scans were working great, but I wanted color. According to the documentation, you just set ESC C to 0x02 instead of 0x00.</p>
 <p>Easy, right? Not quite.</p>
 <p>My first color scan showed three columns side by side, each column was a grayscale version of the image. Classic sign of getting RGB data in the wrong format.</p>
-<p><img src="/img/filmscan/three-columns.jpg" alt="The three columns issue"></p>
+<p><a class="agrandir" href="/img/filmscan/three-columns.jpg" title="Open the full size image"><img src="/img/filmscan/three-columns.jpg" alt="The three columns issue" loading="lazy"></a></p>
 <p><em>Each column is one color channel. Not quite what I was hoping for.</em></p>
 <p>After more digging in the SANE driver, I found that in color mode, the scanner sends 3 separate data blocks per line, one for each color channel. And they come in G, R, B order (not RGB!).</p>
 <pre tabindex="0"><code>For each scan line:
@@ -194,8 +194,8 @@ Save as PGM file
 </span></span><span style="display:flex;"><span>    output[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> bBuf[i];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>The first version came out way too green because I had G and R swapped. Once I got the order right, beautiful color scans!</p>
-<p><img src="/img/filmscan/scan-color-1.jpg" alt="Color scan example 1"></p>
-<p><img src="/img/filmscan/scan-color-2.jpg" alt="Color scan example 2"></p>
+<p><a class="agrandir" href="/img/filmscan/scan-color-1.jpg" title="Open the full size image"><img src="/img/filmscan/scan-color-1.jpg" alt="Color scan example 1" loading="lazy"></a></p>
+<p><a class="agrandir" href="/img/filmscan/scan-color-2.jpg" title="Open the full size image"><img src="/img/filmscan/scan-color-2.jpg" alt="Color scan example 2" loading="lazy"></a></p>
 <p><em>Quick inversion with <a href="https://github.com/montoyatim01/Filmvert" target="_blank">Filmvert</a>. The colors aren&rsquo;t perfect, but it&rsquo;s just for preview. You can always fine-tune later manually or with something like <a href="https://www.negativelabpro.com/" target="_blank">Negative Lab Pro</a>.</em></p>
 <h2 id="the-final-result">The Final Result</h2>
 <p>The finished driver is about 450 lines of C code. It initializes the scanner once at startup, lets you specify a folder name and starting pose number, scans 1 to 6 frames in a batch, saves as PPM (color) or PGM (mono) files, and asks if you want to continue with more frames.</p>

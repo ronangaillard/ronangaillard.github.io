@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
   
-  <link rel="stylesheet" href="/css/refuge.117a174f3c8c5f041689c99ea126f7aaa46cbef7b819abe20113b93621c89ef0.css" integrity="sha256-EXoXTzyMXwQWicmeoSb3qqRsvve4GaviARO5NiHInvA=">
+  <link rel="stylesheet" href="/css/refuge.618495172c3893420a8a6887f1862ab1f04e97df1f77a65ee767cdc1fe0248af.css" integrity="sha256-YYSVFyw4k0IKimiH8YYqsfBOl98fd6Ze52fNwf4CSK8=">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   
 </head>
@@ -92,7 +92,7 @@
 <p>I had been looking to connect my SE/30 to the internet but I struggled to find PDS boards that would fit in it. It is particularly difficult as such boards are rare, but there is also very little space available in the SE/30, so most cards won&rsquo;t fit in. Apart from the internal PDS port the SE/30 has another expansion port : SCSI, which is an improved parallel port. It is available at the back of the computer as a DB25 port. But all SCSI to Ethernet devices from back in the days that I found were missing floppies with drivers. Moreover most of this stuff was in the US so shipping would be really expensive. Then I found about <a href="https://68kmla.org/forums/topic/58413-scsi-to-ethernet-adapter-on-new-hardware/" target="_blank">scuznet</a>, a modern design by @saybur. It was really interesting because it was made to work with an unpatched Nuvotech driver. But there was a few things I did want to change/improve to the design, including the fact that it would be really cool to be able to upgrade the firmware by USB so that the community could easily develop and upgrade the firmware.</p>
 <p>The goals of this project is to make a cheap, open source, community driven, and reliable board.</p>
 <p>This is the original design by @saybur :
-<img src="/img/scuznet.jpg" alt="scuznet"></p>
+<a class="agrandir" href="/img/scuznet.jpg" title="Open the full size image"><img src="/img/scuznet.jpg" alt="scuznet" loading="lazy"></a></p>
 <p>So I decided to create a new design based on this. Here are the main things I changed/added to the original design :</p>
 <ul>
 <li>The microcontroller is replaced by a STM32 (ARM chip) that will be upgradable by USB. In the future it also means a firmware could handle Ethernet over USB, and you could share files between your modern computer just by connecting to you vintage mac by USB;</li>
@@ -105,7 +105,7 @@
 <p>On my design, power can be provided by the SCSI bus or/and the USB port. The board has some circuitry that automatically switches between these two sources, so for the end user it is really convenient. On a Mac that has a stable SCSI 5V you just have to plug the board, on other Macs plug the board and connect the USB port to a USB wall charger and that&rsquo;s it. It also means the board can be connected to the turned on Mac while updating the firmware, which will also be super convenient while developing a new firmware.</p>
 <p>SCSI Termination is for the moment always enabled, I do not see this as an issue. If I discover that it should be software controlled I will tweak the design in the future.</p>
 <p>Here is what the final board could look like :
-<img src="/img/68net-render.png" alt="68net render"></p>
+<a class="agrandir" href="/img/68net-render.png" title="Open the full size image"><img src="/img/68net-render.png" alt="68net render" loading="lazy"></a></p>
 <p>That design is available on my <a href="https://github.com/ronangaillard/68net" target="_blank">GitHub</a>.</p>
 <h3 id="next-steps">Next steps</h3>
 <ul>
@@ -127,15 +127,15 @@
 <ul>
 <li>SCSI -&gt; STM32 (ATN, ACK, &hellip;) : these are unidirectional signals from initiator, I use a 74LVC14 chip to do the level conversion. Indeed the SCSI bus communicates at 2.85V but some peripherals can talk at 5.5V, so we need to protect the STM32 which does not have a lot of 5V tolerant GPIOS.</li>
 </ul>
-<p><img src="/img/68net-74lvc14-small.png" alt="74lvc14"></p>
+<p><a class="agrandir" href="/img/68net-74lvc14-small.png" title="Open the full size image"><img src="/img/68net-74lvc14-small.png" alt="74lvc14" loading="lazy"></a></p>
 <ul>
 <li>STM32 -&gt; SCSI (CD, IO, &hellip;) : these are unidirectional signals from target, I use multiple 74LVTH126 to drive these control pins in Open Drain, this make sure no device on the bus can be damaged in case of multiple devices talking at the same time. This also make sure the board talks at the 2.85V SCSI voltage.</li>
 </ul>
-<p><img src="/img/68net-74lvth126.png" alt="74lvth126"></p>
+<p><a class="agrandir" href="/img/68net-74lvth126.png" title="Open the full size image"><img src="/img/68net-74lvth126.png" alt="74lvth126" loading="lazy"></a></p>
 <ul>
 <li>STM32 &lt;-&gt; SCSI : bidirectional signals that will use the 74LVTH126 and the 74LVC14. One particularity is the data lines. You may have noticed that the 74LVC14 inverts the signal logic. This is not an issue for control lines, as software can handle inverted signal with simple <code>not</code>. The problem for the data lines is that you often want to transfer the data received as quickly as possible to your peripheral (here the Ethernet chip). If you want to be fast you don&rsquo;t want to <code>not</code> all received data before transfering, that&rsquo;s why you&rsquo;ll see the 74LVC245 chip handling the received data line that does the level convert without inverting the data.</li>
 </ul>
-<p><img src="/img/68net-74lvc245.png" alt="74lvc245"></p>
+<p><a class="agrandir" href="/img/68net-74lvc245.png" title="Open the full size image"><img src="/img/68net-74lvc245.png" alt="74lvc245" loading="lazy"></a></p>
 <p>You may now wonder where does the 2.85V comes from. I use a simple adjustable LM1117 to generate it, but you may notice that it produces something more like 2.63V. It is due to the fact that termination resistors (<code>RN1</code> and <code>RN2</code>) are supposed to be 110ohms, but 110ohms resistor networks are not available at the time of writing on DigiKey. So I chose the nearest available value which is 100ohms, and for that value the voltage should be 2.63V. (and yes SCSI devices need a termination to avoid reflection).</p>
 <p>The rest is relatively classical design, the STM32 is connected to the Ethernet chip <code>ENC28J60</code> by SPI. You can also notice the two schottky diodes managing the input voltage (USB and SCSI TRMPWRP) with a low lost voltage.</p>
 <p>Don&rsquo;t hesitate to give some feedback <a href="%28https://68kmla.org/forums/topic/61287-68net-a-modern-scsi-to-ethernet-board/%29">here</a> !</p>
