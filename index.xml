@@ -97,12 +97,5 @@
 				<guid>/posts/minios-arduino-minitel/</guid>
 				<description>&lt;p&gt;&lt;em&gt;A DIN plug, a resistor and an Arduino Mega to bring the good old French Minitel back to life&lt;/em&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;Updates&lt;/em&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;[16 April 2010] This project was featured on the Arduino blog : &lt;a href=&#34;https://blog.arduino.cc/2010/04/16/minitel-is-not-dead/&#34; target=&#34;_blank&#34;&gt;Minitel is not dead!&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;[20 December 2013] The photos were featured on &lt;a href=&#34;https://text-mode.tumblr.com/post/70528088514/le-minitel-nest-pas-mort-sorannefr-used&#34; target=&#34;_blank&#34;&gt;TEXT-MODE&lt;/a&gt;, a blog about text graphics through the ages (ASCII, PETSCII, Teletext, mosaics&amp;hellip;)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;The Minitel is the French terminal that brought online services to millions of homes long before the Internet. There are still plenty of them sleeping in attics, and they have a nice feature : a &amp;ldquo;péri-informatique&amp;rdquo; DIN socket at the back, which is just a serial port. So I plugged an Arduino into one and wrote MiniOS, a tiny OS for the Minitel.&lt;/p&gt;</description>
 			</item>
-			<item>
-				<title>About me</title>
-				<link>/about/</link>
-				<pubDate>Fri, 01 Jan 2010 17:51:42 +0000</pubDate>
-				<guid>/about/</guid>
-				<description>&lt;p&gt;I&amp;rsquo;m Ronan Gaillard an Embedded System Engineer as well as a sailor with boat based in Saint-Malo France.&lt;/p&gt;&#xA;&lt;p&gt;My main points of interest are embedded systems, retro computing, sailing and hiking.&lt;/p&gt;</description>
-			</item>
 	</channel>
 </rss>
