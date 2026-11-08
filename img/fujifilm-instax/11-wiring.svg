@@ -1,82 +1,82 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" font-family="-apple-system,Helvetica,Arial,sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" font-family="Arial,Helvetica,sans-serif">
   <defs>
-    <marker id="k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#22272a"/></marker>
-    <marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#c27a00"/></marker>
-    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#2563eb"/></marker>
+    <marker id="k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#000000"/></marker>
+    <marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#808000"/></marker>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#000080"/></marker>
   </defs>
-  <rect width="800" height="560" fill="#fafafa"/>
+  <rect width="800" height="560" fill="#ffffff"/>
 
   <!-- left: build -->
-  <text x="130" y="34" text-anchor="middle" font-size="14" font-weight="700" fill="#22272a">On the Mac</text>
-  <rect x="50" y="56" width="160" height="62" rx="8" fill="#fff" stroke="#22272a" stroke-width="2"/>
-  <text x="130" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#22272a" font-family="Menlo,monospace">linkxt.c</text>
-  <text x="130" y="101" text-anchor="middle" font-size="11" fill="#6b7280">my C code</text>
-  <path d="M130 120 V168" stroke="#22272a" stroke-width="2" marker-end="url(#k)"/>
-  <text x="140" y="140" font-size="11" fill="#6b7280">compiler, told the</text>
-  <text x="140" y="154" font-size="11" fill="#6b7280">firmware's addresses</text>
-  <rect x="50" y="172" width="160" height="62" rx="8" fill="#fff4e0" stroke="#c27a00" stroke-width="2"/>
-  <text x="130" y="198" text-anchor="middle" font-size="13" font-weight="700" fill="#22272a">linkxt, compiled</text>
-  <text x="130" y="217" text-anchor="middle" font-size="11" fill="#6b7280">~3 KB of ARM code</text>
+  <text x="130" y="34" text-anchor="middle" font-size="14" font-weight="700" fill="#000000">On the Mac</text>
+  <rect x="53" y="59" width="160" height="62" fill="#000000"/><rect x="50" y="56" width="160" height="62" fill="#fff" stroke="#000000" stroke-width="2"/>
+  <text x="130" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#000000" font-family="'Courier New',Courier,monospace">linkxt.c</text>
+  <text x="130" y="101" text-anchor="middle" font-size="11" fill="#404040">my C code</text>
+  <path d="M130 120 V168" stroke="#000000" stroke-width="2" marker-end="url(#k)"/>
+  <text x="140" y="140" font-size="11" fill="#404040">compiler, told the</text>
+  <text x="140" y="154" font-size="11" fill="#404040">firmware's addresses</text>
+  <rect x="53" y="175" width="160" height="62" fill="#000000"/><rect x="50" y="172" width="160" height="62" fill="#ffff00" stroke="#808000" stroke-width="2"/>
+  <text x="130" y="198" text-anchor="middle" font-size="13" font-weight="700" fill="#000000">linkxt, compiled</text>
+  <text x="130" y="217" text-anchor="middle" font-size="11" fill="#404040">~3 KB of ARM code</text>
 
-  <path d="M212 203 C 300 203, 330 154, 418 154" fill="none" stroke="#22272a" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#k)"/>
-  <text x="318" y="216" text-anchor="middle" font-size="11" fill="#6b7280">copied into</text>
-  <text x="318" y="230" text-anchor="middle" font-size="11" fill="#6b7280">the empty hole</text>
+  <path d="M212 203 C 300 203, 330 154, 418 154" fill="none" stroke="#000000" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#k)"/>
+  <text x="318" y="216" text-anchor="middle" font-size="11" fill="#404040">copied into</text>
+  <text x="318" y="230" text-anchor="middle" font-size="11" fill="#404040">the empty hole</text>
 
   <!-- right: firmware in RAM -->
-  <text x="560" y="34" text-anchor="middle" font-size="14" font-weight="700" fill="#22272a">The firmware in RAM (from the SD card)</text>
-  <rect x="420" y="50" width="280" height="420" rx="10" fill="#fff" stroke="#22272a" stroke-width="2"/>
+  <text x="560" y="34" text-anchor="middle" font-size="14" font-weight="700" fill="#000000">The firmware in RAM (from the SD card)</text>
+  <rect x="423" y="53" width="280" height="420" fill="#000000"/><rect x="420" y="50" width="280" height="420" fill="#fff" stroke="#000000" stroke-width="2"/>
 
   <!-- BLE stack -->
-  <rect x="436" y="64" width="248" height="52" rx="6" fill="#e8efff" stroke="#2563eb" stroke-width="1.5"/>
-  <text x="450" y="86" font-size="12" font-weight="700" fill="#22272a">Fuji Bluetooth stack</text>
-  <text x="450" y="104" font-size="11" fill="#6b7280" font-family="Menlo,monospace">0x0128…</text>
+  <rect x="439" y="67" width="248" height="52" fill="#000000"/><rect x="436" y="64" width="248" height="52" fill="#c0c0c0" stroke="#000080" stroke-width="1"/><path d="M438.5 113V66.5H681" fill="none" stroke="#ffffff" stroke-width="2"/><path d="M439 113.5H681.5V67" fill="none" stroke="#808080" stroke-width="2"/>
+  <text x="450" y="86" font-size="12" font-weight="700" fill="#000000">Fuji Bluetooth stack</text>
+  <text x="450" y="104" font-size="11" fill="#404040" font-family="'Courier New',Courier,monospace">0x0128…</text>
 
   <!-- hole with linkxt -->
-  <rect x="436" y="130" width="248" height="52" rx="6" fill="#fff4e0" stroke="#c27a00" stroke-width="2"/>
-  <text x="450" y="152" font-size="12" font-weight="700" fill="#22272a">linkxt, in a 4 KB hole of zeros</text>
-  <text x="450" y="170" font-size="11" fill="#6b7280" font-family="Menlo,monospace">0x01e12030 – 0x01e13000</text>
+  <rect x="439" y="133" width="248" height="52" fill="#000000"/><rect x="436" y="130" width="248" height="52" fill="#ffff00" stroke="#808000" stroke-width="2"/>
+  <text x="450" y="152" font-size="12" font-weight="700" fill="#000000">linkxt, in a 4 KB hole of zeros</text>
+  <text x="450" y="170" font-size="11" fill="#404040" font-family="'Courier New',Courier,monospace">0x01e12030 – 0x01e13000</text>
 
   <!-- file write -->
-  <rect x="436" y="196" width="248" height="52" rx="6" fill="#e8efff" stroke="#2563eb" stroke-width="1.5"/>
-  <text x="450" y="218" font-size="12" font-weight="700" fill="#22272a">Fuji "write a file"</text>
-  <text x="450" y="236" font-size="11" fill="#6b7280" font-family="Menlo,monospace">0x02074244</text>
+  <rect x="439" y="199" width="248" height="52" fill="#000000"/><rect x="436" y="196" width="248" height="52" fill="#c0c0c0" stroke="#000080" stroke-width="1"/><path d="M438.5 245V198.5H681" fill="none" stroke="#ffffff" stroke-width="2"/><path d="M439 245.5H681.5V199" fill="none" stroke="#808080" stroke-width="2"/>
+  <text x="450" y="218" font-size="12" font-weight="700" fill="#000000">Fuji "write a file"</text>
+  <text x="450" y="236" font-size="11" fill="#404040" font-family="'Courier New',Courier,monospace">0x02074244</text>
 
   <!-- stubs -->
-  <rect x="436" y="262" width="248" height="96" rx="6" fill="#fff" stroke="#22272a" stroke-width="1.5"/>
-  <text x="450" y="284" font-size="12" font-weight="700" fill="#22272a">12 empty functions (stubs)</text>
-  <g font-size="11" font-family="Menlo,monospace">
-    <text x="450" y="304" fill="#9ca3af" text-decoration="line-through">return 0</text>
-    <text x="520" y="304" fill="#c27a00" font-weight="700">jump → linkxt</text>
-    <text x="450" y="322" fill="#9ca3af" text-decoration="line-through">return 0</text>
-    <text x="520" y="322" fill="#c27a00" font-weight="700">jump → linkxt</text>
-    <text x="450" y="342" fill="#6b7280">… ×12</text>
+  <rect x="439" y="265" width="248" height="96" fill="#000000"/><rect x="436" y="262" width="248" height="96" fill="#fff" stroke="#000000" stroke-width="1"/>
+  <text x="450" y="284" font-size="12" font-weight="700" fill="#000000">12 empty functions (stubs)</text>
+  <g font-size="11" font-family="'Courier New',Courier,monospace">
+    <text x="450" y="304" fill="#808080" text-decoration="line-through">return 0</text>
+    <text x="520" y="304" fill="#808000" font-weight="700">jump → linkxt</text>
+    <text x="450" y="322" fill="#808080" text-decoration="line-through">return 0</text>
+    <text x="520" y="322" fill="#808000" font-weight="700">jump → linkxt</text>
+    <text x="450" y="342" fill="#404040">… ×12</text>
   </g>
 
   <!-- print app -->
-  <rect x="436" y="372" width="248" height="52" rx="6" fill="#eef6f0" stroke="#1f8a4c" stroke-width="1.5"/>
-  <text x="450" y="394" font-size="12" font-weight="700" fill="#22272a">Fuji print app</text>
-  <text x="450" y="412" font-size="11" fill="#6b7280">unchanged, calls the stubs as always</text>
-  <text x="560" y="456" text-anchor="middle" font-size="11" fill="#6b7280">+ 2 menu bytes (Wi-Fi to Bluetooth) and the serial check ('7')</text>
+  <rect x="439" y="375" width="248" height="52" fill="#000000"/><rect x="436" y="372" width="248" height="52" fill="#ffffff" stroke="#008080" stroke-width="1"/>
+  <text x="450" y="394" font-size="12" font-weight="700" fill="#000000">Fuji print app</text>
+  <text x="450" y="412" font-size="11" fill="#404040">unchanged, calls the stubs as always</text>
+  <text x="560" y="456" text-anchor="middle" font-size="11" fill="#404040">+ 2 menu bytes (Wi-Fi to Bluetooth) and the serial check ('7')</text>
 
   <!-- app -> stubs -->
-  <path d="M560 370 V362" stroke="#22272a" stroke-width="2" marker-end="url(#k)"/>
+  <path d="M560 370 V362" stroke="#000000" stroke-width="2" marker-end="url(#k)"/>
   <!-- stubs -> linkxt (right side) -->
-  <path d="M686 310 C 760 310, 760 156, 688 156" fill="none" stroke="#c27a00" stroke-width="2.5" marker-end="url(#o)"/>
-  <text x="782" y="232" font-size="11" fill="#c27a00" font-weight="700" text-anchor="middle" transform="rotate(90 782 232)">patched jump</text>
+  <path d="M686 310 C 760 310, 760 156, 688 156" fill="none" stroke="#808000" stroke-width="2" marker-end="url(#o)"/>
+  <text x="782" y="232" font-size="11" fill="#808000" font-weight="700" text-anchor="middle" transform="rotate(90 782 232)">patched jump</text>
   <!-- linkxt -> BLE / file (left side) -->
-  <path d="M434 146 C 400 140, 400 96, 434 92" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#b)"/>
-  <path d="M434 168 C 400 176, 400 214, 434 220" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#b)"/>
-  <text x="392" y="110" text-anchor="end" font-size="11" fill="#2563eb" font-weight="700">calls by</text>
-  <text x="392" y="124" text-anchor="end" font-size="11" fill="#2563eb" font-weight="700">address</text>
+  <path d="M434 146 C 400 140, 400 96, 434 92" fill="none" stroke="#000080" stroke-width="2" marker-end="url(#b)"/>
+  <path d="M434 168 C 400 176, 400 214, 434 220" fill="none" stroke="#000080" stroke-width="2" marker-end="url(#b)"/>
+  <text x="392" y="110" text-anchor="end" font-size="11" fill="#000080" font-weight="700">calls by</text>
+  <text x="392" y="124" text-anchor="end" font-size="11" fill="#000080" font-weight="700">address</text>
 
   <!-- legend -->
-  <g font-size="11" fill="#22272a">
-    <path d="M50 300 H80" stroke="#c27a00" stroke-width="2.5" marker-end="url(#o)"/><text x="90" y="304">Fuji calls linkxt: the stub's first</text><text x="90" y="318">8 bytes now say "jump there"</text>
-    <path d="M50 350 H80" stroke="#2563eb" stroke-width="2.5" marker-end="url(#b)"/><text x="90" y="354">linkxt calls Fuji: functions</text><text x="90" y="368">at addresses found in Ghidra</text>
+  <g font-size="11" fill="#000000">
+    <path d="M50 300 H80" stroke="#808000" stroke-width="2" marker-end="url(#o)"/><text x="90" y="304">Fuji calls linkxt: the stub's first</text><text x="90" y="318">8 bytes now say "jump there"</text>
+    <path d="M50 350 H80" stroke="#000080" stroke-width="2" marker-end="url(#b)"/><text x="90" y="354">linkxt calls Fuji: functions</text><text x="90" y="368">at addresses found in Ghidra</text>
   </g>
 
   <!-- why there -->
-  <rect x="40" y="486" width="720" height="62" rx="10" fill="#fff4e0" stroke="#c27a00" stroke-width="2"/>
-  <text x="60" y="510" font-size="13" fill="#22272a"><tspan font-weight="700">Why there?</tspan> It sits in the middle of Fuji's code, but it's 4048 bytes of zeros that no function</text>
-  <text x="60" y="530" font-size="13" fill="#22272a">points to, and it's still zeros in a dump of the running camera. Nobody uses it, so linkxt can.</text>
+  <rect x="43" y="489" width="720" height="62" fill="#000000"/><rect x="40" y="486" width="720" height="62" fill="#ffffe0" stroke="#808000" stroke-width="2"/>
+  <text x="60" y="510" font-size="13" fill="#000000"><tspan font-weight="700">Why there?</tspan> It sits in the middle of Fuji's code, but it's 4048 bytes of zeros that no function</text>
+  <text x="60" y="530" font-size="13" fill="#000000">points to, and it's still zeros in a dump of the running camera. Nobody uses it, so linkxt can.</text>
 </svg>

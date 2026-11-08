@@ -1,63 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" font-family="-apple-system,Helvetica,Arial,sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" font-family="Arial,Helvetica,sans-serif">
   <defs>
-    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="#22272a"/></marker>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="#000000"/></marker>
   </defs>
-  <rect width="800" height="520" fill="#fafafa"/>
+  <rect width="800" height="520" fill="#ffffff"/>
 
   <!-- the file -->
-  <text x="30" y="30" font-size="14" font-weight="700" fill="#22272a">FWUP0029.DAT, the official update (50 MB)</text>
-  <rect x="30" y="42" width="110" height="34" fill="#fff4e0" stroke="#c27a00" stroke-width="2"/>
-  <text x="85" y="64" text-anchor="middle" font-size="12" fill="#22272a">header</text>
-  <rect x="140" y="42" width="630" height="34" fill="#e5e7eb" stroke="#22272a" stroke-width="2"/>
-  <text x="455" y="64" text-anchor="middle" font-size="12" fill="#6b7280">payload: looks like random noise</text>
+  <text x="30" y="30" font-size="14" font-weight="700" fill="#000000">FWUP0029.DAT, the official update (50 MB)</text>
+  <rect x="33" y="45" width="110" height="34" fill="#000000"/><rect x="30" y="42" width="110" height="34" fill="#ffff00" stroke="#808000" stroke-width="2"/>
+  <text x="85" y="64" text-anchor="middle" font-size="12" fill="#000000">header</text>
+  <rect x="143" y="45" width="630" height="34" fill="#000000"/><rect x="140" y="42" width="630" height="34" fill="#c0c0c0" stroke="#000000" stroke-width="2"/><path d="M142.5 73V44.5H767" fill="none" stroke="#ffffff" stroke-width="2"/><path d="M143 73.5H767.5V45" fill="none" stroke="#808080" stroke-width="2"/>
+  <text x="455" y="64" text-anchor="middle" font-size="12" fill="#404040">payload: looks like random noise</text>
 
   <!-- step 1 -->
-  <circle cx="44" cy="118" r="13" fill="#22272a"/><text x="44" y="123" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">1</text>
-  <text x="66" y="114" font-size="14" font-weight="700" fill="#22272a">Cut the header</text>
-  <text x="66" y="132" font-size="12" fill="#6b7280">The first bytes describe the file: camera model, version, checksums. Keep what follows.</text>
+  <circle cx="44" cy="118" r="13" fill="#000000"/><text x="44" y="123" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">1</text>
+  <text x="66" y="114" font-size="14" font-weight="700" fill="#000000">Cut the header</text>
+  <text x="66" y="132" font-size="12" fill="#404040">The first bytes describe the file: camera model, version, checksums. Keep what follows.</text>
 
   <!-- step 2 -->
-  <circle cx="44" cy="178" r="13" fill="#22272a"/><text x="44" y="183" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">2</text>
-  <text x="66" y="174" font-size="14" font-weight="700" fill="#22272a">Flip every bit (the whole "encryption")</text>
-  <g font-family="Menlo,monospace" font-size="14">
-    <rect x="66" y="188" width="250" height="34" rx="6" fill="#fff" stroke="#9ca3af" stroke-width="1.5"/>
-    <text x="191" y="210" text-anchor="middle" fill="#6b7280">b9 aa b5 b6 b9 b6 b3 b2</text>
-    <path d="M324 205 H364" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
-    <text x="344" y="198" text-anchor="middle" font-size="11" fill="#6b7280" font-family="-apple-system,Helvetica,Arial,sans-serif">NOT</text>
-    <rect x="372" y="188" width="250" height="34" rx="6" fill="#fff" stroke="#1f8a4c" stroke-width="1.5"/>
-    <text x="497" y="210" text-anchor="middle" fill="#22272a">46 55 4a 49 46 49 4c 4d</text>
+  <circle cx="44" cy="178" r="13" fill="#000000"/><text x="44" y="183" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">2</text>
+  <text x="66" y="174" font-size="14" font-weight="700" fill="#000000">Flip every bit (the whole "encryption")</text>
+  <g font-family="'Courier New',Courier,monospace" font-size="14">
+    <rect x="69" y="191" width="250" height="34" fill="#000000"/><rect x="66" y="188" width="250" height="34" fill="#fff" stroke="#808080" stroke-width="1"/>
+    <text x="191" y="210" text-anchor="middle" fill="#404040">b9 aa b5 b6 b9 b6 b3 b2</text>
+    <path d="M324 205 H364" stroke="#000000" stroke-width="2" marker-end="url(#a)"/>
+    <text x="344" y="198" text-anchor="middle" font-size="11" fill="#404040" font-family="Arial,Helvetica,sans-serif">NOT</text>
+    <rect x="375" y="191" width="250" height="34" fill="#000000"/><rect x="372" y="188" width="250" height="34" fill="#fff" stroke="#008080" stroke-width="1"/>
+    <text x="497" y="210" text-anchor="middle" fill="#000000">46 55 4a 49 46 49 4c 4d</text>
   </g>
-  <text x="634" y="210" font-size="13" fill="#1f8a4c" font-family="Menlo,monospace">= "FUJIFILM"</text>
+  <text x="634" y="210" font-size="13" fill="#008080" font-family="'Courier New',Courier,monospace">= "FUJIFILM"</text>
 
   <!-- step 3 -->
-  <circle cx="44" cy="262" r="13" fill="#22272a"/><text x="44" y="267" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">3</text>
-  <text x="66" y="258" font-size="14" font-weight="700" fill="#22272a">Decompress 4 blocks (Fuji's own LZ)</text>
+  <circle cx="44" cy="262" r="13" fill="#000000"/><text x="44" y="267" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">3</text>
+  <text x="66" y="258" font-size="14" font-weight="700" fill="#000000">Decompress 4 blocks (Fuji's own LZ)</text>
   <g font-size="13">
-    <rect x="66" y="272" width="96" height="34" rx="6" fill="#fff" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="114" y="294" text-anchor="middle" fill="#22272a" font-family="Menlo,monospace">"abc"</text>
-    <rect x="166" y="272" width="250" height="34" rx="6" fill="#e8efff" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="291" y="294" text-anchor="middle" fill="#22272a">copy 6 bytes from 3 bytes back</text>
-    <path d="M424 289 H474" stroke="#22272a" stroke-width="2" marker-end="url(#a)"/>
-    <rect x="482" y="272" width="160" height="34" rx="6" fill="#fff" stroke="#1f8a4c" stroke-width="1.5"/>
-    <text x="562" y="294" text-anchor="middle" fill="#22272a" font-family="Menlo,monospace">"abcabcabc"</text>
+    <rect x="69" y="275" width="96" height="34" fill="#000000"/><rect x="66" y="272" width="96" height="34" fill="#fff" stroke="#000080" stroke-width="1"/>
+    <text x="114" y="294" text-anchor="middle" fill="#000000" font-family="'Courier New',Courier,monospace">"abc"</text>
+    <rect x="169" y="275" width="250" height="34" fill="#000000"/><rect x="166" y="272" width="250" height="34" fill="#c0c0c0" stroke="#000080" stroke-width="1"/><path d="M168.5 303V274.5H413" fill="none" stroke="#ffffff" stroke-width="2"/><path d="M169 303.5H413.5V275" fill="none" stroke="#808080" stroke-width="2"/>
+    <text x="291" y="294" text-anchor="middle" fill="#000000">copy 6 bytes from 3 bytes back</text>
+    <path d="M424 289 H474" stroke="#000000" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="485" y="275" width="160" height="34" fill="#000000"/><rect x="482" y="272" width="160" height="34" fill="#fff" stroke="#008080" stroke-width="1"/>
+    <text x="562" y="294" text-anchor="middle" fill="#000000" font-family="'Courier New',Courier,monospace">"abcabcabc"</text>
   </g>
-  <text x="66" y="324" font-size="11" fill="#6b7280">literal bytes, then a 2-byte "copy" instruction: repeats are stored once</text>
+  <text x="66" y="324" font-size="11" fill="#404040">literal bytes, then a 2-byte "copy" instruction: repeats are stored once</text>
 
   <!-- check -->
-  <rect x="30" y="346" width="740" height="56" rx="10" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/>
-  <text x="50" y="370" font-size="13" fill="#22272a"><tspan font-weight="700">How do I know it's right?</tspan> The firmware embeds zlib, a public library, and its tables.</text>
-  <text x="50" y="390" font-size="13" fill="#22272a">After my decompressor, they match the published zlib tables byte for byte.</text>
+  <rect x="33" y="349" width="740" height="56" fill="#000000"/><rect x="30" y="346" width="740" height="56" fill="#ffffff" stroke="#008080" stroke-width="2"/>
+  <text x="50" y="370" font-size="13" fill="#000000"><tspan font-weight="700">How do I know it's right?</tspan> The firmware embeds zlib, a public library, and its tables.</text>
+  <text x="50" y="390" font-size="13" fill="#000000">After my decompressor, they match the published zlib tables byte for byte.</text>
 
   <!-- output -->
   <g font-size="12" font-weight="700" text-anchor="middle">
-    <rect x="30" y="428" width="160" height="40" rx="6" fill="#e8efff" stroke="#2563eb" stroke-width="2"/><text x="110" y="452" fill="#22272a">block 1: ARM code</text>
-    <rect x="200" y="428" width="160" height="40" rx="6" fill="#e8efff" stroke="#2563eb" stroke-width="2"/><text x="280" y="452" fill="#22272a">block 2: ARM code</text>
-    <rect x="370" y="428" width="160" height="40" rx="6" fill="#e8efff" stroke="#2563eb" stroke-width="2"/><text x="450" y="452" fill="#22272a">block 3: ARM code</text>
-    <rect x="30" y="474" width="500" height="32" rx="6" fill="#f2f2f2" stroke="#9ca3af" stroke-width="2"/><text x="280" y="495" fill="#6b7280">block 4: data</text>
+    <rect x="33" y="431" width="160" height="40" fill="#000000"/><rect x="30" y="428" width="160" height="40" fill="#c0c0c0" stroke="#000080" stroke-width="2"/><path d="M32.5 465V430.5H187" fill="none" stroke="#ffffff" stroke-width="2"/><path d="M33 465.5H187.5V431" fill="none" stroke="#808080" stroke-width="2"/><text x="110" y="452" fill="#000000">block 1: ARM code</text>
+    <rect x="203" y="431" width="160" height="40" fill="#000000"/><rect x="200" y="428" width="160" height="40" fill="#c0c0c0" stroke="#000080" stroke-width="2"/><path d="M202.5 465V430.5H357" fill="none" stroke="#ffffff" stroke-width="2"/><path d="M203 465.5H357.5V431" fill="none" stroke="#808080" stroke-width="2"/><text x="280" y="452" fill="#000000">block 2: ARM code</text>
+    <rect x="373" y="431" width="160" height="40" fill="#000000"/><rect x="370" y="428" width="160" height="40" fill="#c0c0c0" stroke="#000080" stroke-width="2"/><path d="M372.5 465V430.5H527" fill="none" stroke="#ffffff" stroke-width="2"/><path d="M373 465.5H527.5V431" fill="none" stroke="#808080" stroke-width="2"/><text x="450" y="452" fill="#000000">block 3: ARM code</text>
+    <rect x="33" y="477" width="500" height="32" fill="#000000"/><rect x="30" y="474" width="500" height="32" fill="#c0c0c0" stroke="#808080" stroke-width="2"/><path d="M32.5 503V476.5H527" fill="none" stroke="#ffffff" stroke-width="2"/><path d="M33 503.5H527.5V477" fill="none" stroke="#808080" stroke-width="2"/><text x="280" y="495" fill="#404040">block 4: data</text>
   </g>
-  <path d="M540 448 H600" stroke="#22272a" stroke-width="2.5" marker-end="url(#a)"/>
-  <rect x="608" y="420" width="162" height="86" rx="12" fill="#22272a"/>
+  <path d="M540 448 H600" stroke="#000000" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="608" y="420" width="162" height="86" fill="#000080"/>
   <text x="689" y="450" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">Ghidra</text>
-  <text x="689" y="472" text-anchor="middle" font-size="12" fill="#d1d5db">~59,000 functions</text>
-  <text x="689" y="490" text-anchor="middle" font-size="11" fill="#9ca3af">Cortex-A7, ThreadX</text>
+  <text x="689" y="472" text-anchor="middle" font-size="12" fill="#808080">~59,000 functions</text>
+  <text x="689" y="490" text-anchor="middle" font-size="11" fill="#808080">Cortex-A7, ThreadX</text>
 </svg>

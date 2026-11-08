@@ -1,46 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" font-family="-apple-system,Helvetica,Arial,sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" font-family="Arial,Helvetica,sans-serif">
   <defs>
-    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1f8a4c"/></marker>
-    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="#d9372b"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="#008080"/></marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="#ff0000"/></marker>
   </defs>
-  <rect width="800" height="300" fill="#fafafa"/>
+  <rect width="800" height="300" fill="#ffffff"/>
   <!-- camera -->
-  <g transform="translate(40,95)" stroke="#22272a" stroke-width="2.5">
-    <rect x="45" y="-18" width="60" height="22" rx="4" fill="#d9d9d9"/>
-    <rect x="12" y="-10" width="22" height="12" rx="3" fill="#bdbdbd"/>
-    <rect x="118" y="-10" width="22" height="12" rx="3" fill="#bdbdbd"/>
-    <rect x="0" y="0" width="150" height="95" rx="10" fill="#e9e9e9"/>
-    <rect x="0" y="0" width="150" height="22" rx="10" fill="#bdbdbd"/>
-    <circle cx="75" cy="55" r="33" fill="#55595c"/>
-    <circle cx="75" cy="55" r="19" fill="#22272a"/>
-    <circle cx="69" cy="49" r="5" fill="#9fb6c9" stroke="none"/>
+  <g transform="translate(40,95)" stroke="#000000" stroke-width="2">
+    <rect x="45" y="-18" width="60" height="22" rx="2" fill="#c0c0c0"/>
+    <rect x="12" y="-10" width="22" height="12" rx="2" fill="#808080"/>
+    <rect x="118" y="-10" width="22" height="12" rx="2" fill="#808080"/>
+    <rect x="0" y="0" width="150" height="95" fill="#c0c0c0"/>
+    <rect x="0" y="0" width="150" height="22" fill="#808080"/>
+    <circle cx="75" cy="55" r="33" fill="#404040"/>
+    <circle cx="75" cy="55" r="19" fill="#000000"/>
+    <circle cx="69" cy="49" r="5" fill="#c0c0c0" stroke="none"/>
   </g>
-  <text x="115" y="222" text-anchor="middle" font-size="17" font-weight="700" fill="#22272a">X-T30 II</text>
-  <text x="115" y="241" text-anchor="middle" font-size="13" fill="#6b7280">firmware 2.04 (latest)</text>
+  <text x="115" y="222" text-anchor="middle" font-size="17" font-weight="700" fill="#000000">X-T30 II</text>
+  <text x="115" y="241" text-anchor="middle" font-size="13" fill="#404040">firmware 2.04 (latest)</text>
 
   <!-- wifi path -->
-  <path d="M215 115 C 330 60, 450 60, 560 75" fill="none" stroke="#1f8a4c" stroke-width="3" marker-end="url(#ag)"/>
-  <text x="385" y="52" text-anchor="middle" font-size="14" fill="#1f8a4c" font-weight="700">Wi-Fi · "instax SHARE"</text>
+  <path d="M215 115 C 330 60, 450 60, 560 75" fill="none" stroke="#008080" stroke-width="2" marker-end="url(#ag)"/>
+  <text x="385" y="52" text-anchor="middle" font-size="14" fill="#008080" font-weight="700">Wi-Fi · "instax SHARE"</text>
   <g transform="translate(570,40)">
-    <rect width="190" height="54" rx="10" fill="#eef6f0" stroke="#1f8a4c" stroke-width="2"/>
-    <text x="95" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#22272a">SP-1 / SP-2 / SP-3</text>
-    <text x="95" y="42" text-anchor="middle" font-size="12" fill="#6b7280">old printers, discontinued</text>
+    <rect x="3" y="3" width="190" height="54" fill="#000000"/><rect width="190" height="54" fill="#ffffff" stroke="#008080" stroke-width="2"/>
+    <text x="95" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#000000">SP-1 / SP-2 / SP-3</text>
+    <text x="95" y="42" text-anchor="middle" font-size="12" fill="#404040">old printers, discontinued</text>
   </g>
 
   <!-- ble path -->
-  <path d="M215 175 C 330 215, 450 215, 560 205" fill="none" stroke="#d9372b" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#ar)"/>
-  <text x="385" y="232" text-anchor="middle" font-size="14" fill="#d9372b" font-weight="700">Bluetooth LE</text>
-  <circle cx="385" cy="197" r="15" fill="#fff" stroke="#d9372b" stroke-width="2.5"/>
-  <path d="M378 190 L392 204 M392 190 L378 204" stroke="#d9372b" stroke-width="3" stroke-linecap="round"/>
+  <path d="M215 175 C 330 215, 450 215, 560 205" fill="none" stroke="#ff0000" stroke-width="2" stroke-dasharray="9 7" marker-end="url(#ar)"/>
+  <text x="385" y="232" text-anchor="middle" font-size="14" fill="#ff0000" font-weight="700">Bluetooth LE</text>
+  <circle cx="385" cy="197" r="15" fill="#fff" stroke="#ff0000" stroke-width="2"/>
+  <path d="M378 190 L392 204 M392 190 L378 204" stroke="#ff0000" stroke-width="2" stroke-linecap="round"/>
   <!-- printer -->
-  <g transform="translate(575,140)" stroke="#22272a" stroke-width="2.5">
-    <rect width="78" height="118" rx="16" fill="#f7d7e6"/>
-    <rect x="14" y="-6" width="50" height="10" rx="3" fill="#fff"/>
+  <g transform="translate(575,140)" stroke="#000000" stroke-width="2">
+    <rect width="78" height="118" fill="#ffc0ff"/>
+    <rect x="14" y="-6" width="50" height="10" rx="2" fill="#fff"/>
     <circle cx="39" cy="82" r="10" fill="#fff"/>
   </g>
-  <text x="670" y="185" font-size="15" font-weight="700" fill="#22272a">instax mini</text>
-  <text x="670" y="204" font-size="15" font-weight="700" fill="#22272a">Link 3</text>
-  <text x="670" y="224" font-size="12" fill="#6b7280">Bluetooth only,</text>
-  <text x="670" y="240" font-size="12" fill="#6b7280">no Wi-Fi</text>
-  <text x="400" y="288" text-anchor="middle" font-size="14" fill="#22272a" font-style="italic">Goal: make the red arrow work. No phone, no extra box.</text>
+  <text x="670" y="185" font-size="15" font-weight="700" fill="#000000">instax mini</text>
+  <text x="670" y="204" font-size="15" font-weight="700" fill="#000000">Link 3</text>
+  <text x="670" y="224" font-size="12" fill="#404040">Bluetooth only,</text>
+  <text x="670" y="240" font-size="12" fill="#404040">no Wi-Fi</text>
+  <text x="400" y="288" text-anchor="middle" font-size="14" fill="#000000" font-style="italic">Goal: make the red arrow work. No phone, no extra box.</text>
 </svg>
