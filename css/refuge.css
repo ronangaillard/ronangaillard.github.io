@@ -155,3 +155,10 @@ footer { padding: 12px; text-align: center; font-family: var(--sans); font-size:
   .defile span { animation: none; padding-left: 8px; }
   .travaux { animation: none; }
 }
+
+/* Liste des articles : titre et sous-titre */
+.titre-billet { font-size: 17px; }
+.sous-titre-billet { display: block; margin-top: 2px; font-size: 14px; font-style: italic; color: #333; }
+@media (max-width: 680px) {
+  table.billets .num { white-space: normal; font-size: 12px; }
+}

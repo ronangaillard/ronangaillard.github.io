@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>Categories on Ronan Gaillard</title>
-		<link>/categories/</link>
-		<description>Recent content in Categories on Ronan Gaillard</description>
-		<generator>Hugo</generator>
-		<language>en-us</language>
-		
-		
-		
-		
-			<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
-	</channel>
+  <channel>
+    <title>Ronan Gaillard's Workshop</title>
+    <link>https://ronangaillard.com/categories/</link>
+    <description>Ronan Gaillard&#39;s workshop: embedded systems, retro computers and sailing, from Saint-Malo.</description>
+    <language>en-us</language>
+    
+    <atom:link href="https://ronangaillard.com/categories/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
 </rss>
