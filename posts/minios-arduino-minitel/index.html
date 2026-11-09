@@ -95,7 +95,7 @@
 <li>[20 December 2013] The photos were featured on <a href="https://text-mode.tumblr.com/post/70528088514/le-minitel-nest-pas-mort-sorannefr-used" target="_blank">TEXT-MODE</a>, a blog about text graphics through the ages (ASCII, PETSCII, Teletext, mosaics&hellip;)</li>
 </ul>
 <hr>
-<p>The Minitel is the French terminal that brought online services to millions of homes long before the Internet. There are still plenty of them sleeping in attics, and they have a nice feature : a &ldquo;péri-informatique&rdquo; DIN socket at the back, which is just a serial port. So I plugged an Arduino into one and wrote MiniOS, a tiny OS for the Minitel.</p>
+<p>The Minitel is the French terminal that brought online services to millions of homes long before the Internet. Plenty of them still sleep in attics. They have a nice feature : a &ldquo;péri-informatique&rdquo; DIN socket at the back, which is just a serial port. So I plugged an Arduino into one and wrote MiniOS, a tiny OS for the Minitel.</p>
 <p><a class="agrandir" href="/img/minitel/boot.jpg" title="Open the full size image"><img src="/img/minitel/boot.jpg" alt="The MiniOS boot screen" loading="lazy"></a></p>
 <h2 id="the-wiring">The wiring</h2>
 <p>There is not much to it : a male DIN plug wired to the second serial port of an Arduino Mega, and a 4.7 kΩ resistor. The two LEDs are only there to show what is going on.</p>
@@ -115,7 +115,7 @@
 <p><a class="agrandir" href="/img/minitel/fakebook.jpg" title="Open the full size image"><img src="/img/minitel/fakebook.jpg" alt="3615 FACEBOOK" loading="lazy"></a></p>
 <p>All the code (a single file) is in the <a href="https://forum.arduino.cc/t/le-minitel-nest-pas-mort/33619" target="_blank">forum thread</a>.</p>
 <h2 id="what-happened-next">What happened next</h2>
-<p>I posted it on the French Arduino forum and the Arduino blog picked it up the next day. Other people rebuilt it, ported it to the Duemilanove (replace <code>Serial1</code> with <code>Serial</code> and <code>UCSR1C</code> with <code>UCSR0C</code>), mapped the keys of the keyboard, and even added a speaker to play music. Not bad for a menu with two entries !</p>
+<p>I posted it on the French Arduino forum and the Arduino blog picked it up the next day. Other people rebuilt it and ported it to the Duemilanove (replace <code>Serial1</code> with <code>Serial</code> and <code>UCSR1C</code> with <code>UCSR0C</code>). They also mapped the keys of the keyboard and even added a speaker to play music. Not bad for a menu with two entries !</p>
 
   
 </article>
