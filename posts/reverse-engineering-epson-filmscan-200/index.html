@@ -92,13 +92,13 @@
 <p>I shoot and develop 35mm film at home. It&rsquo;s a nice hobby, and I do my own prints in a small darkroom. But sometimes I want digital copies to share online or just to archive.</p>
 <p><a class="agrandir" href="/img/filmscan/cameras.jpg" title="Open the full size image"><img src="/img/filmscan/cameras.jpg" alt="My analog cameras" loading="lazy"></a></p>
 <p>A while ago I found an Epson FilmScan 200 on leboncoin (the French Craigslist) for 10 euros. It&rsquo;s a dedicated 35mm film scanner from 1997 that scans at 1200 DPI optical. At that price, worth a try.</p>
-<p>The catch? This scanner only has a SCSI interface and the official drivers only work on Mac System 7/8 or Windows 95/98. My main machines are modern Macs. I could install a virtual machine, but SCSI passthrough is basically impossible. I could use a USB-to-SCSI adapter, but those are expensive and often don&rsquo;t work well with scanners.</p>
-<p>But wait. I have a Mac SE/30 sitting on my desk. The same one I <a href="/posts/my-mac-se30-is-back-alive/">brought back to life</a> a few years ago. It has SCSI. It runs System 7. Could I scan directly on it?</p>
+<p>The problem is that this scanner only has a SCSI interface and the official drivers only work on Mac System 7/8 or Windows 95/98. My main machines are modern Macs. I could install a virtual machine, but SCSI passthrough is basically impossible. I could use a USB-to-SCSI adapter, but those are expensive and often don&rsquo;t work well with scanners.</p>
+<p>But I have a Mac SE/30 sitting on my desk, the same one I <a href="/posts/my-mac-se30-is-back-alive/">brought back to life</a> a few years ago. It has SCSI and runs System 7, so could I scan directly on it?</p>
 <p><a class="agrandir" href="/img/filmscan/scanner-mac.jpg" title="Open the full size image"><img src="/img/filmscan/scanner-mac.jpg" alt="The FilmScan 200 next to my Mac SE/30" loading="lazy"></a></p>
 <p>The official Epson TWAIN driver exists, but it&rsquo;s a complex plugin designed for Photoshop. I wanted something simpler: a standalone app that scans frames and saves them as files I can transfer via FTP.</p>
 <p>Time to write my own driver.</p>
 <h2 id="understanding-the-hardware">Understanding the Hardware</h2>
-<p>The first step was understanding how this scanner actually works. I found a service manual PDF online, which gave me crucial information:</p>
+<p>The first step was understanding how this scanner actually works. I found a service manual PDF online, which gave me the main specs:</p>
 <table>
 	<thead>
 			<tr>
@@ -128,7 +128,7 @@
 <p>The &ldquo;Processor&rdquo; device type was interesting. Unlike standard SCSI scanners that use vendor-specific commands, this one uses generic SEND (0x0A) and RECEIVE (0x08) commands to exchange ESC/I protocol data. The ESC/I protocol is Epson&rsquo;s standard scanner command language, same family as what their flatbed scanners use.</p>
 <p><a class="agrandir" href="/img/filmscan/manual-extract.png" title="Open the full size image"><img src="/img/filmscan/manual-extract.png" alt="Extract from the service manual" loading="lazy"></a></p>
 <p><em>I was surprised by how technical the service manual is. It details SCSI timings, command sequences, data exchange formats&hellip; Did technicians really use this to repair people&rsquo;s scanners back in the day? I guess they did. Either way, it gave me a solid foundation, even if it stayed a bit high-level and didn&rsquo;t detail every command parameter.</em></p>
-<p>I also extracted the original 68k driver from the Epson TWAIN plugin (a 748KB resource fork) and started disassembling it to understand the command flow. Why not just use SANE on Linux? Because SANE doesn&rsquo;t actually support the FilmScan 200 out of the box. The mainline epson backend doesn&rsquo;t include it. So I was on my own.</p>
+<p>I also extracted the original 68k driver from the Epson TWAIN plugin (a 748KB resource fork) and started disassembling it to understand the command flow. SANE on Linux was not an option either, because it doesn&rsquo;t support the FilmScan 200 out of the box: the mainline epson backend doesn&rsquo;t include it. So I was on my own.</p>
 <h2 id="setting-up-the-development-environment">Setting Up the Development Environment</h2>
 <p>For development, I used THINK C 5.0 on the SE/30. Yes, I&rsquo;m writing 68k code in 2025. There&rsquo;s something satisfying about it.</p>
 <p>The project setup is minimal. You just link against <code>ANSI</code> for printf/FILE functions and set partition size to 8MB (color scans need ~5.6MB buffer).</p>
@@ -152,7 +152,7 @@ Save as PGM file
 <p><a class="agrandir" href="/img/filmscan/scan-bw.jpg" title="Open the full size image"><img src="/img/filmscan/scan-bw.jpg" alt="First successful scan" loading="lazy"></a></p>
 <p><em>The scratches on the film? One of my first home developments. I had a hard time getting the film out of the reel. Image inverted with <a href="https://github.com/montoyatim01/Filmvert" target="_blank">Filmvert</a> for viewing.</em></p>
 <h2 id="the-frame-selection-problem">The Frame Selection Problem</h2>
-<p>Here&rsquo;s where things got frustrating. The FilmScan 200 has a 6-frame carrier. You load a strip of film and can scan frames 1 through 6. My first scan worked, but I couldn&rsquo;t figure out how to select different frames.</p>
+<p>Then I hit a problem: selecting the frame. The FilmScan 200 has a 6-frame carrier. You load a strip of film and can scan frames 1 through 6. My first scan worked, but I couldn&rsquo;t figure out how to select different frames.</p>
 <p><a class="agrandir" href="/img/filmscan/carrier.jpg" title="Open the full size image"><img src="/img/filmscan/carrier.jpg" alt="The film carrier with a strip of 35mm film" loading="lazy"></a></p>
 <p>The service manual mentioned an ESC P (SetBay) command with 2 parameter bytes. I tried everything:</p>
 <pre tabindex="0"><code>[frame-1, 0]    what the disassembled 68k driver seemed to use
@@ -162,8 +162,8 @@ Save as PGM file
 </code></pre><p>Nothing worked. The scanner would just scan frame 1 every time, or worse, return an error.</p>
 <p>I spent hours in the disassembler, tracing through the original driver. I found a function at offset 0x47080 that handled ESC P, and it seemed to use 0-indexed values. But when I replicated the exact sequence, it still didn&rsquo;t work.</p>
 <p>Then I noticed something odd: some commands in the driver called a function that checked for a handle called &ldquo;OnionCommsRef&rdquo; with magic bytes &lsquo;Comm&rsquo;. Without this handle, the commands were blocked <em>on the driver side</em> before even reaching the scanner. Was the ESC P format I found never actually used?</p>
-<h2 id="the-breakthrough-a-hidden-website">The Breakthrough: A Hidden Website</h2>
-<p>After much frustration, I stumbled upon a hidden gem: <a href="http://www.vjet.f2s.com/linux/scanner/download.html" target="_blank">http://www.vjet.f2s.com/linux/scanner/download.html</a>. This site, maintained by someone named Clive, contains a patched SANE driver specifically for the FilmScan 200. It&rsquo;s not in the mainline SANE project, just sitting there on this old website that somehow still works in 2025.</p>
+<h2 id="a-patched-sane-driver-from-2002">A Patched SANE Driver from 2002</h2>
+<p>After a lot of searching, I found an old website: <a href="http://www.vjet.f2s.com/linux/scanner/download.html" target="_blank">http://www.vjet.f2s.com/linux/scanner/download.html</a>. This site, maintained by someone named Clive, contains a patched SANE driver specifically for the FilmScan 200. It&rsquo;s not in the mainline SANE project, just sitting there on this old website that somehow still works in 2025.</p>
 <p>I downloaded <code>epson_17062002.c</code> and started reading. And there it was, on line 2447:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#a6e22e">simplecommand</span>(SET_BAY, s, s<span style="color:#f92672">-&gt;</span>val[OPT_BAY]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, s<span style="color:#f92672">-&gt;</span>val[OPT_BAY]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
 </span></span></code></pre></div><p>The format is <code>[frame, frame]</code>, both bytes identical, 1-indexed!</p>
@@ -175,7 +175,7 @@ Save as PGM file
 <p>Thank you Clive for writing this driver back in 2002, and thank you for keeping your website online all these years. It saved my project.</p>
 <h2 id="adding-color-support">Adding Color Support</h2>
 <p>Mono scans were working great, but I wanted color. According to the documentation, you just set ESC C to 0x02 instead of 0x00.</p>
-<p>Easy, right? Not quite.</p>
+<p>It was not that easy.</p>
 <p>My first color scan showed three columns side by side, each column was a grayscale version of the image. Classic sign of getting RGB data in the wrong format.</p>
 <p><a class="agrandir" href="/img/filmscan/three-columns.jpg" title="Open the full size image"><img src="/img/filmscan/three-columns.jpg" alt="The three columns issue" loading="lazy"></a></p>
 <p><em>Each column is one color channel. Not quite what I was hoping for.</em></p>
@@ -193,7 +193,7 @@ Save as PGM file
 </span></span><span style="display:flex;"><span>    output[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> gBuf[i];
 </span></span><span style="display:flex;"><span>    output[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> bBuf[i];
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>The first version came out way too green because I had G and R swapped. Once I got the order right, beautiful color scans!</p>
+</span></span></code></pre></div><p>The first version came out way too green because I had G and R swapped. Once I got the order right, I had nice color scans!</p>
 <p><a class="agrandir" href="/img/filmscan/scan-color-1.jpg" title="Open the full size image"><img src="/img/filmscan/scan-color-1.jpg" alt="Color scan example 1" loading="lazy"></a></p>
 <p><a class="agrandir" href="/img/filmscan/scan-color-2.jpg" title="Open the full size image"><img src="/img/filmscan/scan-color-2.jpg" alt="Color scan example 2" loading="lazy"></a></p>
 <p><em>Quick inversion with <a href="https://github.com/montoyatim01/Filmvert" target="_blank">Filmvert</a>. The colors aren&rsquo;t perfect, but it&rsquo;s just for preview. You can always fine-tune later manually or with something like <a href="https://www.negativelabpro.com/" target="_blank">Negative Lab Pro</a>.</em></p>
@@ -201,12 +201,8 @@ Save as PGM file
 <p>The finished driver is about 450 lines of C code. It initializes the scanner once at startup, lets you specify a folder name and starting pose number, scans 1 to 6 frames in a batch, saves as PPM (color) or PGM (mono) files, and asks if you want to continue with more frames.</p>
 <p>A full 6-frame color scan at 1200 DPI takes about 10 minutes on the SE/30. Not fast, but not bad for a 35-year-old computer talking to a 27-year-old scanner.</p>
 <p>To get the files off the SE/30, I run a Python FTP server on my modern Mac and use Fetch on the SE/30 to upload. Works great.</p>
-<p>And honestly? There&rsquo;s something nice about this whole setup. Shooting film, developing it myself, then scanning on hardware from the same era. Staying in the 90s, before the digital revolution took over. Full nostalgia, and I love it.</p>
-<h2 id="lessons-learned">Lessons Learned</h2>
-<p><strong>Old hardware documentation is gold.</strong> The service manual and SANE source code were essential. Without them, I&rsquo;d still be guessing at protocol details.</p>
-<p><strong>Disassembly isn&rsquo;t always the answer.</strong> I spent hours in the 68k disassembler when the SANE source had all the answers in readable C.</p>
-<p><strong>Don&rsquo;t trust 0-indexed vs 1-indexed assumptions.</strong> The frame numbering mismatch cost me a whole evening of debugging.</p>
-<p><strong>Old computers are still useful.</strong> My SE/30 now has a real job: digitizing my negatives.</p>
+<p>I like this setup: I shoot film, develop it myself, then scan it on hardware from the same era. It&rsquo;s like staying in the 90s, before digital took over, and I love it.</p>
+<p>Looking back, I spent hours in the 68k disassembler when the SANE source had all the answers in readable C, and the frame numbering mismatch alone cost me a whole evening of debugging. But my SE/30 now has a real job: digitizing my negatives.</p>
 <p>The code is available on GitHub: <a href="https://github.com/ronangaillard/fs200-classic-mac" target="_blank">fs200-classic-mac</a></p>
 <p>Now if you&rsquo;ll excuse me, I have about 50 rolls of film to scan&hellip;</p>
 

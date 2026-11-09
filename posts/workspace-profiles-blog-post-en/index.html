@@ -88,39 +88,39 @@
   <h1><span class="puce"></span>From Frustration to App Store: The Story of Workspace Profiles</h1>
   <p class="date">3 September 2025</p>
   <p><em>Or, how I turned an annoying daily routine into a Mac app.</em></p>
-<h2 id="the-problem-the-tyranny-of-manual-settings">The Problem: The Tyranny of Manual Settings</h2>
-<p>Like many developers, my day is punctuated by context switches. I plug my MacBook into a docking station at the office, connect it to an external monitor at home, put on a headset for a call&hellip; and each time, it&rsquo;s the same ritual: open System Settings, find the right Display panel, rearrange my screens, then go to the Sound panel to select the correct microphone and speakers. It&rsquo;s a waste of a few seconds, but repeated multiple times a day, it became a constant source of frustration.</p>
-<p>It was this small, daily annoyance that sparked the idea for a solution. A generic solution. A simple, lightweight app that would live in the menu bar and let me switch between my configurations with a single click. Today, I&rsquo;m incredibly proud to announce that this idea has become a reality: <a href="https://apps.apple.com/fr/app/workspace-profiles/id6751802172?l=en-GB&amp;mt=12" target="_blank">Workspace Profiles is now available on the Mac App Store!</a></p>
+<h2 id="changing-settings-by-hand-several-times-a-day">Changing settings by hand, several times a day</h2>
+<p>Like many developers, I switch contexts a lot during the day. I plug my MacBook into a docking station at the office, connect it to an external monitor at home, put on a headset for a call&hellip; and each time I do the same thing: open System Settings, find the right Display panel, rearrange my screens, then go to the Sound panel and select the correct microphone and speakers. It only takes a few seconds, but I do it several times a day, and it became really annoying.</p>
+<p>So I wanted a simple, lightweight app that lives in the menu bar and switches between my configurations with a single click. I built it, and <a href="https://apps.apple.com/fr/app/workspace-profiles/id6751802172?l=en-GB&amp;mt=12" target="_blank">Workspace Profiles is now available on the Mac App Store!</a></p>
 <p><a class="agrandir" href="/img/wokspace%20profiles/profiles.png" title="Open the full size image"><img src="/img/wokspace%20profiles/profiles.png" alt="Image of the Workspace Profiles app icon in the macOS menu bar" loading="lazy"></a></p>
 <p><em>The Workspace Profiles settings window where you can configure your different profiles.</em></p>
-<p>The core of the problem is simple: macOS remembers some configurations, but it&rsquo;s far from perfect. If you use multiple external monitors or various audio devices at different times, the system can get confused.</p>
-<p>My typical use cases:</p>
+<p>macOS remembers some configurations, but it&rsquo;s far from perfect. If you use multiple external monitors or various audio devices at different times, the system can get confused.</p>
+<p>Here is how I use my Mac:</p>
 <ul>
-<li><strong>At the Office:</strong> My MacBook is connected to two Dell monitors. I want the left monitor to be my primary display, and I need the audio to come out of the monitor&rsquo;s built-in speakers.</li>
-<li><strong>At Home:</strong> I plug it into my Studio Display. This screen should become the primary one, and the sound needs to go through my external USB speakers.</li>
-<li><strong>On the Go / Podcasting:</strong> Just the MacBook, but I want my external Rode NT-USE mic to be the default audio input as soon as it&rsquo;s connected.</li>
+<li>At the office: my MacBook is connected to two Dell monitors. I want the left monitor to be my primary display, and the audio must come out of the monitor&rsquo;s built-in speakers.</li>
+<li>At home: I plug it into my Studio Display. This screen should become the primary one, and the sound needs to go through my external USB speakers.</li>
+<li>On the go or podcasting: just the MacBook, but I want my external Rode NT-USE mic to be the default audio input as soon as it&rsquo;s connected.</li>
 </ul>
-<p>Each transition required manual reconfiguration. I wanted a solution that would understand the context and adapt automatically.</p>
-<h2 id="the-solution-profiles-for-every-workspace">The Solution: Profiles for Every Workspace</h2>
-<p>Workspace Profiles is built on a simple concept: <strong>Profiles</strong>. A profile is a snapshot of a desired configuration. For each profile, you can define:</p>
+<p>Each of these changes meant reconfiguring everything by hand. I wanted an app that would see where I was and adapt automatically.</p>
+<h2 id="how-profiles-work">How profiles work</h2>
+<p>The app is built around profiles. A profile is a snapshot of the configuration you want. For each profile, you can define:</p>
 <ul>
-<li><strong>Display Arrangement:</strong> Whether you want an extended desktop or mirrored displays</li>
-<li><strong>Primary Display:</strong> Which of your monitors should have the menu bar and the Dock</li>
-<li><strong>Audio Devices:</strong> Which microphone (input) and speakers/headphones (output) to use by default</li>
+<li>The display arrangement: an extended desktop or mirrored displays</li>
+<li>The primary display: which of your monitors gets the menu bar and the Dock</li>
+<li>The audio devices: which microphone (input) and speakers/headphones (output) to use by default</li>
 </ul>
 <p>Once you&rsquo;ve created your profiles (e.g., &ldquo;Office&rdquo;, &ldquo;Home&rdquo;, &ldquo;Presentation&rdquo;), you can switch between them in three ways:</p>
 <ul>
-<li><strong>Manually</strong> from the menu bar icon.</li>
-<li>With a <strong>global keyboard shortcut</strong> that you can set for each profile</li>
-<li><strong>Automatically</strong> using &ldquo;Triggers&rdquo;.</li>
+<li>Manually, from the menu bar icon</li>
+<li>With a global keyboard shortcut that you can set for each profile</li>
+<li>Automatically, with &ldquo;Triggers&rdquo;</li>
 </ul>
-<p>This last feature is, in my opinion, the most powerful. You can link a profile to the connection of a specific device. For example: &ldquo;When my Dell monitor is connected, automatically activate the &lsquo;Office&rsquo; profile.&rdquo; And just like that, the magic happens!</p>
-<h2 id="a-technical-look-under-the-hood">A Technical Look Under the Hood</h2>
-<p>Developing this app was an interesting journey into the low-level APIs of macOS, far from the usual comfort of SwiftUI. Here are a few of the most interesting technical challenges I tackled.</p>
-<h3 id="detecting-hardware-changes">Detecting Hardware Changes</h3>
-<p>The first essential building block was knowing when a display or audio device was connected or disconnected. To do this, I had to dive into macOS&rsquo;s C-based frameworks.</p>
-<p>For displays, I used the <code>CGDisplayRegisterReconfigurationCallback</code> function from the <strong>Core Graphics</strong> framework. This allows you to register a callback function that the system will call whenever the display configuration changes.</p>
-<p>For audio, it&rsquo;s a similar approach with <code>AudioObjectAddPropertyListener</code> from the <strong>Core Audio</strong> framework. This lets you listen for changes to the <code>kAudioHardwarePropertyDevices</code> property on the global system object.</p>
+<p>Triggers are my favorite part. You link a profile to the connection of a specific device. For example: &ldquo;When my Dell monitor is connected, automatically activate the &lsquo;Office&rsquo; profile.&rdquo;</p>
+<h2 id="how-it-works-inside">How it works inside</h2>
+<p>To build this app I had to use the low-level APIs of macOS, far from the usual comfort of SwiftUI. Here are the problems that took me the most time.</p>
+<h3 id="detecting-hardware-changes">Detecting hardware changes</h3>
+<p>First, the app must know when a display or audio device is connected or disconnected. For this I had to use the C-based frameworks of macOS.</p>
+<p>For displays, I used the <code>CGDisplayRegisterReconfigurationCallback</code> function from the Core Graphics framework. It registers a callback function that the system calls whenever the display configuration changes.</p>
+<p>For audio, it&rsquo;s a similar approach with <code>AudioObjectAddPropertyListener</code> from the Core Audio framework. It listens for changes to the <code>kAudioHardwarePropertyDevices</code> property on the global system object.</p>
 <p>In Swift, the code to bridge these C calls looks like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#75715e">// In HardwareManager.swift</span>
 </span></span><span style="display:flex;"><span>
@@ -137,10 +137,10 @@
 </span></span><span style="display:flex;"><span>    AudioObjectAddPropertyListener(
 </span></span><span style="display:flex;"><span>        AudioObjectID(kAudioObjectSystemObject), &amp;propertyAddress, audioDevicesPropertyListener, <span style="color:#66d9ef">nil</span>)
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>These callbacks then post a notification via Swift&rsquo;s <code>NotificationCenter</code> so the rest of the app can react cleanly.</p>
-<h3 id="handling-notification-bursts">Handling Notification &ldquo;Bursts&rdquo;</h3>
-<p>A gotcha I quickly encountered, especially with audio devices, is that the system sometimes sends a burst of notifications for a single event (e.g., a device initializing). If I applied the profile on every single notification, the app would perform redundant actions.</p>
-<p>The solution is a classic technique called &ldquo;debouncing&rdquo;. Instead of handling the event immediately, I schedule it to run after a one-second delay using a <code>DispatchWorkItem</code>. If a new notification comes in during that short window, I cancel the previously scheduled task and plan a new one. This ensures that only the last event in a rapid series is actually processed.</p>
+</span></span></code></pre></div><p>These callbacks then post a notification via Swift&rsquo;s <code>NotificationCenter</code>, so the rest of the app can react cleanly.</p>
+<h3 id="handling-notification-bursts">Handling notification &ldquo;bursts&rdquo;</h3>
+<p>I quickly ran into a problem, especially with audio devices: the system sometimes sends a burst of notifications for a single event (e.g., a device initializing). If I applied the profile on every notification, the app would do the same work several times.</p>
+<p>The fix is a classic technique called &ldquo;debouncing&rdquo;. I don&rsquo;t handle the event immediately. I schedule it with a <code>DispatchWorkItem</code> to run after a one-second delay. If a new notification comes in during that second, I cancel the scheduled task and plan a new one. This way, the app only processes the last event of a rapid series.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#75715e">// In ProfileManager.swift</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">var</span> audioChangeWorkItem: DispatchWorkItem?
@@ -156,12 +156,12 @@
 </span></span><span style="display:flex;"><span>    DispatchQueue.main.asyncAfter(deadline: .now() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.0</span>, execute: newWorkItem)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">self</span>.audioChangeWorkItem = newWorkItem
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="implementing-global-keyboard-shortcuts">Implementing Global Keyboard Shortcuts</h3>
-<p>To allow users to trigger profiles from anywhere in macOS, I needed to implement system-wide (or &ldquo;global&rdquo;) hotkeys. Modern Swift and AppKit APIs are sandboxed and don&rsquo;t make this easy. The solution was to reach back to an older, but incredibly powerful, C-based framework: <strong>Carbon</strong>.</p>
-<p>By using the <code>RegisterEventHotKey</code> function, the app can tell the system to listen for a specific key combination, no matter which application is currently active. The system then sends an event to my app when the hotkey is pressed. It feels a bit like archeology, but it&rsquo;s the most reliable way to get this done on macOS.</p>
-<h2 id="whats-next">What&rsquo;s Next</h2>
-<p>Building Workspace Profiles has been a fantastic learning experience, taking me from a simple idea born out of personal frustration to a polished app on the Mac App Store. It was built natively with SwiftUI to feel right at home on your Mac.</p>
-<p>I invite you to <a href="https://apps.apple.com/fr/app/workspace-profiles/id6751802172?l=en-GB&amp;mt=12" target="_blank">check it out on the Mac App Store</a>. Your feedback is invaluable, so please don&rsquo;t hesitate to report bugs or request new features on the project&rsquo;s GitHub repository. Thank you for your support!</p>
+</span></span></code></pre></div><h3 id="global-keyboard-shortcuts">Global keyboard shortcuts</h3>
+<p>To trigger profiles from anywhere in macOS, I needed system-wide (or &ldquo;global&rdquo;) hotkeys. Modern Swift and AppKit APIs are sandboxed and don&rsquo;t make this easy. So I went back to an older C-based framework that still does the job: Carbon.</p>
+<p>With the <code>RegisterEventHotKey</code> function, the app tells the system to listen for a specific key combination, no matter which application is active. The system then sends an event to my app when the hotkey is pressed. It feels a bit like archeology, but it&rsquo;s the most reliable way to get this done on macOS.</p>
+<h2 id="try-it">Try it</h2>
+<p>I learned a lot building Workspace Profiles, from the first idea (born out of my own frustration) to an app on the Mac App Store. I built it natively with SwiftUI so it feels at home on a Mac.</p>
+<p>You can <a href="https://apps.apple.com/fr/app/workspace-profiles/id6751802172?l=en-GB&amp;mt=12" target="_blank">check it out on the Mac App Store</a>. If you find a bug or want a new feature, please open an issue on the project&rsquo;s GitHub repository.</p>
 
   
 </article>
